@@ -49,3 +49,27 @@ test("evaluateStrategy returns deterministic explainability counts", () => {
   assert.equal(result.explainability.softTotalCount, 1);
 });
 
+test("evaluateStrategy produces deterministic output for identical input", () => {
+  const dsl: StrategyDSL = {
+    key: "swing_deterministic",
+    family: "swing",
+    reviewFrequency: "daily",
+    primaryTimeframe: "D1",
+    filters: [
+      { field: "daily.close", operator: ">", valueRef: "daily.sma44", kind: "hard" },
+      { field: "daily.rsi14", operator: ">=", value: 50, kind: "soft" },
+    ],
+    entry: { type: "confirmation_close" },
+    stopLoss: { type: "fixed_pct", pct: 2 },
+  };
+
+  const ctx = {
+    "daily.close": 212,
+    "daily.sma44": 201,
+    "daily.rsi14": 58,
+  };
+
+  const first = evaluateStrategy(dsl, "ABC", "2026-04-16", ctx);
+  const second = evaluateStrategy(dsl, "ABC", "2026-04-16", ctx);
+  assert.deepEqual(second, first);
+});
