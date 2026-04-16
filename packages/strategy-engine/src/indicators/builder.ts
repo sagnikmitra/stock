@@ -5,6 +5,7 @@ import { computeRSI } from "./rsi";
 import { computeBollingerBands } from "./bollinger";
 import { computeATR } from "./atr";
 import { computeSuperTrend } from "./supertrend";
+import { relativeVolume as computeRelativeVolume } from "./relative-volume";
 
 /**
  * Compute full IndicatorSet from candle series.
@@ -28,14 +29,10 @@ export function buildIndicatorSet(candles: Candle[]): IndicatorSet {
   const atr = computeATR(candles, 14);
   const st = computeSuperTrend(candles, 10, 3);
 
-  const avgVolume20 =
-    candles.length >= 20
-      ? candles.slice(-20).reduce((s, c) => s + c.volume, 0) / 20
-      : undefined;
-  const relativeVolume =
-    avgVolume20 && avgVolume20 > 0
-      ? candles[last].volume / avgVolume20
-      : undefined;
+  const hasVolume = candles.some((c) => c.volume > 0);
+  const relativeVolume = hasVolume && candles.length >= 20
+    ? computeRelativeVolume(candles, 20)
+    : undefined;
 
   return {
     rsi14: nanToUndef(rsi[last]),
@@ -55,6 +52,10 @@ export function buildIndicatorSet(candles: Candle[]): IndicatorSet {
     relativeVolume,
     deliveryPct: candles[last].deliveryPct,
   };
+}
+
+export function buildIndicators(candles: Candle[]): IndicatorSet {
+  return buildIndicatorSet(candles);
 }
 
 function nanToUndef(v: number): number | undefined {

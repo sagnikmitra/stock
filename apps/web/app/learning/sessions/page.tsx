@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -19,6 +20,7 @@ export default async function SessionsPage() {
         title="Course Sessions"
         description="WithArin 29th Batch — session-by-session knowledge base"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       <div className="space-y-4">
         {docs.map((doc) => (

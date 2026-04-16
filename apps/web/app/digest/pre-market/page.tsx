@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { PostureIndicator } from "../../components/ui/posture-indicator";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,7 @@ export default async function PreMarketDigestPage() {
         title="Pre-Market Digest"
         description="Daily pre-market brief with global cues, FII/DII, and market posture"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {/* Market Context */}
       <Card className="mb-6">

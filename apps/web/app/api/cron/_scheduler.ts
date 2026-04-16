@@ -18,24 +18,38 @@ export async function acquireCronLock(input: {
   force: boolean;
 }): Promise<CronLockResult> {
   const lockKey = lockKeyFor(input.jobKey, input.marketDate);
+  const parsedDate = new Date(`${input.marketDate}T00:00:00.000Z`);
 
   if (!input.force) {
-    const completed = await prisma.auditEvent.findFirst({
+    const existing = await prisma.cronJobLock.findUnique({
       where: {
-        action: "cron_completed",
-        entityType: "CronJob",
-        entityId: lockKey,
+        jobKey_marketDate: {
+          jobKey: input.jobKey,
+          marketDate: parsedDate,
+        },
       },
-      orderBy: { createdAt: "desc" },
     });
-    if (completed) {
-      return {
-        canRun: false,
-        lockKey,
-        reason: "already_completed",
-      };
+
+    if (existing) {
+      if (existing.status === "completed") {
+        return {
+          canRun: false,
+          lockKey,
+          reason: "already_completed",
+        };
+      }
+
+      const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+      if (existing.status === "running" && existing.lockedAt > thirtyMinutesAgo) {
+        return {
+          canRun: false,
+          lockKey,
+          reason: "locked",
+        };
+      }
     }
   } else {
+    // Audit force rerun
     await prisma.auditEvent.create({
       data: {
         actor: "admin",
@@ -47,27 +61,28 @@ export async function acquireCronLock(input: {
     });
   }
 
-  const now = new Date();
-  const thirtyMinutesAgo = new Date(now.getTime() - 30 * 60 * 1000);
-  const activeLock = await prisma.auditEvent.findFirst({
+  // Atomically upsert the lock
+  const lock = await prisma.cronJobLock.upsert({
     where: {
-      action: "cron_lock_acquired",
-      entityType: "CronJob",
-      entityId: lockKey,
-      createdAt: { gte: thirtyMinutesAgo },
+      jobKey_marketDate: {
+        jobKey: input.jobKey,
+        marketDate: parsedDate,
+      },
     },
-    orderBy: { createdAt: "desc" },
+    update: {
+      status: "running",
+      lockedAt: new Date(),
+    },
+    create: {
+      jobKey: input.jobKey,
+      marketDate: parsedDate,
+      status: "running",
+      lockedAt: new Date(),
+    },
   });
 
-  if (activeLock && !input.force) {
-    return {
-      canRun: false,
-      lockKey,
-      reason: "locked",
-    };
-  }
-
-  const lock = await prisma.auditEvent.create({
+  // Retain audit event for observability only
+  await prisma.auditEvent.create({
     data: {
       actor: "system",
       action: "cron_lock_acquired",
@@ -92,6 +107,22 @@ export async function releaseCronLock(input: {
   status: "completed" | "failed";
   details?: Record<string, unknown>;
 }) {
+  const [jobKey, marketDateStr] = input.lockKey.split(":");
+  const parsedDate = new Date(`${marketDateStr}T00:00:00.000Z`);
+
+  await prisma.cronJobLock.update({
+    where: {
+      jobKey_marketDate: {
+        jobKey: jobKey!,
+        marketDate: parsedDate,
+      },
+    },
+    data: {
+      status: input.status,
+      details: input.details as Prisma.InputJsonValue | undefined,
+    },
+  });
+
   await prisma.auditEvent.create({
     data: {
       actor: "system",

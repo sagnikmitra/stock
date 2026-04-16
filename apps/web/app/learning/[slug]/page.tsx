@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,7 @@ export default async function KnowledgeDocPage({ params }: Props) {
           {doc.confidence} confidence
         </Badge>
       </PageHeader>
+      <EducationalDisclaimer className="mb-4" />
 
       {doc.summary && (
         <p className="mb-6 text-sm text-slate-600">{doc.summary}</p>

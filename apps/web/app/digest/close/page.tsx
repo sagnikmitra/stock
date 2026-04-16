@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,7 @@ export default async function PostCloseDigestPage() {
         title="Post-Close Digest"
         description="End-of-day summary with strategy matches, breadth, and highlights"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {digest ? (
         <div className="space-y-4">

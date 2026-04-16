@@ -6,6 +6,10 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
+    "@ibo/web#build": {
+      "dependsOn": ["@ibo/db#generate", "^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "dev": {
       "cache": false,
       "persistent": true
@@ -17,6 +21,9 @@
       "dependsOn": ["^build"]
     },
     "db:generate": {
+      "cache": false
+    },
+    "generate": {
       "cache": false
     },
     "db:push": {

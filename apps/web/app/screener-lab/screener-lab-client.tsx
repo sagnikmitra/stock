@@ -84,6 +84,26 @@ export function ScreenerLabClient({ screeners }: Props) {
     }
   };
 
+  const exportCsv = () => {
+    if (results.length === 0) return;
+    const header = ["symbol", "companyName", "overlapCount", "matchedBy", "explanation"];
+    const lines = results.map((row) => [
+      row.symbol,
+      row.companyName,
+      String(row.overlapCount),
+      row.matchedBy.map((item) => item.key).join("|"),
+      row.explanation.replaceAll(",", ";"),
+    ]);
+    const csv = [header, ...lines].map((line) => line.join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `screener-intersection-${today}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="space-y-4">
       <div className="rounded-xl border border-slate-200 bg-white p-4">
@@ -126,7 +146,7 @@ export function ScreenerLabClient({ screeners }: Props) {
               disabled={running}
               className="w-full rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {running ? "Running..." : "Run Overlap"}
+              {running ? "Running..." : "Run Intersection"}
             </button>
           </div>
         </div>
@@ -142,20 +162,24 @@ export function ScreenerLabClient({ screeners }: Props) {
           {internal.map((screener) => {
             const isSelected = selected.includes(screener.key);
             return (
-              <button
+              <label
                 key={screener.key}
-                type="button"
-                onClick={() => toggleScreener(screener.key)}
                 className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
                   isSelected
                     ? "border-brand-400 bg-brand-50 text-brand-800"
                     : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                 }`}
-                aria-pressed={isSelected}
               >
-                <p className="font-medium">{screener.name}</p>
+                <div className="mb-1 flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => toggleScreener(screener.key)}
+                  />
+                  <p className="font-medium">{screener.name}</p>
+                </div>
                 <p className="text-xs text-slate-500">{screener.key}</p>
-              </button>
+              </label>
             );
           })}
         </div>
@@ -169,6 +193,13 @@ export function ScreenerLabClient({ screeners }: Props) {
           <p className="text-sm text-slate-500">Run a set operation to inspect overlap candidates and explanations.</p>
         ) : (
           <div className="space-y-2">
+            <button
+              type="button"
+              onClick={exportCsv}
+              className="rounded-lg border border-slate-300 px-2 py-1 text-xs"
+            >
+              Export CSV
+            </button>
             {results.map((row) => {
               const open = expanded[row.symbol] ?? false;
               return (

@@ -5,6 +5,7 @@ import { seedStrategies } from "./strategies";
 import { seedScreeners } from "./screeners";
 import { seedExternalResources } from "./external-resources";
 import { seedKnowledge } from "./knowledge";
+import { seedGlossary } from "./glossary";
 import { seedAmbiguities } from "./ambiguities";
 import { seedFeatureFlags } from "./feature-flags";
 
@@ -19,6 +20,7 @@ async function main() {
   await seedScreeners(prisma);
   await seedExternalResources(prisma);
   await seedKnowledge(prisma);
+  await seedGlossary(prisma);
   await seedAmbiguities(prisma);
   await seedFeatureFlags(prisma);
 

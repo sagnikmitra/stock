@@ -1,7 +1,10 @@
 import { prisma } from "@ibo/db";
-import { runPreMarketPipeline } from "./pipelines/pre-market";
-import { runPostClosePipeline } from "./pipelines/post-close";
-import { runMonthEndPipeline } from "./pipelines/month-end";
+import {
+  runPreMarketPipelineCore,
+  runPostClosePipelineCore,
+  runMonthEndPipelineCore,
+  runWeeklySummaryPipelineCore,
+} from "@ibo/pipelines";
 import { getAllAdapters } from "./adapters";
 
 /**
@@ -14,8 +17,9 @@ import { getAllAdapters } from "./adapters";
  *   pre-market      — Global cues fetch, FII/DII, market context scoring, digest (8:30 AM IST)
  *   post-close      — EOD candles, indicators, strategy eval, screener eval, confluence, digest (4:30 PM IST)
  *   month-end       — Monthly BB scan, MBB opportunities, investment digest (last trading day 5:00 PM IST)
+ *   weekly         — Weekly summary digest generation
  *   provider-health — Health check all enabled data providers
- *   all             — Run pre-market + post-close + month-end sequentially
+ *   all             — Run pre-market + post-close + month-end + weekly sequentially
  *
  * Examples:
  *   tsx src/index.ts pre-market
@@ -24,7 +28,7 @@ import { getAllAdapters } from "./adapters";
  *   tsx src/index.ts all
  */
 
-const VALID_PIPELINES = ["pre-market", "post-close", "month-end", "provider-health", "all"] as const;
+const VALID_PIPELINES = ["pre-market", "post-close", "month-end", "weekly", "provider-health", "all"] as const;
 type PipelineName = (typeof VALID_PIPELINES)[number];
 
 async function main() {
@@ -38,6 +42,7 @@ async function main() {
     console.log("  pre-market      Global cues + FII/DII + market context + pre-market digest");
     console.log("  post-close      EOD candles + indicators + strategy/screener eval + digest");
     console.log("  month-end       Monthly BB scan + MBB + investment strategy eval + digest");
+    console.log("  weekly          Weekly summary digest (week-end)");
     console.log("  provider-health Health check all configured data providers");
     console.log("  all             Run all pipelines sequentially");
     console.log("\nExamples:");
@@ -61,15 +66,19 @@ async function main() {
   try {
     switch (pipeline) {
       case "pre-market":
-        await runPreMarketPipeline();
+        await runPreMarketPipelineCore();
         break;
 
       case "post-close":
-        await runPostClosePipeline();
+        await runPostClosePipelineCore();
         break;
 
       case "month-end":
-        await runMonthEndPipeline();
+        await runMonthEndPipelineCore();
+        break;
+
+      case "weekly":
+        await runWeeklySummaryPipelineCore();
         break;
 
       case "provider-health":
@@ -79,11 +88,13 @@ async function main() {
       case "all":
         console.log("[all] Running all pipelines sequentially...\n");
         console.log("--- PRE-MARKET ---");
-        await runPreMarketPipeline();
+        await runPreMarketPipelineCore();
         console.log("\n--- POST-CLOSE ---");
-        await runPostClosePipeline();
+        await runPostClosePipelineCore();
         console.log("\n--- MONTH-END ---");
-        await runMonthEndPipeline();
+        await runMonthEndPipelineCore();
+        console.log("\n--- WEEKLY ---");
+        await runWeeklySummaryPipelineCore();
         console.log("\n[all] All pipelines complete.");
         break;
     }

@@ -11,12 +11,17 @@
     "test:e2e": "npx --yes @playwright/test test"
   },
   "dependencies": {
+    "@ibo/config": "workspace:*",
     "@ibo/db": "workspace:*",
+    "@ibo/pipelines": "workspace:*",
     "@ibo/strategy-engine": "workspace:*",
     "@ibo/types": "workspace:*",
+    "@ibo/utils": "workspace:*",
     "@prisma/client": "^6.0.0",
+    "@sentry/nextjs": "^10.20.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "lightweight-charts": "^5.0.8",
     "lucide-react": "^0.468.0",
     "next": "15.1.0",
     "react": "19.0.0",

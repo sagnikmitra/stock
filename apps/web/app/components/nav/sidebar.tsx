@@ -27,6 +27,7 @@ const NAV_SECTIONS = [
       { href: "/digest", label: "Digest Archive", icon: Newspaper },
       { href: "/digest/pre-market", label: "Pre-Market", icon: Newspaper },
       { href: "/digest/close", label: "Post-Close", icon: Newspaper },
+      { href: "/digest/weekly", label: "Weekly Summary", icon: Newspaper },
       { href: "/digest/month-end", label: "Month-End", icon: Newspaper },
     ],
   },

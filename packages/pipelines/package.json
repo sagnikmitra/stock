@@ -1,0 +1,13 @@
+{
+  "name": "@ibo/pipelines",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@ibo/db": "workspace:*",
+    "@ibo/strategy-engine": "workspace:*",
+    "@ibo/types": "workspace:*",
+    "@ibo/utils": "workspace:*"
+  }
+}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
 import { PageHeader } from "../components/ui/page-header";
+import { EducationalDisclaimer } from "../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +25,7 @@ export default async function StocksPage() {
         title="Stocks"
         description="Browse tracked instruments and open symbol-level market context"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {instruments.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

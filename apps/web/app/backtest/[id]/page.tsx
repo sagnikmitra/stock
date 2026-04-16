@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -125,6 +126,7 @@ export default async function BacktestDetailPage({ params }: Props) {
           All Backtests
         </Link>
       </PageHeader>
+      <EducationalDisclaimer className="mb-4" />
 
       <div className="mb-4 flex flex-wrap gap-2">
         <Badge variant={statusVariant(backtest.status)}>{backtest.status}</Badge>

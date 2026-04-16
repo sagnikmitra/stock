@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@ibo/db", "@ibo/types", "@ibo/strategy-engine"],
+  transpilePackages: ["@ibo/db", "@ibo/types", "@ibo/strategy-engine", "@ibo/pipelines"],
 };
 
-export default nextConfig;
+const shouldEnableSentry = Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN);
+
+export default shouldEnableSentry
+  ? withSentryConfig(nextConfig, {
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    silent: true,
+  })
+  : nextConfig;

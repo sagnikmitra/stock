@@ -1,0 +1,1441 @@
+# WithArin Stock Market 29th Batch — Session 9 Recording Transcript
+
+Source: local `mlx-community/whisper-large-v3-turbo` translate pass on Session 9 Vimeo stream (video id 1182519408, lesson 2225223).
+
+Notes:
+- Audio code-switched Bengali/English. Whisper ran in `translate` mode; output is approximate English.
+- Consecutive exact-duplicates and obvious hallucination loops removed.
+
+---
+
+- [00:00:00] Thank you.
+- [00:18:00] !
+- [00:19:00] Thank you.
+- [00:27:30] !
+- [00:28:30] Thank you.
+- [00:31:00] Good evening, Shabay Kesh. Shabay Shunti Pal, A-Type Code One Chat Boxer, please.
+- [00:31:30] Yeah.
+- [00:31:37] Okay, our 40 seconds back here.
+- [00:31:39] Tapasita, putti.
+- [00:32:00] Okay, so let's start. So now, how many numbers are today? Nine numbers. So, it's the ninth day. So, in the first five days, we have basic to advance. In the sixth class, we have to learn how to invest in long-term strategy. So, we have to learn how to invest in long-term strategy. So, we have to learn how to invest in the second class.
+- [00:32:30] and we will do our intraday session.
+- [00:32:37] And we will do our live class in the next week.
+- [00:32:44] Okay?
+- [00:32:45] The day of the day is 22 September.
+- [00:32:48] 22 April.
+- [00:32:50] We will manage time.
+- [00:32:53] We will go to office to office.
+- [00:32:56] We will manage time.
+- [00:32:59] Okay, sir.
+- [00:33:08] Hena Mondol 20 Weeks.
+- [00:33:10] Anwit, what do you say?
+- [00:33:13] Hena Mondol.
+- [00:33:16] Sir.
+- [00:33:18] What's your name?
+- [00:33:19] Fukumar Ghus, sir.
+- [00:33:21] You can rename a new option.
+- [00:33:23] Yes, sir.
+- [00:33:25] We have a new name set.
+- [00:33:27] I have to vote.
+- [00:33:31] So, 22nd, then we have to vote.
+- [00:33:33] But 22nd, then we have to vote.
+- [00:33:35] So, 22nd, then we have to vote.
+- [00:33:39] So, we have to vote.
+- [00:33:41] But we have to vote.
+- [00:33:43] So, we have to vote.
+- [00:33:55] There are hundreds of reasons.
+- [00:34:00] You have a genuine concern.
+- [00:34:05] What do you say to yourself?
+- [00:34:13] The vote is 23, 29, 29.
+- [00:34:19] We have to delay the video recording.
+- [00:34:42] I can't do this.
+- [00:34:46] If you have any questions,
+- [00:34:48] what do you do?
+- [00:34:52] If you have any questions,
+- [00:34:54] if you have any questions,
+- [00:35:10] Desperate times required desperate measures
+- [00:35:13] Okay, so this is how you start
+- [00:35:19] So, how do we manage this?
+- [00:35:22] So, let's start.
+- [00:35:24] Let's talk about what we have discussed.
+- [00:35:26] What we have discussed is
+- [00:35:35] Swing Trading, last day context.
+- [00:35:38] I have to look at the reversal trade never.
+- [00:35:44] So, the reversal trade never is sideways.
+- [00:35:48] I will tell you about the situation in the situation.
+- [00:35:50] Okay?
+- [00:35:51] Today, we will discuss the situation in the situation.
+- [00:35:53] Breakout is the situation in the situation.
+- [00:35:57] Breakout.
+- [00:35:58] Breakout means that...
+- [00:36:00] Breakout, I have discussed before.
+- [00:36:04] Breakout means that...
+- [00:36:06] This is our resistance and support.
+- [00:36:18] So, the price move is our breakout.
+- [00:36:23] So, when we go to the breakout, our trade is not enough.
+- [00:36:29] Because we trap the fact that we are saying fake breakout.
+- [00:36:33] If you see the breakout, the breakout would be less than the price.
+- [00:36:51] So, not 100% but the probability of succeeding is less than the price.
+- [00:36:59] So here we can see some conditions. The first condition is that when we break out, the candle will be a green candle. So here we can see a big green candle. This is the first condition.
+- [00:37:29] The body shall be at least 70%.
+- [00:37:36] Meaning, this candle is low and high.
+- [00:37:48] This portion is body.
+- [00:37:51] And this portion is range.
+- [00:37:56] So body shall be at least 70% of the total range in this context.
+- [00:38:06] If you have a touch with your own, you will not be able to drink.
+- [00:38:13] So the big part is the body.
+- [00:38:18] We will not be able to get this.
+- [00:38:20] The volume shall be higher than the previous day.
+- [00:38:29] First, the candle shall be a big green candle.
+- [00:38:35] Second, the body shall be at least 70%.
+- [00:38:38] Third, the volume shall be higher than the previous day.
+- [00:38:41] Meaning, the volume will be higher than the previous day.
+- [00:38:48] The third condition is that the delivery percentage is 35%. How did the delivery percentage say?
+- [00:39:08] How did the delivery percentage say?
+- [00:39:14] 45%
+- [00:39:16] So, this is the fourth condition. And fifth, the stock must give closing at least 1% above the relation level.
+- [00:39:39] I can see the candle.
+- [00:39:44] The candle is closing.
+- [00:39:46] Green candle.
+- [00:39:47] Opening and closing.
+- [00:39:49] Our resistance is 100.
+- [00:39:52] Closing is 100.
+- [00:39:59] We are 500.
+- [00:40:02] 1% on 500, 505.
+- [00:40:04] 505 is closing.
+- [00:40:09] If any one of the above conditions is not favorable, then it would lead to false break-up.
+- [00:41:07] In the world has improved.
+- [00:41:09] In the corporate world, how do you learn English?
+- [00:41:14] In Bombay, there is a lot of Hindi.
+- [00:41:19] We have a lot of English and Hindi.
+- [00:41:25] But my favourite subject in Bengali is the highest number.
+- [00:41:29] So, we have a great place in Bangladesh.
+- [00:41:33] So, we have a lot of time.
+- [00:41:35] I have a love for the Bengali language.
+- [00:41:45] So, it is clear?
+- [00:41:48] So, let's see.
+- [00:41:52] What questions?
+- [00:41:58] Clear, C type, which question?
+- [00:42:07] We can see these conditions.
+- [00:42:10] If these conditions are low, we will break out of trade.
+- [00:42:17] We will not be able to break out of the trade.
+- [00:42:19] And if we are not confident about it, we will get the price and resistance.
+- [00:42:31] So we will get the price and the price will get the resistance.
+- [00:42:48] So if you take one risk, you don't have to take one risk, you don't have to take one risk. Clear? Okay? So this is the case that we have to take a break out of the trade.
+- [00:43:18] I have to know the R-actor.
+- [00:43:26] How many M-actor situations are you seeing?
+- [00:43:30] What is the R-actor situation?
+- [00:43:44] Hello?
+- [00:43:46] I said, we can see the candle, which is 70% of the candle, but we can use the indicator.
+- [00:44:00] I said, I said, I said, I don't want to see the candle, but I don't want to see the candle.
+- [00:44:06] It's simple. So, the breakout ratio, who we trade, is what we see.
+- [00:44:11] You already have to see 5-5 things. You should see.
+- [00:44:16] You should see. You should see.
+- [00:44:19] You should see.
+- [00:45:10] So, we have to do this.
+- [00:45:15] We have to do this.
+- [00:45:22] We have to start with this.
+- [00:45:25] We don't have to do this.
+- [00:45:29] We have to start with this.
+- [00:45:31] We have to do this.
+- [00:45:35] We have to learn the basics.
+- [00:45:38] What is this?
+- [00:45:41] It's a whole process of learning.
+- [00:45:45] If you learn this, you should appreciate it better.
+- [00:45:51] Okay?
+- [00:45:52] So, when we were off-line, we were on the internet.
+- [00:45:58] Okay?
+- [00:45:59] So, we were on the internet, but we were on the internet.
+- [00:46:01] I was on the internet.
+- [00:46:03] I was on the level of this.
+- [00:46:05] I was so proud of it.
+- [00:46:06] So it's not about strategy, it's not about hundreds of things. It's about the particular thing that we can do. Okay, let's move forward. So what I've been saying is that the situation is going to be a big deal.
+- [00:46:36] This is a resistance level.
+- [00:46:40] But in this area, the distance is reduced.
+- [00:46:48] So, we have seen a candle break out.
+- [00:46:58] So, it is narrow.
+- [00:47:02] So if you have a big deal, then the probability will be higher.
+- [00:47:16] Clear?
+- [00:47:17] This perspective we have shared with you.
+- [00:47:21] This is a small thing.
+- [00:47:23] Okay, active.
+- [00:47:29] Are you clear?
+- [00:47:30] If you have any breakout, please, please, please.
+- [00:47:35] Okay, okay.
+- [00:47:38] Now, we will discuss something called BTS.
+- [00:47:43] I said that I am a good person.
+- [00:47:46] I am a good person.
+- [00:47:50] So we can apply this to the long term. We have to ask about swing trading, bullslam, and we will discuss about BTST.
+- [00:48:20] !
+- [00:48:21] Support is not a breakout. But if we have support, we can do that.
+- [00:48:33] We can do that. We can do that.
+- [00:48:39] We can do that.
+- [00:48:43] So we will discuss the price below the price, so we will have to reverse the price.
+- [00:48:52] So we will discuss the next thing about BTST.
+- [00:49:02] BTST is to buy today and sell tomorrow.
+- [00:49:06] Today is the price of the price.
+- [00:49:09] So if you have a question, you can learn how to do this.
+- [00:49:19] So if you have a question, what do we do in this question?
+- [00:49:24] So if you have a question, we will go to the stock action.
+- [00:49:34] We will talk about top gainers and volume shockers.
+- [00:49:38] Top gainers and Volume shockers find out the stock.
+- [00:49:45] In these stocks, we will focus on common stock.
+- [00:49:49] When we have a consumer product, we will focus on the company.
+- [00:50:02] One is Top gainers and Volume shockers.
+- [00:50:07] !
+- [00:50:09] So, let's go to MoneyControl.com.
+- [00:50:12] Let's go to MoneyControl.com.
+- [00:50:15] Let's click on All Stats.
+- [00:50:30] If you click all stats, you can click all stats.
+- [00:50:37] Then you can click all stats.
+- [00:51:00] I select the Excel file paste.
+- [00:51:12] If I paste, I will paste the name of the company.
+- [00:51:21] Clear?
+- [00:51:23] Next is Volume Chuckles.
+- [00:51:26] So what we do is to go to Volume Shocker.
+- [00:51:33] We click on Volume Shocker.
+- [00:51:46] We click on the stock of Volume Shocker.
+- [00:51:56] So we select the stock and paste. Okay, we will delete these.
+- [00:52:24] We have to delete this.
+- [00:52:30] So, when we have top gain, we have volume.
+- [00:52:34] What do we do?
+- [00:52:36] We have to identify the stock that we have to do.
+- [00:52:42] So, what do we do?
+- [00:52:44] The small column.
+- [00:52:47] We have to identify the stock names.
+- [00:52:52] I can't remember the code.
+- [00:53:20] Saffir, Saffir, Saffir Fords, these people will not see.
+- [00:53:26] Krishna, Saffir, Saffir, Saffir Fords, this is not the same.
+- [00:53:30] So, let's identify the stock of the stock.
+- [00:53:34] The stock is more than the laptop or Excel sheet, it is better than the other.
+- [00:53:40] If there is a phone, it will not be the same.
+- [00:53:44] So, you can see the stock.
+- [00:55:18] So this is what happens to the transaction.
+- [00:55:26] I ask for BTSC why don't you have to wait for BTSC?
+- [00:55:34] I mean, if you have to wait for the second one, you will have to wait for the second one.
+- [00:55:38] I mean, if you have not got $2000, then you will have to wait for the second one.
+- [00:55:45] So, if you have 3-1, 4-1, 5-1, then you can do this.
+- [00:55:51] If you have 3-1, then you can do this.
+- [00:55:54] So, what will be the best way to do?
+- [00:55:56] If you have a delivery percentage,
+- [00:56:02] you can see that the delivery percentage is 45%.
+- [00:56:08] So, this is the correct condition.
+- [00:56:11] I don't think BTS trade is a good thing.
+- [00:56:17] BTS trade is not a good thing.
+- [00:56:20] Because if you don't trade, you'll be able to get a good market.
+- [00:56:25] So, you'll be able to get a good market.
+- [00:56:28] So, you don't trade any more.
+- [00:56:31] And you'll be able to get a good day.
+- [00:56:36] If you don't have a lot of BTSD, you can't take a lot of BTSD.
+- [00:56:46] That's the idea.
+- [00:56:48] The idea is that we have a derivative market.
+- [00:56:57] You can't even know how many of us know.
+- [00:56:58] Our next day, expiry day is Tuesday.
+- [00:57:02] That's the expiry day.
+- [00:57:04] So we will trade next day.
+- [00:57:09] Okay, so we will trade next day.
+- [00:57:13] We will trade next day.
+- [00:57:16] And we will trade next day.
+- [00:57:22] We will trade next days.
+- [00:57:24] And BTS will trade next day.
+- [00:57:27] So we will trade next day.
+- [00:57:31] And we will trade next day.
+- [00:57:34] I will give you some questions.
+- [00:57:43] If you don't take much pressure on your BTSC trade,
+- [00:57:47] I will give you some questions.
+- [00:57:50] If you don't give me some questions,
+- [00:57:52] I will give you some questions.
+- [00:57:58] I will tell you what you need to do.
+- [00:58:03] Is it clear?
+- [00:58:08] What did we learn from this?
+- [00:58:12] The breakouts are the same as the problems we have.
+- [00:58:18] If there is a false breakouts, we will avoid the same.
+- [00:58:24] and we will be able to do this in BTS 3.
+- [00:58:32] I will learn this in a second.
+- [00:58:34] In the mind, we will see how the swing trading is going to be identified.
+- [00:58:45] I was talking about swing trading. I was thinking about 10, 5, 4, 5, 6 months. Long term means 1-2 months.
+- [00:59:05] If we don't have a stock, we don't have a stock.
+- [00:59:17] So, I'll learn this.
+- [00:59:22] Okay, this is clear.
+- [00:59:24] C-type, please.
+- [00:59:28] Market closer, but not.
+- [00:59:31] So, let's see the market in the 4th half of the day. BTS, and in the first half of the day, we'll see the next day.
+- [00:59:43] Okay?
+- [00:59:44] Let's see.
+- [00:59:46] Anjuli Devnaar,
+- [00:59:48] the commentator,
+- [00:59:51] by today,
+- [00:59:53] skin-term access.
+- [00:59:55] I have written the context in Tridip Kumar Das. Hello. Hello. How are you talking about Tridip?
+- [01:00:55] Anjali Devanath, unmute.
+- [01:00:59] Unjali Devanath, unmute.
+- [01:01:31] Sir, if you have any questions, do you have any questions?
+- [01:01:37] Okay, if you have any questions, do you have any questions?
+- [01:01:43] If you have any questions, do you have any questions?
+- [01:01:48] Do you have any questions?
+- [01:01:51] Yes sir.
+- [01:01:54] Can you see all the stats?
+- [01:01:58] Did you see the cursor?
+- [01:02:00] No sir.
+- [01:02:03] It's the cursor.
+- [01:02:05] Wow.
+- [01:02:06] That's good.
+- [01:02:08] Why did you see the zoom?
+- [01:02:18] Okay. Oh, I can see the view. Zoom.
+- [01:02:30] Now, if you look at the market, all the stats.
+- [01:02:36] Can you see it? Hello.
+- [01:02:40] Anjali, can you see it?
+- [01:02:43] Can you see it?
+- [01:02:45] Yes, sir.
+- [01:02:48] All stats, can you see all stats?
+- [01:02:56] Yes, it's not. All stats. All stats. Clicking.
+- [01:03:02] Clicking. Top gainers.
+- [01:03:08] Top gainers.
+- [01:03:14] Volume shockers.
+- [01:03:18] So let's move forward.
+- [01:03:48] So, let's go ahead and ask our customers, what's the powerpoint?
+- [01:04:01] How many stock have you got?
+- [01:04:04] How many stock have you got practically traded?
+- [01:04:08] How many stock have you got?
+- [01:04:13] So let's move forward
+- [01:04:31] I have to go to the class in 2022.
+- [01:05:01] So, you know what the class is doing?
+- [01:05:03] You know, you have to be in the classroom.
+- [01:05:15] You have to be in the classroom.
+- [01:05:29] If you don't have any questions, you can answer your question.
+- [01:05:47] I was having a discussion about the question.
+- [01:05:49] We have to answer the question.
+- [01:05:51] ...
+- [01:05:58] What is the vote? We are not sure what the vote is. We are not sure what the vote is.
+- [01:06:28] I did a class.
+- [01:06:32] The class was that,
+- [01:06:36] I was going to do a technical analysis.
+- [01:06:42] But I was going to do a class,
+- [01:06:48] but I was going to do a class,
+- [01:06:52] and I was going to do a live class.
+- [01:06:56] I can't remember how much time is.
+- [01:07:01] I was thinking about it, but I can't remember how much time is.
+- [01:07:06] I can't remember how much time is.
+- [01:07:08] Still, if you have a lot of time, I don't have to do live class.
+- [01:07:14] I can't remember how much time is.
+- [01:07:16] If you have to do your weight,
+- [01:07:20] you can't remember how much time is.
+- [01:07:22] That's the same thing.
+- [01:07:27] Is it going?
+- [01:07:29] Okay, sir.
+- [01:07:33] I'll do it.
+- [01:07:34] Let's take a look at the next class.
+- [01:07:37] We'll record the first class in the first class.
+- [01:07:42] What's your question?
+- [01:07:45] I've said that it's 22 hours.
+- [01:07:49] It's a long time ago.
+- [01:07:52] So you can see the recording, or do you see the recording?
+- [01:07:57] Okay, if it's not a video, it's not a video.
+- [01:08:03] It's not a recording.
+- [01:08:05] Okay, guys, I just wanted to say that I have a class.
+- [01:08:10] I have a class called the 7 number.
+- [01:08:14] We have a scanner called Chatling.com.
+- [01:08:19] What is this?
+- [01:08:25] I want to show you the channel.
+- [01:08:31] You can show you the classes.
+- [01:08:33] You can get a link to this.
+- [01:08:47] All the platforms are available.
+- [01:08:49] If you have any videos, you can see the link in the description.
+- [01:08:57] If you have any questions, you can see the discussion.
+- [01:09:01] What are you talking about?
+- [01:09:03] Or not?
+- [01:09:05] What are you talking about?
+- [01:09:07] I don't know.
+- [01:09:11] How many videos are available?
+- [01:10:15] I missed this.
+- [01:10:19] I was going to say that.
+- [01:10:22] I will start with this.
+- [01:10:26] And the future and options are the class below.
+- [01:10:33] Do you know the fundamental?
+- [01:10:35] No, it is a process.
+- [01:10:37] It is a process in Delhi.
+- [01:10:40] I will tell you about which one.
+- [01:10:43] Okay, focus.
+- [01:10:45] How do you know the data, fundamental, and the third-party derivatives?
+- [01:10:49] Okay, Sanjay Mandol?
+- [01:10:51] Okay, okay.
+- [01:10:53] You're very happy to see all the data.
+- [01:10:56] Look, how long time is going to be?
+- [01:10:58] How long time is going to be?
+- [01:11:00] We've got a number of classes.
+- [01:11:02] We've started in our stock market history.
+- [01:11:05] How long time is going to be?
+- [01:11:41] You can click the dislike button.
+- [01:11:47] We can keep the pundits from the pundits.
+- [01:11:53] We can't keep the pundits from the pundits.
+- [01:11:58] We can keep the pundits from the pundits from the pundits.
+- [01:12:02] So, what do you want to say?
+- [01:13:06] I have to manage or what do I do?
+- [01:13:09] It's a bad idea that I'm learning how to manage.
+- [01:13:13] Okay, so you know how to manage.
+- [01:13:15] What do I do?
+- [01:13:18] Okay, so let's go to 22.
+- [01:13:22] 22 class.
+- [01:13:24] 10-10 minutes.
+- [01:13:28] Good evening.
+- [01:13:30] Sorry, I joined today's class.
+- [01:14:03] So it is better to see questions in the next class.
+- [01:14:24] So that person has to come live.
+- [01:14:28] That person has to come live.
+- [01:14:32] If you want to do it, you can see the recording.
+- [01:14:37] But many people are expecting that I have a live class.
+- [01:14:41] Let's not confuse ourselves anymore.
+- [01:14:43] I have a class without a class.
+- [01:14:45] It's okay.
+- [01:14:47] Okay. So next discussion is something called
+- [01:14:54] If we have to do this, we have to do this.
+- [01:15:12] Did you discuss the risk?
+- [01:15:16] What was the systematic risk, unsystematic risk?
+- [01:15:22] What is the risk? What is the risk? What is the risk? Basically, the corporation is the risk of 3 major.
+- [01:15:52] I have to choose the swing trading, but I have to choose the swing trading.
+- [01:16:02] I have to choose the swing trading.
+- [01:16:06] So, this is the discussion is starting.
+- [01:16:11] I have to choose the swing trading.
+- [01:16:21] I have to focus on the last few days.
+- [01:16:38] I will tell you what I have done in the last few months.
+- [01:16:47] Clear?
+- [01:17:19] If there is a lot of the company, it is a lot of the company. It is 100% more than it is, but it is a lot of the company. What do you do to keep the company in the risk management department?
+- [01:17:49] So, if you have risk, you have risk.
+- [01:17:59] But the major risk is risk.
+- [01:18:03] Market risk, credit risk, and operational risk.
+- [01:18:09] So, credit risk is not a big risk for the company.
+- [01:18:20] Credit is not a big risk for the company.
+- [01:18:27] Operational risk is a big risk for the company.
+- [01:18:33] If you don't have any questions, you can do the operations and do the risk assessment.
+- [01:18:44] And what is the risk? Market risk.
+- [01:18:46] What is the risk of market risk? What is the risk of market risk?
+- [01:18:52] Anyway, I am going to go to this point.
+- [01:18:54] I am going to say that from our account,
+- [01:19:00] This risk is primarily
+- [01:19:08] We have to say that
+- [01:19:17] Systematic risk
+- [01:19:19] What do we say?
+- [01:19:20] Systematic risk
+- [01:19:26] This is the risk system.
+- [01:19:30] What is this?
+- [01:19:34] Today, Iran and Ukraine are the most important company.
+- [01:19:42] They are the most important industry.
+- [01:19:46] But if you are the most important part,
+- [01:19:48] do you have to be exposed risk risk?
+- [01:19:52] So, what we learned from our portfolio? How much risk is?
+- [01:20:04] Because the basic logic is that don't put all your eggs in one basket.
+- [01:20:10] If you want to make a company, you can't make a deal.
+- [01:20:48] If you have to make this portfolio, you can see the risk.
+- [01:20:52] No, no.
+- [01:20:55] Why?
+- [01:20:56] The whole country is going to be affected.
+- [01:20:58] It's very affected.
+- [01:21:00] This is called systematic risk.
+- [01:21:02] It's called systematic risk.
+- [01:21:04] This is called a diversified risk.
+- [01:21:05] If we diversify the portfolio,
+- [01:21:09] we can see the risk of non-diversifiable risk.
+- [01:21:15] Non-diversifiable risk.
+- [01:21:19] Meaning that we cannot diversify the risk.
+- [01:21:27] That's right.
+- [01:21:28] That's the risk.
+- [01:21:30] And the risk in children is non-systematic risk.
+- [01:21:36] Non-systematic risk.
+- [01:21:40] Non-systematic...
+- [01:21:41] Non-systematic risk is not a system of risk.
+- [01:21:51] In this case, there is a company-specific risk.
+- [01:21:54] What is a specific risk?
+- [01:21:58] What is a company-specific risk?
+- [01:22:00] What is a top management?
+- [01:22:03] What is a company-specific risk?
+- [01:22:06] So basically, this risk is called diversifiable risk.
+- [01:22:24] So basically, this risk is not a big issue.
+- [01:22:34] I have to know the risk of this kind of life.
+- [01:22:41] I have to use this term as beta.
+- [01:22:46] What is beta?
+- [01:22:48] What do you hear?
+- [01:22:56] Beta.
+- [01:22:58] Yes or No, no, no, no.
+- [01:23:28] I am going to go into the financial context.
+- [01:23:33] So, basically, financial is important to be in the financial context.
+- [01:23:38] And if we don't have any data, we will go back to the financial context.
+- [01:23:42] So, the data is very important to be in the financial context.
+- [01:23:47] So, the data represents the systemic risk.
+- [01:23:57] So to keep it simple, I have to do a lot of website that has been named TikaTap.in.
+- [01:24:19] This is the TickerTip.in site where you can log in, you can log in and log in.
+- [01:24:29] This is the More option. You can log in the Stock screen.
+- [01:24:34] This is the Stock screen. Then you can click Start Screening.
+- [01:24:39] When you click Start Screening, you can see the figure of 5,739 stocks.
+- [01:24:48] 5,739 stocks are the least. Clear? Okay. This is the point that we identify the best stock. So one of the definitions of the best, best, best definition of best, best definition of best.
+- [01:25:18] The stocker has a definition of the stocker is that the stocker has a return and the risk is on the risk.
+- [01:25:28] In this case, we need to identify a stocker, so we need to help in this case.
+- [01:25:42] So, we can see this stock in the case of 15.5.
+- [01:25:58] Alpha means stock return minus market return.
+- [01:26:42] So I will determine what I will determine if I will.
+- [01:26:58] I will click the alpha.
+- [01:27:10] If you click the alpha, you can see the alpha.
+- [01:27:15] This is 15% above.
+- [01:27:21] This is the highest.
+- [01:27:24] How many times do you see the alpha?
+- [01:27:29] 2,000.
+- [01:27:31] So, the stock returns are more than 2,000.
+- [01:28:06] What I see?
+- [01:28:10] Beta
+- [01:28:11] I will type beta
+- [01:28:33] I will type 0 to 1
+- [01:28:39] So, we have to 0 to 1.
+- [01:28:43] Beta-rector concept is 1%.
+- [01:28:49] Okay. So, if we have 1% of our market,
+- [01:28:55] we have 1% of our stock.
+- [01:29:00] We have to get 0.8.
+- [01:29:03] So, if we look at the market, we will increase the stock of 1.8.
+- [01:29:10] If we look at the beta, we will increase the stock of 1.2.
+- [01:29:20] So, if we look at the beta, we will increase the stock of 1.2.
+- [01:29:24] So, if we look at the beta, we will increase the stock of 1.8.
+- [01:29:31] If the market is 1% of the stock is 0.8%
+- [01:29:39] So, the beta is a good example.
+- [01:29:42] I want to find out the beta is 0 to 1.
+- [01:29:49] So, what do I do? I want to write 0 to 1.
+- [01:30:26] which is a large cap.
+- [01:30:29] A large company is in the middle of the business management team.
+- [01:30:34] They are well prepared.
+- [01:30:36] So we looked at the same thing.
+- [01:30:38] So we clicked on a large cap.
+- [01:30:41] So we got 22 stocks in Golpo.
+- [01:30:45] 5,000 to 5,700 to 22 stocks.
+- [01:30:49] It's a good idea.
+- [01:30:51] The logic is hopefully we can understand.
+- [01:30:55] I have a large cap stock, which is the last quarter of the year. Second, we have 6 stocks, which are 15% and above. And we have 6 stocks where beta is between 0 to 1. That's how we have risked. Clear?
+- [01:31:55] So if you have to try to get some good stuff.
+- [01:32:04] If you have to try to get a risk, you can get a risk.
+- [01:32:12] You can get a risk from 0 to 1.5 to 1.5 to 1.5.
+- [01:32:17] You can see the risk.
+- [01:32:19] Okay? But not beyond that.
+- [01:32:22] So, we have to be clear to our c-type. Delta is the derivative. Alpha, theta, vega, delta, gamma, all of these derivatives. We have to be clear to our c-type.
+- [01:32:52] What's your question?
+- [01:32:57] Sir, did you say that this is the calculation?
+- [01:33:02] The data?
+- [01:33:04] The data is the data.
+- [01:33:07] What data is the data?
+- [01:33:09] The data is the data.
+- [01:33:11] Did you say that this is the data?
+- [01:33:15] No, I didn't know that.
+- [01:33:19] I think 1% is greater than 0.8%
+- [01:33:30] So the market is greater than 1%
+- [01:33:33] Our stock is greater than 0.8%
+- [01:33:37] The market is greater than 2%
+- [01:33:39] So the market is greater than 0.8%
+- [01:33:41] So how much stock is greater than 0.8%
+- [01:34:13] Yes, I will.
+- [01:34:16] Clear?
+- [01:34:17] Yes, sir.
+- [01:34:19] So,
+- [01:34:21] we will learn how to get the derivatives of RO.
+- [01:34:27] We will learn how to get the risk of the portfolio.
+- [01:34:34] I will learn from the derivative of systemic risk.
+- [01:34:47] Anyway, let's get clear.
+- [01:34:54] Now, let's get to the next question.
+- [01:34:58] Thank you, Mr. Kumaan. Thank you.
+- [01:35:01] Thank you.
+- [01:35:57] If you have to identify the alpha and beta, you will find the alpha and beta.
+- [01:36:07] So, if you have to identify the alpha and beta, you will find the alpha and beta.
+- [01:36:12] Okay.
+- [01:36:13] We will keep it in separate chambers.
+- [01:36:16] Okay.
+- [01:36:17] Have you seen the last day?
+- [01:36:19] No, not Kevin.
+- [01:36:21] We have all the time in Polkata.
+- [01:36:25] So, we can do everything.
+- [01:36:29] But if we do everything, we can do everything.
+- [01:36:39] We can do everything.
+- [01:36:41] So, I'll tell you how to do everything.
+- [01:36:44] I'll tell you everything.
+- [01:36:49] Now, I'll start the next strategy.
+- [01:36:52] This strategy is called Trend Continuation Strategy.
+- [01:37:05] The opportunity is called a low return.
+- [01:37:12] What is Trend Continuation Strategy?
+- [01:37:19] This is called Trend Continutions.
+- [01:37:23] This is called Stock Selection.
+- [01:37:26] This is called Monthly RSI, which I discussed earlier.
+- [01:37:32] This is called Daily RSI, which is not the RSI.
+- [01:37:37] This is called Daily Close Crossed Above ST, which is called Super Trend.
+- [01:37:43] I have not discussed in my country, but Super Trend is not the same.
+- [01:37:48] So, there are different conditions that are monthly RSI and daily close.
+- [01:37:56] If you have a daily candle, you can see that close will be a super trend.
+- [01:38:04] Okay, so let's see how many of you can see.
+- [01:38:09] So, let's go to the trading view.
+- [01:38:14] The first condition is that monthly RSI is in the same way.
+- [01:38:24] This is our first condition.
+- [01:38:27] I will put monthly candle in the first condition.
+- [01:39:09] If you have to do that, you can do that.
+- [01:39:16] So, in the RSI 60 section, we will see backtesting, we will mark that.
+- [01:39:28] Now, we will convert this in Delhi.
+- [01:39:32] So, if we convert this in Delhi, we will start this in Delhi.
+- [01:40:07] This is super trend. Daily Candle. Now, our condition is closed in the super trend. So, we have to look at the candle close in the super trend.
+- [01:40:37] So what is this?
+- [01:40:39] I suppose I put entry and stop loss.
+- [01:40:43] I put down swing and stop loss.
+- [01:40:45] If I put down the lower time frame, I put stop loss.
+- [01:40:49] I put down the lower time frame and stop loss.
+- [01:41:06] 365 divided by
+- [01:41:13] 19 into 19%.
+- [01:41:17] That's 877%.
+- [01:41:21] Clear?
+- [01:41:23] Aapna kuna stock and nam boulun please?
+- [01:41:27] Aapna kuna stock and nam boulun?
+- [01:41:36] ITC.
+- [01:41:44] I have to call ITC.
+- [01:41:48] ITC Limited.
+- [01:41:50] ITC is a monthly candle.
+- [01:41:53] Okay.
+- [01:41:55] It is a monthly candle.
+- [01:41:57] I have to call it RSI chart.
+- [01:42:03] RSI chart, where is it?
+- [01:42:06] 1 to 1, this is the same.
+- [01:42:09] So, this is the same.
+- [01:42:10] Now, we convert this in daily.
+- [01:42:13] So, where is it?
+- [01:42:23] This is the same.
+- [01:42:27] Now we have seen our green candle close and we have a swing low to stop loss.
+- [01:42:57] 25 days, which means 365 divided by 24 into 13.
+- [01:43:15] That's 197 percent.
+- [01:43:21] SBI State Bank of India State Bank of India State Bank of India State Bank of India
+- [01:43:39] I will see the RSI Shutter and identify the RSI Shutter.
+- [01:43:51] I will see the RSI Shutter.
+- [01:43:56] Back test.
+- [01:43:58] I will convert to daily.
+- [01:44:04] So what is this? This is our new one. I am closing. I am stop loss.
+- [01:44:34] If I stop, I will trail.
+- [01:44:41] I will trail.
+- [01:44:55] 102 days.
+- [01:44:59] 102 days means roughly 3 months some days. So which is 200%? So this is annualized roughly 500% of the return. Clear?
+- [01:45:29] If you have to balance your portfolio. Life is balanced. You can't go to the place where you can go to the place.
+- [01:45:50] So if you balance your risk-taking ability, you can balance your risk-taking ability.
+- [01:46:13] BIL
+- [01:46:47] There is 60 rs.
+- [01:46:49] So I can go to daily.
+- [01:46:51] We can go to daily.
+- [01:46:55] Now, where is the green candle?
+- [01:47:01] Close.
+- [01:47:03] Close is here.
+- [01:47:05] Don't close.
+- [01:47:07] Now, we can go to swing load and stop loss.
+- [01:47:11] I have to keep this.
+- [01:47:16] So I have to keep this.
+- [01:47:18] I have to keep this.
+- [01:47:41] What is the red line? What is the super trend? What is the super trend? What is the super trend?
+- [01:48:11] Indicator. Where do I go to Indicator? Indicator. I've said what I've said. Indicator is a little bit. Indicator is a little bit.
+- [01:48:41] I have to click on this line.
+- [01:48:49] Clear, Shanti Mahan Raya?
+- [01:48:56] Graphs are not.
+- [01:48:59] Shanti Mahan Raya, I have not unmuted.
+- [01:49:09] Yes sir, as you saw the HBI, they saw the red line, but they were invisible.
+- [01:49:22] Why did you say that? Yes, they saw the line in the super trend.
+- [01:49:29] What is the super trend indicator?
+- [01:49:38] I will start the ribbon.
+- [01:49:43] So, what do you think about it?
+- [01:49:49] No, I don't know.
+- [01:49:51] What do you think about it?
+- [01:49:54] The first thing about it is the RSA is about 6.5.
+- [01:50:00] We will mark the time frame in the month.
+- [01:50:04] I can see the conditions.
+- [01:50:10] But the conditions are closed.
+- [01:50:16] I can see the conditions.
+- [01:50:22] What is the condition?
+- [01:50:25] Daily close.
+- [01:50:28] What time frame?
+- [01:50:30] It's closed. It's closed. It's open. It's closed. It's open. It's open. It's open. It's open. It's open. It's open. It's open. It's open. It's open. It's open. It's open.
+- [01:51:00] Open, close, low and high. This is a daily time frame. And our super trend is like this. So, close, super trend is like this? Right or not? Our super trend is like this. Now, the green candle is like this. Open, close, low, high.
+- [01:51:30] !
+- [01:51:32] Our close-up trender is up to date.
+- [01:51:35] We are going to do daily tax.
+- [01:51:37] Clear?
+- [01:51:39] Okay.
+- [01:51:41] Obji shortcut, please clear?
+- [01:51:49] No, we are going to ask you questions.
+- [01:51:51] We are going to ask you questions.
+- [01:51:53] Obji shortcut, please.
+- [01:51:55] Obji shortcut.
+- [01:52:30] Hello.
+- [01:53:32] So what did we see in the scanner?
+- [01:53:41] Monthly RSI is 60 and in Delhi is closed crossed above Delhi Supertrend 72
+- [01:53:51] So what we did here is we will use stock and name
+- [01:53:55] So this is SBC exports
+- [01:53:58] So what do we do? We go to SBC exports
+- [01:54:01] Let's click on the SBC exports.
+- [01:54:13] SBC exports.
+- [01:54:27] Monthly RSI is 95%
+- [01:54:32] So, do you see the first condition of RSI?
+- [01:54:38] And the condition of the DTO is Delhi.
+- [01:54:44] What do you see?
+- [01:54:45] Our green candle close is above the super trend line.
+- [01:54:52] Where are we?
+- [01:54:57] Clear? Life is easy to be so easy. Then you ask a question to yourself, right? We have to understand that this is a very hard life. Not necessarily, right? Okay. If you have a technology at this level, how do you get to the airport?
+- [01:55:27] I have to do this.
+- [01:55:32] I have to do this for 2 days and 5 days.
+- [01:55:37] I have to do this for the Hungarian people.
+- [01:55:39] I have to do this for the first time.
+- [01:55:47] I have to do this for technology.
+- [01:55:49] I have to do this for AI agents.
+- [01:55:51] I have to do this for the first time.
+- [01:55:53] Anyway.
+- [01:55:55] ! It's still debatable. It's not very clear.
+- [01:56:55] So, in a day, the religion will follow the religion.
+- [01:57:25] So, let's discuss this.
+- [01:58:05] Structured Thinking
+- [01:58:07] Okay, anyway
+- [01:58:09] I'm just having fun
+- [01:58:12] Look, I don't have a class
+- [01:58:14] One day, I don't have a class
+- [01:58:16] I don't have a class in two days, four hours
+- [01:58:19] I don't have a class in three days, six days
+- [01:58:22] But I don't have a class in three days
+- [01:58:24] If I don't enjoy the process, then it's very difficult, right? Continuous
+- [01:58:30] Then I'll have to do eight hours in four days
+- [01:58:35] So, we will be able to do this next thing.
+- [01:58:48] What is the 1334 strategy?
+- [01:58:53] So, this is a simple, 1334 SMA.
+- [01:58:59] This is a very interesting thing.
+- [01:59:01] I have to check out the data.
+- [01:59:30] I will place the same thing in SME.
+- [01:59:38] Clear?
+- [01:59:39] 3 and 4.
+- [01:59:40] So, this is what I will do.
+- [01:59:42] 3 and 4.
+- [01:59:44] So, what do I do?
+- [01:59:45] I will place the same thing in SME.
+- [01:59:47] Hold, 1 and 1 and 3.
+- [01:59:52] Okay.
+- [01:59:56] And what is this? This is 34, this is orange and the other.
+- [02:00:04] So, if you are looking at 34, you can see the difference between the small and small.
+- [02:00:11] But I can see this.
+- [02:00:14] This is 200 moving average.
+- [02:00:17] Okay?
+- [02:00:18] In this case, roughly, it's 314 trading days.
+- [02:00:24] If you have to do that, you can do that in the next few days.
+- [02:00:34] So, this is the second quarter of the trading day.
+- [02:00:37] In this second quarter of the trading day,
+- [02:00:39] I reflect a 200 moving average in a long term pattern.
+- [02:00:44] So, I have not seen the past.
+- [02:00:49] However, I have seen the 24th model that is 200.
+- [02:00:54] I want to see 200 SME.
+- [02:01:02] This is sideways and nigh.
+- [02:01:04] I want to see 200 SME.
+- [02:01:14] This is the same.
+- [02:01:21] So, after the change in the 1334, we have to go uptrend.
+- [02:01:30] We can see that.
+- [02:01:32] And the change in the data is like this.
+- [02:01:35] So, if we mark the number of the changes in the data, we will mark the number of the changes in the data.
+- [02:01:42] So, if we look at the data, we will mark the number of the changes in the data.
+- [02:01:47] So I cross this drone from 13-34. So if I cross this, I mean that the corresponding candle is here and the swing of the drone is here. Right? If I go this way, I'm scared. So what is it? I have to say that the A of D is a big one. So 30 days, 80%.
+- [02:02:47] 3-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4-4
+- [02:03:47] I can see 200.
+- [02:03:56] What is 200?
+- [02:03:58] 200 is the first one.
+- [02:04:01] The first one is the second one.
+- [02:04:04] The second one is the second one.
+- [02:04:13] So we change the problem in which we change the problem.
+- [02:04:21] So we cut the problem and we go back to the problem.
+- [02:04:27] So we change the problem.
+- [02:04:29] So we make a trend.
+- [02:04:32] And we have seen some other trends.
+- [02:04:36] So we don't have to do any trade.
+- [02:05:09] This is a lot of the time.
+- [02:05:30] In 39 days, 67%
+- [02:05:35] 67% into 2%
+- [02:05:40] I'm 70%
+- [02:05:44] 70% into 2% is 840%
+- [02:05:47] Chalega?
+- [02:05:52] Dukho bhavenno to?
+- [02:05:55] Yeah, 80%
+- [02:05:56] Okay
+- [02:06:00] So, okay, infosys. Infosys Limited. Daily. This is the first time.
+- [02:06:23] So what happens is this?
+- [02:06:53] The first thing is that we have to do is we have to do a lot of things.
+- [02:07:02] The first thing is that we have to do a lot of things.
+- [02:07:05] I think we have to do a lot of things.
+- [02:07:08] If we have to do a lot of things, we can change the things we have to do.
+- [02:07:14] The first thing is that we have to do a lot of things.
+- [02:07:18] This is about 15 days.
+- [02:07:26] Did you have the concept or no?
+- [02:07:34] Please, please, check the box in the C-type box.
+- [02:07:37] The other thing is that we can see.
+- [02:07:40] Clear?
+- [02:07:41] So this is going to be done with our stock.
+- [02:07:49] So I will give our stock a scanner.
+- [02:08:14] So, in this case, we will see our consumer care.
+- [02:08:17] So, what code is it?
+- [02:08:19] We will see our consumer care.
+- [02:08:21] What is the consumption of consumption?
+- [02:08:26] What is consumption of consumption?
+- [02:08:28] Okay?
+- [02:08:29] One thing I have to do is I have to do all the consumption of consumption.
+- [02:08:34] So, I can see that the consumption of consumption is cut.
+- [02:08:37] Is it not?
+- [02:08:38] So, I have to do that.
+- [02:08:42] But, I have to see that the consumption of consumption is cut.
+- [02:08:48] So, what is the consumption of consumption?
+- [02:08:50] Let's look at the other side.
+- [02:08:57] What are the other things that are going to do?
+- [02:08:59] The other things are trending.
+- [02:09:02] Good.
+- [02:09:04] Clear?
+- [02:09:09] Let's see the scanner.
+- [02:09:15] How can you do this?
+- [02:09:18] 5700 stocks are focused on the second time.
+- [02:09:27] It makes life so easy.
+- [02:09:30] So, the first time you are thinking about it is that you are lazy.
+- [02:09:44] What do you say?
+- [02:09:48] We should always have a mindset that we have multiple sources of income.
+- [02:10:12] That's very important. Anyways, so I have to ask you.
+- [02:10:23] Did you hear that? Yes or no?
+- [02:10:26] You know, the people who are waiting for the night to see the night, the office, the office, the office, the office.
+- [02:10:35] The next thing I have to ask is 44 moving average strategy.
+- [02:10:42] 44 moving average strategy. What do we do? We have one SMA that is 44. We have one SMA that is 44. We have one SMA that is 44.
+- [02:11:12] The first thing is that we can see the price in 44 SMA.
+- [02:11:21] If we go down, no one will have to pay.
+- [02:11:23] And the price will be the price in 44 SMA.
+- [02:11:34] I have just looked at the example.
+- [02:11:38] I have to cross this direction.
+- [02:11:45] I will cross this direction.
+- [02:12:05] So, if you are going to the price, you will see the price of the price.
+- [02:12:36] !
+- [02:12:38] What's your name?
+- [02:12:42] Sir, I've told you about our scanner.
+- [02:12:45] What's your name?
+- [02:12:48] How is your name?
+- [02:12:50] The scanner?
+- [02:13:00] Yes, sir.
+- [02:13:03] Yes sir
+- [02:13:04] This is a Indian company, a chart link is a Indian company
+- [02:13:08] This stock is Indian stock
+- [02:13:13] Okay?
+- [02:13:15] And if you invest in your own way, you invest in a foreign stock,
+- [02:13:19] you have to invest in a foreign stock
+- [02:13:24] You have to keep it in your own way
+- [02:13:27] That's why you have to invest in a foreign stock
+- [02:13:29] Why?
+- [02:13:30] If you are stuck in this context, you should stop by looking at the technical side of your stock.
+- [02:13:42] Why did you stop by looking at the stock?
+- [02:13:46] The stocker has a news item.
+- [02:13:54] There are a few fundamental aspects.
+- [02:13:57] If we learn a technical analysis, we will learn a fundamental analysis.
+- [02:14:10] If we learn a fundamental analysis, we will learn a fundamental analysis.
+- [02:14:12] Ideally, if we invest in a trading context, we will follow this process as well as techno-funda investing.
+- [02:14:22] technical analysis and fundamental analysis mix
+- [02:14:27] so that we are going to be better trading
+- [02:14:29] and if we are not going to be a good stock, we are going to be a good gift
+- [02:14:33] or we are going to be a good gift
+- [02:14:37] but we are going to be a good investment in the platform
+- [02:14:40] and we are going to be a good investment in the stock
+- [02:14:43] but we are going to be a good trading view of technical charts
+- [02:14:48] but the fundamental aspects
+- [02:14:51] If you don't have any country, then as a retail trader, it's difficult to analyze.
+- [02:15:01] If you work as an analyst, you have to spend a day with your own money, that's a different story.
+- [02:15:09] I was in Bangladesh, I was in India, I was in Bangladesh, I was in India, I was in India.
+- [02:15:19] So, you know, the stock exchange has come to our stock exchange.
+- [02:15:31] The concept is the same.
+- [02:15:35] We are going to Bangladesh,
+- [02:15:38] and we are going to establish a rating agency.
+- [02:15:41] We are going to do fundamental analysis.
+- [02:15:44] DBRBD, Donan West Street Rating Agency Bangladesh.
+- [02:15:49] I was in Bangladesh, I was in Bangladesh.
+- [02:15:56] Okay? So I was in the same way.
+- [02:15:59] I have 4 grams.
+- [02:16:04] My dadu Bangladesh is a good one.
+- [02:16:08] Bangladesh is a good one.
+- [02:16:11] What do you say about it?
+- [02:16:17] What do you say about it in Bangladesh?
+- [02:16:22] What do you say about it?
+- [02:16:26] And...
+- [02:16:33] BOLBO...
+- [02:16:35] Bhanubandabaddhae naam shunye chanapnaraa?
+- [02:16:38] Bhanubandabaddhae actor?
+- [02:16:41] Huh?
+- [02:16:42] Momuta...
+- [02:16:44] Okay, so bhanubandabaddhae naam shunye thakken,
+- [02:16:48] to bhanubandabaddhae hoche ghi hamaar dadugo,
+- [02:16:51] hamaar maayen nijer mama.
+- [02:16:53] So, we have to connect with the new platform.
+- [02:17:00] Anyways, so, we have to learn how to connect with our stock exchange.
+- [02:17:10] So, we have to help with our concept.
+- [02:17:14] Okay?
+- [02:17:16] So, anyways, we have 44 moving averages.
+- [02:17:23] So 44 moving averages, we have to know what the average is.
+- [02:17:29] So, let's see our stock in the context.
+- [02:17:34] So,
+- [02:17:36] This is a 44 moving average.
+- [02:17:58] So, I see this is Glottis Limited.
+- [02:18:07] This is the Glottis Limited.
+- [02:18:21] So, we can see that our condition is 44 moving average.
+- [02:18:29] So, we can see that our stock is on the direct.
+- [02:18:34] This is 44 moving average.
+- [02:18:37] So, we can see that our condition is on the direct.
+- [02:18:43] So, we can see that the current is on the train.
+- [02:18:48] So, we can see that the current is on the direct.
+- [02:18:49] So, if you have a data, you can use a scanner to use easily. If you have a chart or a pattern, you can use a scanner to use easily. If you have a chart or a pattern, you can use a scanner to use easily. So, if you have a data, you can use a scanner to use easily.
+- [02:19:19] This is the same way.
+- [02:19:25] I have learned the same way.
+- [02:19:29] This is the same way.
+- [02:19:33] We use 4 hours.
+- [02:19:38] This is called 915 EMA.
+- [02:19:43] The green candle shall be above 950 EMA in 4 hour chart when the super trend is in green.
+- [02:19:54] Let me see what we have here. We have to go here.
+- [02:19:58] So we have to place EMA.
+- [02:20:06] I have to link EMA. So EMA is placed. So what is the thing? Oh, it's a high dive. So I have to check the training view.
+- [02:20:36] This is the one that is orange.
+- [02:20:48] So this is 4 hours.
+- [02:20:52] This is the 9-15-20.
+- [02:20:59] This is the one that is going to be the side.
+- [02:21:06] I will add Supertrend.
+- [02:21:14] I will place this area.
+- [02:21:18] I will add Supertrend.
+- [02:21:20] I will place this area.
+- [02:21:22] We have added the area.
+- [02:21:26] We will add this area.
+- [02:21:28] It is greener.
+- [02:21:30] It is a little bit more.
+- [02:21:32] If we cross the supertrain is green, that's a better place. Meaning, if we cross the green, we cross the green. If we cross the 4 hours, we need to enter. Clear? I can see Infosys Limited.
+- [02:22:02] EMA Moving Average is 14-34.
+- [02:22:11] Orange is 1-34.
+- [02:22:16] It's not a side-way.
+- [02:22:20] It's not a very good thing.
+- [02:22:23] It's not a good thing.
+- [02:22:26] This is cut from 13-34. This is a big trending. This is a big trend.
+- [02:22:56] I will mark this area and I will place Supertrend.
+- [02:23:06] So I will mark this area and this area is green.
+- [02:23:11] So I will place this area when I enter.
+- [02:23:14] I will place 4 hours of scandal and I will place this area.
+- [02:23:19] I will place this area and I will place this area.
+- [02:23:23] This is 4% of the scandal in 4 hours.
+- [02:24:23] I have done my job with my job.
+- [02:24:26] But there is an analyst who has done this for a day.
+- [02:24:32] That's right.
+- [02:24:34] There is no salary for that.
+- [02:24:38] And what is your job?
+- [02:24:40] What is your opinion?
+- [02:24:43] What is your job?
+- [02:25:17] Okay, let's say, best mutual funds in India, 2026.
+- [02:25:22] Then, we call it best mutual funds in this case.
+- [02:25:26] If we call it, we call it best mutual funds in this case.
+- [02:25:33] Then, this fund is a thematic fund.
+- [02:25:37] Thematic fund means PSU fund, which is only PSU companies invested in this case.
+- [02:25:41] Which is infrastructure fund, which is only infrastructure companies invested in this case.
+- [02:25:46] I choose a thematic fund, which will invest across sectors.
+- [02:25:54] So, this is the SDFC FlexiCap fund.
+- [02:26:01] So, I click on this.
+- [02:26:03] I click on this.
+- [02:26:10] Asset allocation.
+- [02:26:12] This is a detail portfolio analysis.
+- [02:26:21] If you click here, you will see that this fund manager will invest in a particular sector, and in this context, a particular stock.
+- [02:26:34] What do you do?
+- [02:26:36] This is a list of 9 funds.
+- [02:26:40] Okay? Please, let me see which name is very common. It's a very common type.
+- [02:26:47] If you have to study, you have to do this, but they are not fools. If you have to do this, you have to do this, and you have to do this.
+- [02:27:17] So what are you trying to do?
+- [02:27:24] What are you trying to capture these stocks?
+- [02:27:27] What are you trying to learn from our fundamental answer?
+- [02:27:30] We need to study the question mark.
+- [02:27:36] We have a question mark.
+- [02:27:39] So we can confirm what happens to this, which is the first step.
+- [02:27:48] So we can check what happens to this, and we can check what happens to this.
+- [02:27:52] Okay, so if we do this, we focus on the best stock.
+- [02:27:59] Clear?
+- [02:28:00] We know our trendline.com, our site, trendline.com.
+- [02:28:05] The trendline.com is the site of the trendline.com. You can see the top holdings of which stock is invested in. You can see the stock. You can see the stock. You can see the stock. You can see the stock.
+- [02:28:35] So you will get a lot of information. Clear? Will it go? Will it go? Will it go? Okay. So today we will start our swing trading discussion. Okay. So please ask us to know what's up group in today's session.
+- [02:29:05] Thank you.
+- [02:30:05] I hope you can understand that every 15 days we learned the process of making a 4-minute process.
+- [02:30:19] If you have the process of making a 4-minute process, we can understand that every 15 days we learned the process of making a 4-minute process.
+- [02:30:26] Obviously, it requires a bit of practice.
+- [02:30:29] It's worth giving the time. I hope you are getting a direction. I hope that suits you.
+- [02:30:51] Clear? I have a question about this.
+- [02:30:54] I have to learn fundamental analysis.
+- [02:31:05] I have not learned technical analysis.
+- [02:31:08] And I have learned fundamental analysis.
+- [02:31:16] So I have to understand.
+- [02:31:18] What question is Sanjay Mondal?
+- [02:31:20] I have to know about the market. If you look at the ad, how much success has been?
+- [02:31:35] The question is, how much algorithm is?
+- [02:31:41] Algorithm is called algorithmic trading.
+- [02:31:45] So basically, the machine has given me the rules that I have to follow the machine.
+- [02:31:54] That's how the vapor.
+- [02:31:56] The reason why there is an advantage is that we have emotional vapor.
+- [02:32:08] But in algo, the emotion is less.
+- [02:32:13] If you have to change the algo, you can change the picture.
+- [02:32:25] What do you think?
+- [02:32:29] Institutional traders, engineers, etc.
+- [02:32:39] But our retail traders have to get the algotrading, so we can change our own.
+- [02:32:45] Now, we have seen that the 100% is right.
+- [02:32:51] But in the algotrading, the success ratio is 60%, 65%, 70%.
+- [02:32:57] The success ratio is 1 or 2% of the success ratio.
+- [02:33:01] Now, we have seen that the algotrading is a lot of our own.
+- [02:33:06] You are going ahead with the ELGO training.
+- [02:33:10] So if you are doing ELGO, do you want to do a strategy that you want to do a strategy?
+- [02:33:17] Do you know?
+- [02:33:18] If you are doing a strategy, you are going to learn this.
+- [02:33:22] That's how you learn.
+- [02:33:24] The technology is our basic concept of technology.
+- [02:33:29] Our calculator is our own.
+- [02:33:33] So if we learn the software, we can do the technology fast, smooth and easy
+- [02:33:46] So I don't know what Algo is doing personally
+- [02:33:54] I don't know what Algo is doing
+- [02:33:57] I don't love that way of trading
+- [02:33:59] I had a few months ago, but I had a severe event in BKC.
+- [02:34:19] So the topic was successful, the manual trading was successful. That was a study. I was thinking about what I said about my own data points. What is a study about? What is the study about?
+- [02:34:49] I have to attend this seminar.
+- [02:35:10] I am comfortable with the way of the way.
+- [02:35:18] I will use Tecno Fund.
+- [02:35:25] The technical analysis is a fundamental aspect of the way.
+- [02:35:31] I have no interest in Algo to that extent.
+- [02:35:56] I have to know that company has been updated.
+- [02:36:12] It's a lot of people.
+- [02:36:14] It's a lot of people who have recruited people.
+- [02:36:22] AI is the skill and manpower.
+- [02:36:36] Who has AI passed?
+- [02:36:40] And who passed the knowledge that today is not the salary level,
+- [02:36:48] or is it not the salary level?
+- [02:36:50] I don't have to do this.
+- [02:36:55] There's a lot of people who have to do this.
+- [02:36:59] I don't know if you have to do this.
+- [02:37:07] But what do you think about it?
+- [02:37:10] What do you think about it?
+- [02:37:14] I don't know what I'm saying.
+- [02:37:22] Sir, I'm going to ask you about this.
+- [02:37:24] This is a very good software.
+- [02:37:28] Who is the best company?
+- [02:37:32] I don't know. I'm not sure.
+- [02:37:36] How is the same?
+- [02:38:12] Yes, name is.
+- [02:38:14] So, we will get the next level question.
+- [02:38:17] Okay?
+- [02:38:19] So, we will get the next level question.
+- [02:38:20] The actor company is registered to the three conditions.
+- [02:38:25] The three things are fulfilled.
+- [02:38:27] The actor, the name of the actor,
+- [02:38:32] will be registered to the research analyst exam.
+- [02:38:35] The NISM will be registered to the research analyst exam.
+- [02:38:39] This is the first one.
+- [02:38:40] The third is that the office is the three criteria.
+- [02:38:59] When I was doing research analyst exam, I didn't have to do the exam.
+- [02:39:09] The research analyst has been more than 300 pages.
+- [02:39:15] When I was given this exam, I saw what I saw in the index and topics.
+- [02:39:24] If I learned my life, I learned how to learn 300 pages.
+- [02:39:32] That's okay.
+- [02:39:34] So why did NSM have to do this?
+- [02:39:39] If you go to A2 and you place it, you can pass it on to the 3rd number.
+- [02:39:46] You can't even get it.
+- [02:39:49] Just to place a code, we can go to A2.
+- [02:39:53] That's the checkpoint.
+- [02:39:56] What did you do this?
+- [02:40:00] You have to do this.
+- [02:40:03] I started my research analyst.
+- [02:40:05] I said it was a good one, I was in office.
+- [02:40:07] But I didn't want to be registered.
+- [02:40:10] Why did I do it?
+- [02:40:11] Because there was a lot of compliance,
+- [02:40:14] and a lot of effort,
+- [02:40:17] when I was registered,
+- [02:40:19] I said, when I was registered,
+- [02:40:21] I would like to buy stock,
+- [02:40:23] buy or sell.
+- [02:40:25] So I would like to learn something.
+- [02:40:28] But I don't want to do that.
+- [02:40:30] I have to post the telegram channel
+- [02:40:36] and I have to get a 100-100
+- [02:40:40] So I have to get a 100-100
+- [02:40:44] I will post the post and I will give you a 100-100
+- [02:40:48] But my first thing is that
+- [02:40:52] I will tell you that the amount of money is going to be worth it
+- [02:40:58] I wanted to be able to do this for my report for a month.
+- [02:41:04] So I started training with the end in mind that I wanted to keep my own objective.
+- [02:41:17] That's the first thing.
+- [02:41:18] And the answer is that I have already said, buy or sell.
+- [02:41:53] I'm telling you, I'm losing money.
+- [02:42:18] I am not in cash.
+- [02:42:42] I am in cash.
+- [02:42:47] I don't think I'm clear.
+- [02:42:54] The class is not strong.
+- [02:42:59] We've been 11-12.
+- [02:43:02] How is it?
+- [02:43:04] I'm sorry.
+- [02:43:06] The logic is right.
+- [02:43:08] We're going to learn future options.
+- [02:43:12] We're going to learn today's future options.
+- [02:43:15] I didn't know how much I was going to answer the question.
+- [02:43:22] I was going to ask the question.
+- [02:43:39] Did you see the question in Kolkata?
+- [02:43:43] I love to meet my students, right?
+- [02:44:09] I would love to meet you all.
+- [02:44:13] I am so happy.
+- [02:44:16] You are most welcome.
+- [02:44:19] Where are you from?
+- [02:44:21] What's your name, sir?
+- [02:44:25] Our name is Baloo Ghat.
+- [02:44:29] Where is Baloo Ghat?
+- [02:44:32] About 400 km.
+- [02:44:34] Where is Baloo Ghat?
+- [02:44:36] I have to go to Malda.
+- [02:44:40] It's 5 kilometers.
+- [02:44:44] It's about 2 kilometers.
+- [02:44:46] So when did you get your time to go to Malda?
+- [02:44:49] I was going to go to Malda.
+- [02:45:05] I will help you.
+- [02:45:09] Okay, thank you.
+- [02:45:13] Shwandip Dar, something to say.
+- [02:45:17] Sir.
+- [02:45:19] Yes, sir.
+- [02:45:21] The second step is the second step.
+- [02:45:29] So, we can see that the XGX, Nifty, Dow Jones, Dow Ventures, Oil, etc.
+- [02:45:41] We can see that the other side of the swing trading is a big part of the swing trading.
+- [02:45:50] No, swing trading depends on how much the trade is.
+- [02:45:55] If you have a swing trading, you can see the Nifty.
+- [02:46:04] But when you have a swing trading, you can see the Nifty.
+- [02:46:14] Dow Jones, Dow Futures, Gold Price, GIF, Nifty.
+- [02:46:19] It's a big thing.
+- [02:46:51] I think it is very difficult.
+- [02:46:56] It is very difficult.
+- [02:46:58] It is difficult to find out.
+- [02:47:18] If you have to analyze the world-life situation, you will have to do a lot of things.
+- [02:47:25] How do you say that we have to do a exact question?
+- [02:47:29] The Nifty is the most bullish and the very very very very
+- [02:47:35] No, the very very very, very very
+- [02:47:36] The Nifty is the most bullish, but what is it?
+- [02:47:39] The bullish is the most bullish
+- [02:47:43] The Nifty is the most bullish
+- [02:47:45] So we can see the stock in the market.
+- [02:47:50] So we can see the market in the market.
+- [02:47:54] So we can see the stock in the market.
+- [02:48:00] So we can see the market in the market.
+- [02:48:05] We can see the market in the market.
+- [02:48:43] So what is mutual fund?
+- [02:48:51] Mutual fund means that if there are people who are interested in the community, they can add a fund, a corpus that they use.
+- [02:49:06] So what is the portfolio manager?
+- [02:49:36] across sectors, across companies, there are specific themes.
+- [02:49:42] There are infrastructure and build, so that's why infrastructure company will be able to develop.
+- [02:49:49] So, there are other companies that are in infrastructure, so that's why infrastructure is in the company.
+- [02:49:54] So, the current infrastructure is in the company, so that's the theme.
+- [02:50:00] The theme is that solar companies. If you go to solar, you can see solar industry, EV industry, electric vehicles, etc. So, if you invest in those companies, you can invest in this. Clear? So, there is a theme. What is the theme?
+- [02:50:30] I hope it is clear.
+- [02:50:35] Okay. Raj, what questions?
+- [02:50:37] Sir, I know what I want to ask.
+- [02:50:43] I have a question about this.
+- [02:50:49] Actually, sir, I have a question about this.
+- [02:50:51] I have a question about this first time.
+- [02:50:55] So, we have to teach our students.
+- [02:51:00] No, please, we have to teach our students.
+- [02:51:03] Let's go.
+- [02:51:04] We have to teach our students.
+- [02:51:07] Please, please.
+- [02:51:14] We have to teach our students.
+- [02:51:19] What is the problem?
+- [02:51:20] Problem of plenty.
+- [02:51:22] We have to teach our students.
+- [02:51:24] So, it's a problem.
+- [02:51:54] I understand and acknowledge that I have lifetime video access.
+- [02:52:00] I have a piece of video access.
+- [02:52:03] So I have lifetime video access.
+- [02:52:04] I have a platform that I have used to use.
+- [02:52:08] But I have a lot of people who are doing it.
+- [02:52:11] So I am doing that for the sole reason.
+- [02:52:15] So that you enjoy the process.
+- [02:52:18] Okay?
+- [02:52:18] So, you can't be able to forget the process.
+- [02:52:28] I just want to use the actor's strategy.
+- [02:52:32] I want to use it, I want to see it, and then move to the next one.
+- [02:52:36] Right? You won't be able to forget the Chakraborti.
+- [02:52:42] You simply won't be.
+- [02:52:44] I was watching my baby videos and I was saying thank you to someone.
+- [02:52:55] Taka is an actor.
+- [02:52:58] The best way to get the students is more than important.
+- [02:53:03] Taka is a very important thing.
+- [02:53:08] The whole relationship is in the world.
+- [02:53:10] My question is, is that our trading friends are already trading.
+- [02:53:22] I think it's a good thing to do.
+- [02:53:26] First time entry to trading.
+- [02:53:30] I have to look at the ad that is very important.
+- [02:53:40] The problem is that we are learning swing trading.
+- [02:53:44] We have seen 44 moving average, 915 EMA, AirPort, SME 1334.
+- [02:53:56] I don't know what the situation is.
+- [02:54:02] If you apply the situation, you apply the situation.
+- [02:54:13] No, I don't know. I don't know. I don't know.
+- [02:54:21] I tell you, we have given the strategy.
+- [02:54:26] It's 1334.
+- [02:54:28] But 44 EMA.
+- [02:54:29] For example, 1334, suppose.
+- [02:54:32] Let's give an example.
+- [02:54:34] 1334, the strategy.
+- [02:54:36] 8.
+- [02:54:38] I'm going to be able to do this at any time.
+- [02:54:42] We've given our many good results.
+- [02:54:45] Let's keep it short.
+- [02:54:48] I learned swing trading.
+- [02:54:53] When I realized that the swing trading is not a big deal, I would have to do a lot of things.
+- [02:55:00] Then I would have to run the scanner in the 1334.
+- [02:55:06] I would have to see if I was a big deal.
+- [02:55:09] I would have to do a lot of things.
+- [02:55:13] I have to say specific time boundaries.
+- [02:55:33] There is no specific time boundaries.
+- [02:55:36] When I have to say specific time boundaries.
+- [02:55:41] The BB strategy is used to use a glass of 20-30.
+- [02:55:47] We have to use a timer.
+- [02:55:49] If you have mentioned a timer, you can use it across any time period.
+- [02:55:55] Sir, if you have a scanner, we have a swing trading, we can match and match and apply it.
+- [02:56:03] If you have to do it, you can do it.
+- [02:56:06] We can do it.
+- [02:56:11] It's a basic concept.
+- [02:56:34] The technical analysis is about the technical analysis.
+- [02:56:40] Plus, minus, division, and multiplication.
+- [02:56:43] What does the technical analysis mean?
+- [02:56:46] It's about the technical analysis.
+- [02:56:49] Then 95% of the students are not aware of it.
+- [02:56:55] Because if you learn a little bit,
+- [02:56:58] one is the first step that you learn equity market.
+- [02:57:01] So, we have to do that.
+- [02:57:03] We have to do that.
+- [02:57:06] So, we have to do that.
+- [02:57:11] We have to do that.
+- [02:57:23] So, we have to do that.
+- [02:57:25] We have to do that.
+- [02:57:29] If you are in the same boat as others.
+- [02:57:51] If you are in the odds, you are in the odds. But that's not the case.
+- [02:58:02] Okay?
+- [02:58:04] Sir, I have a question.
+- [02:58:07] I have a question. I have a question. I have a question. I have a question.
+- [02:58:14] I have to do this.
+- [02:58:21] What is the name of the Raja Ahmed?
+- [02:58:26] My name is Shiliburi.
+- [02:58:31] It's a good name.
+- [02:58:35] Yes, it's a good name.
+- [02:58:38] So today I have a class that is our student is learning offline. We have no video recording system. So we have online class. We have online class. We have one of them said that if you have offline class, then online class is better. Why?
+- [02:59:08] It's all relative. Manus always looks greener on the other side.
+- [02:59:18] The search for greener pastures.
+- [02:59:20] So, when you are pointing your finger, you are not pointing literally.
+- [02:59:26] I mean to say, if you don't want to be like a bhabchi, you don't want to be like a bhabchi.
+- [02:59:30] First, please, soul search. It's about you. You have to devote time.
+- [03:00:05] The power of the why. I was doing something.
+- [03:00:11] I was doing something. I was doing something.
+- [03:00:19] When I was doing something, I would say,
+- [03:00:21] what time I was doing in my life.
+- [03:00:25] My girlfriend was doing something.
+- [03:00:29] I was doing something.
+- [03:00:32] I have to go to the whole day.
+- [03:00:37] I have to know that in London,
+- [03:00:42] in London,
+- [03:01:00] I don't know how to say it.
+- [03:01:30] I am one of those who are 11-12.
+- [03:01:37] I am saying that I was in ICSC, I was in 11-12.
+- [03:01:41] I was in engineering and I was in West Bengal.
+- [03:01:47] I was in college and I was in the mindset of the paper.
+- [03:01:53] I was in 11-12, I was in the class of 11-12.
+- [03:01:59] I have to class in the first year.
+- [03:02:06] In the first year, I have to class in the first year.
+- [03:02:10] In the third year, I have to class in the first year.
+- [03:02:16] I have to class in the first year.
+- [03:02:25] The reality has struck me.
+- [03:02:47] I had to go to the MBA evening.
+- [03:02:54] I had to go to the business subject.
+- [03:03:01] I had to go to the third day.
+- [03:03:03] I had to go to the maturity, I had to learn the maturity.
+- [03:03:07] I had to go to the confidence that I had to do my life.
+- [03:03:13] So I should explore.
+- [03:03:14] I asked for the situation in Kolkata that there is a problem with the situation.
+- [03:03:22] Okay?
+- [03:03:23] Okay, sir.
+- [03:03:24] I was thinking about CSE.
+- [03:03:27] And what did I do?
+- [03:03:29] I was doing CFA program.
+- [03:03:31] I was doing a strong finance.
+- [03:03:32] I was doing a full-time CFA program.
+- [03:03:35] I was doing a lot of things, but I was doing a lot of things.
+- [03:03:39] We are doing very good.
+- [03:03:48] We have done two steps.
+- [03:03:51] Our concepts are so clear.
+- [03:03:53] And then I was a 10 CGPA holder.
+- [03:03:56] We are going to have a room for 3,000 people.
+- [03:04:01] We have to do this effort.
+- [03:04:04] I have been able to get the 3,000 people.
+- [03:04:06] If you have 3,000, 800,000, 200,000, I will go to the next video. Right? So that's the right. So I got to be 10 CGPA. 10 CGPA is not going to happen. CGPA is the first class. So management college is CGPA. So that's the highest. So you can have a higher level. So you can have a higher level.
+- [03:04:36] I was 10 CGP.
+- [03:04:38] If I was 10 CGP.
+- [03:04:42] So I was 10 CGP.
+- [03:04:44] Can you say it?
+- [03:04:46] No sir, I can't.
+- [03:04:48] What can I say?
+- [03:04:50] No, I can't.
+- [03:04:52] No sir, I can't.
+- [03:04:54] So there's a lot of story.
+- [03:04:56] I can't see it.
+- [03:05:02] I was paralyzed, I was paralyzed, I was paralyzed, I was retired. So our education loan was 4 lakhs. So why did we give education loan? And I was in the bank bank, and I saw the first time we saw the course for 3,000,000 to 3,000,000.
+- [03:07:32] We have to stay separate from Kolkata and we will live our lives.
+- [03:07:50] But after that, we have been talking about the government school.
+- [03:07:54] and they were in the government school.
+- [03:07:58] They were in the adult teachers.
+- [03:08:01] They were in the adult school.
+- [03:08:23] So we have seen those days. Right? And that's why we have seen those days.
+- [03:08:53] This is the most important part of Bank of Baroda.
+- [03:09:23] What do you see from this person? Former Deputy Governor. So Governor means that there are notes that are coming from their postnotes. Okay? This is the name of the subject. This is the first GM Corporate Affairs. They are the chairman of Bank of Baroda.
+- [03:09:53] I joined CMD Secretariat. So I was working with the CMD of Bank of Baroda. The logo, the orange logo, was the one that was done. Okay? So the bank was about 1,80,000,000. So it was 3,000,000,000. So the three people selected.
+- [03:10:23] I moved into the treasury.
+- [03:10:40] I was the consulting head of the company.
+- [03:10:51] I was the consulting head of Dun & Bradstreet India.
+- [03:10:56] Tata Motors, Taiten, Tanish, Hindustan Liver, Procter Gamble, Dr. Reddy's.
+- [03:11:04] You name any company and my team has consulted.
+- [03:11:07] I was the consulting head of Dun & Bradstreet India.
+- [03:11:18] I can't do anything.
+- [03:11:23] So if I tell you what I can do,
+- [03:11:26] I can't do anything.
+- [03:11:30] Don't reason yourself out.
+- [03:11:34] What do you do?
+- [03:11:38] That remains the question.
+- [03:11:40] How much do you have a slog so that you can do it?
+- [03:11:44] I have to say that the public is a lot of difference.
+- [03:12:01] In the past, I have to say that the public is a lot of difference.
+- [03:12:06] Restructuring means that the company fails and they will stand.
+- [03:12:13] It's an open challenge. If you have 3,000,000 people, you don't have to.
+- [03:12:19] Therefore, I was the consulting head of Dun & Bass Street India.
+- [03:12:29] And our contemporary companies, they were very good.
+- [03:12:33] They were a head of Pan India.
+- [03:12:35] They were local level, regional level, and zonal level.
+- [03:12:40] I was very careful of the situation.
+- [03:12:47] But I was in the process of being in the process.
+- [03:12:52] I was in the CMD Secretary.
+- [03:12:54] I was in the process of being in the process of being in the process.
+- [03:12:59] I am one of those CACs that I shared with you.
+- [03:13:07] What did CACs do? Full truck load.
+- [03:13:13] Loading unloading.
+- [03:13:16] I was a loader of CMD of the companies. I worked with a lot of companies.
+- [03:13:20] So I worked with a lot of companies.
+- [03:13:23] I can work across the spectrum of people. I can work a lot of people with their own sophistication.
+- [03:13:53] and restructuring it.
+- [03:13:54] That's why we're looking for the top most bankers.
+- [03:13:56] That's why we're looking for the company.
+- [03:13:58] Okay?
+- [03:13:59] Five days.
+- [03:14:00] So Raj, don't reason yourself out.
+- [03:14:05] But I was watching a video, right?
+- [03:14:10] When I was at my prime, then only I left.
+- [03:14:16] That was my call.
+- [03:14:18] I'm eccentric.
+- [03:14:19] I am not saying anything about it. I am not saying anything about it.
+- [03:14:49] I don't enjoy that process. I enjoy more about giving, sharing, making difference in the life of people. That gives me the energy at show. I was classed yesterday and I had access to my video. I had access to my video. I had a commitment to my video. I had a full day.
+- [03:15:19] I will be full of energy.
+- [03:15:35] Because my passion is speaking. It's not me who is speaking.
+- [03:15:39] Right? So you have to develop this.
+- [03:15:43] Don't get hulk out.
+- [03:15:51] You don't get a lot of money.
+- [03:15:58] If you're a thousand years old, you don't get a lot of money.
+- [03:16:03] You don't get a lot of money.
+- [03:16:08] You have to take control of your life.
+- [03:16:11] This is the most important thing.
+- [03:16:16] When you get luckier, the harder you work, the luckier you get.
+- [03:16:23] I know that this is going to happen.
+- [03:16:27] Why do we say that we don't have this?
+- [03:16:31] Why do we have the CMD security?
+- [03:16:35] That's a very important thing.
+- [03:16:37] I can't see CMD's C4.
+- [03:16:43] So Bank of Brother, local manager, has a heroism.
+- [03:16:49] And CMD, the last day of the CMD, the first day was the first day?
+- [03:16:57] He said, no?
+- [03:16:59] He said, no, there was an interview.
+- [03:17:01] He saw the person who saw the impression of him.
+- [03:17:05] What did you see?
+- [03:17:07] So when I was working on CSE at the generating station, I was struck by the AC, which I was working on in the small company.
+- [03:17:17] I was told that I was working on a lamp post.
+- [03:17:21] So in the second place, I was working on a large company.
+- [03:17:24] So I was working on a small company, but I was working on a large CSE.
+- [03:17:30] How did you manage this big CSE?
+- [03:17:32] So I was a CEO, so I managed what to do. So I started to make a model.
+- [03:17:42] I used textile unit to make spindles.
+- [03:17:56] If you have a spindle, it will be a yellow light.
+- [03:18:11] So with this idea, I connected with this idea.
+- [03:18:15] I am CEO of CSC, and I am a marketing department.
+- [03:18:21] I have a lot of light.
+- [03:18:22] There is a lot of light in the marketing department.
+- [03:18:25] And there is a lot of light in the marketing department.
+- [03:18:27] So I have a lot of light in the marketing department.
+- [03:18:29] So I have a lot of light in the dark.
+- [03:18:31] I have a lot of light in the dark.
+- [03:18:32] So I have a lot of light in the dark.
+- [03:18:42] I could have stayed very calm, composed, right? But no.
+- [03:19:05] This person liked a lot. I saw the model and worked out. That is how I got a chance. So what I am trying to say is that work towards it. You need to get mad about if you want to succeed.
+- [03:19:36] !
+- [03:19:37] I can succeed without being mad.
+- [03:19:38] The only thing I carry is madness.
+- [03:19:41] Okay, so you just need to be mad.
+- [03:19:45] And I'm not going to be mad, Raj.
+- [03:19:48] Through you, I also spoke to a number of people who are sitting over here.
+- [03:19:52] Right?
+- [03:19:53] The income.
+- [03:19:56] It means that you have to be proud.
+- [03:19:58] Right?
+- [03:19:59] Tighten it.
+- [03:20:00] Our life is a great place.
+- [03:20:01] Let's work towards that.
+- [03:20:03] If we don't deserve to earn money
+- [03:20:09] We will go and learn a strategy
+- [03:20:15] But we will not have to do this
+- [03:20:17] Because we don't deserve to earn money
+- [03:20:19] I am not telling you
+- [03:20:23] I am telling any person
+- [03:20:25] I am telling you
+- [03:20:27] Why do you teach me
+- [03:20:29] I asked you about your questions.
+- [03:20:37] What did you ask?
+- [03:20:41] No, I didn't ask.
+- [03:20:43] So why don't you ask questions?
+- [03:20:45] I asked you about it.
+- [03:20:49] I executed it.
+- [03:20:51] I asked you about it.
+- [03:20:55] What's up to the WhatsApp group? You can ask me questions in WhatsApp. I want you guys to enjoy the process. If you enjoy it, we won't succeed. Okay, so don't be in the pressure. You guys do. I'm there, right? You can always ask questions. Thank you, sir. I am there. Oniket is there.
+- [03:21:25] We'll get into that, so don't worry. But today, we'll get into the worst steps you have taken. I'll tell you, but I won't tell you. I won't tell you. I won't tell you. I won't tell you. I won't tell you.
+- [03:21:55] Why you? Okay. So you have to tell me what you have done. Then I'll tell you where the question needs to be resolved. Then I'll tell you what needs to be done. Clear Raj? Okay. So Bhabar Kono Karanani was just
+- [03:22:25] We have to do this.
+- [03:22:30] But we don't have to do this.
+- [03:22:37] We will leave it.
+- [03:22:39] Have that attitude.
+- [03:22:42] We know that we have to do this.
+- [03:22:47] We have to do this.
+- [03:22:49] But we don't have to do this.
+- [03:22:52] We have to do this.
+- [03:22:55] If you don't have energy in your mind, you can't do anything.
+- [03:23:10] If you're tight, you can't do anything.
+- [03:23:16] And I want my son to have that spirit.
+- [03:23:21] You shouldn't be using words, it's not in the right domain. These are certain mindsets that I have built over a period of time.
+- [03:23:51] I am at my best policy.
+- [03:23:57] Attitude is not a good thing.
+- [03:24:03] I am not a bad person.
+- [03:24:07] It is not a bad person.
+- [03:24:10] So, I am not a bad person.
+- [03:24:16] So I will be the attitude. We are failing on our attitude, nothing else. It's not on the technical aspect of things. Right? Good night. Let's see our next robot. Okay? Okay, Shomnat, you have to ask me.
+- [03:25:16] What are the companies that are in the business?
+- [03:25:21] I have a lot of funds, but I think they are going to make all the funds.
+- [03:25:26] I think they are going to make all the funds.
+- [03:25:28] Start with A and A and Z.
+- [03:25:32] What did Warren Buffett do?
+- [03:25:34] What did we study in the business?
+- [03:25:36] What did Warren Buffett do?
+- [03:25:40] Start with companies starting with A.
+- [03:25:46] What is it?
+- [03:25:49] Take a Z of the Protect company.
+- [03:25:52] What is it?
+- [03:25:54] Yes, sir.
+- [03:25:55] Just put it.
+- [03:25:56] Put it.
+- [03:25:59] Start the exercise.
+- [03:26:01] Then you will figure it out.
+- [03:26:02] If you look at the common pattern,
+- [03:26:04] focus on how to get it.
+- [03:26:07] We will approach.
+- [03:26:09] Start the journey.
+- [03:26:11] Okay?
+- [03:26:12] Okay.
+- [03:26:15] What is your energy?
+- [03:26:43] I have to say business class in Bangladesh.
+- [03:26:51] I have done business training for 3,000 students.
+- [03:26:57] But if you join our program, you will be able to live.
+- [03:27:04] I have said, brother, you are all right.
+- [03:27:08] I have to see the testimonials and testimonials.
+- [03:27:14] So, this is the way the people who are living in this world are built.
+- [03:27:26] Good night, everyone. See you in the next show.
+- [03:27:31] All the best. Bye.

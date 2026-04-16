@@ -4,6 +4,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +47,7 @@ export default async function DigestDatePage({ params }: Props) {
           Back to Archive
         </Link>
       </PageHeader>
+      <EducationalDisclaimer className="mb-4" />
 
       <Card className="mb-6">
         <CardHeader>

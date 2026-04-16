@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { PageHeader } from "../components/ui/page-header";
+import { EducationalDisclaimer } from "../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,7 @@ export default async function ReferencesPage() {
         title="Source References"
         description="Reference links for course context and market checks. Internal deterministic engines remain primary."
       />
+      <EducationalDisclaimer className="mb-4" />
 
       <Card className="mb-6">
         <CardHeader>

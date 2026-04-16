@@ -685,6 +685,17 @@ model ProviderJobRun {
   @@index([providerId, startedAt])
 }
 
+model CronJobLock {
+  id         String    @id @default(cuid())
+  jobKey     String
+  marketDate DateTime  @db.Date
+  lockedAt   DateTime  @default(now())
+  status     RunStatus @default(running)
+  details    Json?
+
+  @@unique([jobKey, marketDate])
+}
+
 // =============================================================================
 // BACKTEST
 // =============================================================================

@@ -1,6 +1,7 @@
 import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +17,7 @@ export default async function FiiDiiPage() {
         title="FII / DII Activity"
         description="Foreign & Domestic Institutional Investor net flows"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {flows.length > 0 ? (
         <Card>

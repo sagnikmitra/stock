@@ -1,6 +1,7 @@
+import { nseCalendar } from "@ibo/utils";
+
 export function isCalendarMonthEnd(date: Date): boolean {
-  const next = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + 1));
-  return next.getUTCMonth() !== date.getUTCMonth();
+  return nseCalendar.isMonthEnd(date);
 }
 
 export function shouldRenderDegradedMode(warnings: string[]): boolean {

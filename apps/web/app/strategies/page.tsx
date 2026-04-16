@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { PageHeader } from "../components/ui/page-header";
+import { EducationalDisclaimer } from "../components/ui/educational-disclaimer";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -34,6 +35,7 @@ export default async function StrategiesPage() {
         title="Strategies"
         description="All course-derived strategies with rules, confidence levels, and ambiguity tracking"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {Object.entries(grouped).map(([family, items]) => (
         <div key={family} className="mb-8">

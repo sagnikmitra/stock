@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -53,6 +54,7 @@ export default async function WatchlistDetailPage({ params }: Props) {
           All Watchlists
         </Link>
       </PageHeader>
+      <EducationalDisclaimer className="mb-4" />
 
       <div className="mb-4">
         <Badge variant="muted">{watchlist.kind}</Badge>

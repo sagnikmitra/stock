@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -18,6 +19,7 @@ export default async function IndicatorReferencePage() {
         title="Indicator Reference"
         description="Technical indicators used across strategies with definitions and linked strategies"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {indicators.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

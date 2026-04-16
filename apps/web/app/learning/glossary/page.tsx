@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -44,6 +45,7 @@ export default async function GlossaryPage() {
         title="Glossary"
         description="All investment concepts, indicators, patterns, and principles — sorted alphabetically"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {/* Letter quick-nav */}
       {letters.length > 0 && (

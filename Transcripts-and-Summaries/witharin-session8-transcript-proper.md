@@ -1,0 +1,311 @@
+# WithArin Stock Market 29th Batch — Session 8 Transcript (proper, deduped)
+
+Source: Vimeo stream for lesson 2224601. Local mlx-community/whisper-large-v3-turbo translate pass. Audio code-switched Bengali/English; transcript approximate.
+
+---
+
+- [00:00:00] Apoio.
+- [00:00:30] Aloe?
+- [00:00:59] Ese.
+- [00:01:29] Uau!
+- [00:02:03] Apoio é que é a vida.
+- [00:02:33] ELECTUMPH.
+- [00:03:03] ELECTOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECH
+- [00:03:33] E aí, deixa eu me afirar, deixa eu te ver com a câmera.
+- [00:03:42] E aí, deixa eu te ver com a câmera.
+- [00:03:44] Aqui!
+- [00:03:46] Aqui, né?
+- [00:03:55] Aí, deixa eu te ver com a câmera.
+- [00:03:57] Quarta de câmera.
+- [00:04:01] ELECTO.
+- [00:04:31] Apoio.
+- [00:05:01] Apoio é a reunião.
+- [00:05:31] ELECTURAGEMENTO
+- [00:06:01] ELECTRONICILECANIO
+- [00:06:31] E aí
+- [00:07:01] Apoio.
+- [00:07:31] ELECTOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECH
+- [00:08:01] Apoio.
+- [00:09:31] E aí
+- [00:10:01] Apoio.
+- [00:11:01] Apoio!
+- [00:11:31] ELECTROM.COM
+- [00:13:01] Apoio.
+- [00:13:31] ELECTROM.COM
+- [00:14:01] E aí
+- [00:14:31] ELECTOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECH
+- [00:15:01] ELECTRONICAL.COM
+- [00:15:31] ELECTROM.COM
+- [00:16:31] ELECTOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECHOBRECH
+- [00:17:01] Apoio.
+- [00:18:01] ELECTRONICILECANOS
+- [00:18:31] Apoio.
+- [00:19:01] E aí
+- [00:20:01] RELATIONSHIP PROJEMENT, A WIN-WIN, SUNEHEREN, KATHARDA, KYO? WIN-WIN, YES OR NO, TÚ JANA, CHATBOX, WIN-WIN, KATHARDA, SUNEHEREN, SUNEHEREN, NINI? WIN-WIN, WIN-WIN, WIN-WIN, SUNEHEREN, KATHARDA?
+- [00:21:01] Então, a gente vai continuar.
+- [00:21:05] Então, a gente vai continuar com a gente.
+- [00:21:08] Então, tem 3 milhões de pessoas.
+- [00:21:10] Tem 4 milhões de pessoas.
+- [00:21:13] Então, o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é o que é.
+- [00:21:27] Então, se você quer que o seu pai se perde, se quer que o seu pai se perde. Se você quer que o seu pai se perde, se quer que o seu pai se perde. Então, todos os relacionamentos são um um bom.
+- [00:21:49] Então, eu acho que essa é a questão de essa questão, que eu acho que é a questão de essa questão.
+- [00:22:25] Então, vamos a discussão sobre o quanto a gente vai fazer.
+- [00:22:55] E.R.S.
+- [00:23:25] Olá, como você fala?
+- [00:23:55] E aí?
+- [00:24:25] que a risco é importante.
+- [00:27:55] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [00:28:25] Então, nós falamos. Então, nós falamos que o nosso espírito é um pouco mais fácil.
+- [00:28:32] Por isso, nós falamos que o nosso espírito é um pouco mais fácil.
+- [00:28:35] Se você não se preocupar, se você não se preocupar, se você não se preocupar.
+- [00:28:39] Se você não se preocupar, se você não se preocupar.
+- [00:28:42] Mas eu falo que o nosso espírito é um pouco mais fácil.
+- [00:28:45] Hoje, o que é o nosso espírito é um pouco mais fácil.
+- [00:28:47] Se você não se preocupar, se você não se preocupar, se você não se preocupar.
+- [00:28:51] Apenas o nosso trabalho é o trabalho.
+- [00:29:51] Apenas as fracasso, mas o mercado não é o lugar para que a gente se acabe. Mas o mercado não é o lugar para que a gente se acabe. Mas o mercado não é o lugar para que a gente se acabe.
+- [00:30:21] É que é que é o mercado de impassionismo?
+- [00:32:11] Apenas o que você quer fazer, não é?
+- [00:33:41] GIFTY, o que é o GIFTY?
+- [00:34:11] Então, como você vê aqui, o mercado está no mais.
+- [00:34:15] Então, hoje, quando você começa a ver, quem vê a gente?
+- [00:34:23] A gente vê a gente.
+- [00:34:24] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [00:37:24] Eu vou falar sobre isso.
+- [00:38:54] Nifty, GIF Nifty.
+- [00:39:01] Ok?
+- [00:39:02] E aí, GIF Nifty, a gente já tinha GIF Nifty.
+- [00:39:07] Agora, a gente já tinha Shingga-Purra SGX Nifty.
+- [00:39:10] Então, a gente já tinha um paralelo na parte de India.
+- [00:39:13] A gente já tinha um problema.
+- [00:39:15] A gente já conhece a SGX, a gente já conhece a SGX Nifty.
+- [00:39:17] A gente já conhece a SGX Nifty, a gente já conhece a SGX Nifty.
+- [00:39:24] SIGX é que é Singapore Nifty?
+- [00:39:27] SIGAPURA Nifty não existe no Indian market?
+- [00:39:31] Sim, não existe no Indian market, mas se o mercado está em um mercado, então o mercado está em um mercado está em um mercado.
+- [00:40:12] Boa noite.
+- [00:41:42] Ainda não se estabelece, mas não se estabelece.
+- [00:42:12] Então, quando a gente tem a link, a gente tem que dar a link na plataforma.
+- [00:42:19] Então, a gente tem que saber.
+- [00:42:22] Então, a gente tem que ver aqui.
+- [00:42:27] Quando a gente tem que ver aqui,
+- [00:42:42] Nifty é que é que é o problema? É que é o problema. É que é o problema. É que é o problema. É que é o problema. É que é o problema.
+- [00:44:12] Apoio é que eu vou fazer a minha opinião.
+- [00:44:42] Nego de acordo com o preço.
+- [00:46:12] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [00:46:42] Então, se você pode ver com o Dow Jones e Dow Futures, então vamos ver com o Dow Jones e Dow Futures, então vamos ver com o Dow Jones e Dow Futures, então vamos ver com o Dow Jones Industrial Average Index,
+- [00:47:12] E-mini-dao-jones futures, YM1,
+- [00:47:42] ETA nos pagamos.
+- [00:47:49] Então, vemos que o GIF NIFTI é negativo, Dow Jones negativo, Dow Futures negativo,
+- [00:47:55] Gold Price é alto e a ETA nos pagamos.
+- [00:48:00] Então, vemos que o GIF NIFTI é negativo.
+- [00:49:09] Então, vamos verificar o derivativo.
+- [00:49:13] Derivativo é que nós vamos verificar.
+- [00:49:16] Então, agora vamos verificar o derivativo.
+- [00:49:18] Claro, todos os quais são os derivativos.
+- [00:49:20] Se eu falarmos sobre derivativos, o que é o que é o que é o que é?
+- [00:49:27] Como eu falei, o que é o que é o que é?
+- [00:50:02] E aí
+- [00:50:32] Apoio é que você está falando?
+- [00:51:32] E-mini-dau-jones-index.
+- [00:51:36] Aqui está o DAU-futures.
+- [00:51:38] DDI-DDI type-code.
+- [00:51:41] Aqui está o E-mini-dau-futures.
+- [00:51:47] Aqui está o DAU-futures.
+- [00:51:50] YM1 semicolon.
+- [00:51:55] Aqui está o DAU-futures.
+- [00:52:02] E-mini-dau-jones futures.
+- [00:52:10] Claro?
+- [00:52:13] Dau-jones e-dau-futures é, direct correlationship, gift-nifty e-mini-dau-jones futures é, direct correlationship,
+- [00:52:23] e-sos oil price, gold price e-mini-dau-jones futures é, negative correlationship.
+- [00:52:58] A mini-doujo-nse-fusos. Ok?
+- [00:53:28] Nifty tem o que tem no mercado? Nifty tem o que tem no mercado? Nifty tem o que tem no mercado? Nifty tem o que tem no mercado? Nifty tem o mercado de mercado,
+- [00:53:58] NIFTI, não é?
+- [00:54:02] Então, não é interessante.
+- [00:54:04] Mas, NIFTI, a empresa, como se trata de como um trader,
+- [00:54:15] como se trata de como um trade?
+- [00:54:17] Hoje em dia, é um trade de novo.
+- [00:55:18] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [00:57:48] Aprolou a discussão sobre o que a gente vai ver com a gente.
+- [00:58:48] Volatility é que é?
+- [00:59:12] Volatility é que é o resultado.
+- [00:59:15] Tension, Anxiousness, Uncertainty, Uncertain. That's the right word of volatility.
+- [00:59:33] A marketing hobby não precisa.
+- [00:59:35] A questão é uma coisa que acontece.
+- [00:59:39] Uncertainty.
+- [01:00:10] Aprolou o nosso trabalho é? Não, não há nada.
+- [01:00:17] Eu vou falar um pouco, dois minutos.
+- [01:00:50] e-seguntei, mas o que é o que é?
+- [01:03:20] e-segredito, então vamos ver com essa questão de volatilidade e liquidade.
+- [01:03:26] Ok? Essa é a questão de caractura.
+- [01:03:28] Essa é a questão de volatilidade e liquidade.
+- [01:03:31] Como eu já vi mostrando a stock de scanner, eu já falei que o volume é 1.0.
+- [01:03:38] Eu já falei que o que?
+- [01:03:39] Então, o liquidade é mais
+- [01:03:22] e o que é o que é?
+- [01:03:42] Então, eu já vi mostrando a stock de uptrending.
+- [01:03:46] Eu já falei que o swing trading é um problema de forma.
+- [01:03:49] Então, vamos fazer um pouco mais de novo.
+- [01:03:56] Então, vamos fazer um processo de umptrending para o que eu vou fazer.
+- [01:04:31] Apoio é que o que é?
+- [01:05:31] Abre-seando é uma coisa que eu acho.
+- [01:06:01] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:07:01] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:07:31] Adena energia é 52 week high.
+- [01:08:24] Apoio é um aumento de 50.90.
+- [01:08:54] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:09:54] Aselecionei, o que é o que é o que é?
+- [01:10:54] Ata é uma coisa que eu acho.
+- [01:11:24] ...
+- [01:11:54] 3 conceitos de 1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5
+- [01:13:24] e a gente vai dar uma situação.
+- [01:14:24] eqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqe
+- [01:14:54] Aprolou a partir de novo, não é?
+- [01:14:57] Aprolou a partir de novo, então vamos fazer a partir de novo.
+- [01:15:01] Então vamos fazer a partir de novo.
+- [01:15:04] Vamos fazer a partir de novo.
+- [01:15:08] Mas não vamos fazer a partir de novo.
+- [01:15:10] Vamos fazer a partir de novo.
+- [01:16:52] Então, vamos verificar a minha entrada.
+- [01:17:22] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:18:22] 3 mais 23, então eu vou colocar 2, 3 mais 23, então eu vou colocar 2, 3 mais 23, então eu vou colocar 2, 3 mais 23.
+- [01:18:47] A e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-
+- [01:19:17] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:20:47] Apoio é que você pode fazer?
+- [01:21:47] Ata que a gente tem que ver com a gente que vê o mercado de mercado.
+- [01:22:47] Columboing Average
+- [01:23:17] Apoio é que você pode fazer.
+- [01:24:17] RSI, eu vou dar um indicador para RSI.
+- [01:24:26] Rated Strength Index, eu vou dar um...
+- [01:24:32] eu vou dar um...
+- [01:24:42] !
+- [01:27:17] Nenhuma, não é isso aí?
+- [01:27:47] e se você faz um problema.
+- [01:28:17] Apoio é que você pode identificar.
+- [01:29:17] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:29:47] e a gente vai dar uma coisa.
+- [01:30:17] e-segura é o que é o que é?
+- [01:30:47] Quero que eu sei.
+- [01:31:17] e-segura, o que é?
+- [01:31:47] EMA é ababává, eu já vi mostrei a parte de abacidade.
+- [01:32:56] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:33:56] ...
+- [01:36:56] Aproximo, o que discutirámos?
+- [01:37:02] O que discutirámos?
+- [01:37:22] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:38:22] Então, se você tem que o preço nos muda. Então, se você tem que o preço nos muda e o volume nos muda. Então, se você tem que o preço nos muda e o volume nos muda. Então, se você tem que o que o preço nos muda?
+- [01:38:52] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:39:52] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:40:52] E aí
+- [01:40:57] ...
+- [01:41:27] A FII é que é
+- [01:41:34] Foreign Institutional Investors
+- [01:41:37] é que o país se tornou com um país
+- [01:42:21] Nenhuma, não é que você não tem que fazer.
+- [01:43:21] ATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIATIA
+- [01:43:51] Então, essa é a questão de que a gente quer dizer. Então, essa é a questão de que a gente quer dizer.
+- [01:44:51] E aí, E aí, E aí, E aí, TINTE JININIS, MONE RÁKUN, GOLPOR PROTEURRA CHE, ATA JAREN DARKANIN, TINTE JININIS, PROTEURM HOCHE GIE, E F I I NED BUYING IN NIEQUITIES, E F I I NED BUYING IN NIEQUITIES, E F I I NED BUYING IN NIEQUITIES,
+- [01:45:21] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:45:51] Resilmente, não é que se não se estivesse a bolichar ou a bearish.
+- [01:45:58] É que se estivesse a fazer.
+- [01:46:00] Se estivesse a ser mais forte.
+- [01:46:03] E aí é muito claro. É o sentido.
+- [01:46:09] É o sentido.
+- [01:46:11] A2, não sei.
+- [01:46:14] Quando a gente tem investimento em banco, a gente tem um nível de base.
+- [01:46:20] Então, isso é moderno.
+- [01:46:22] A gente precisa complicar a gente.
+- [01:46:24] A gente precisa de base de base, a gente precisa de base.
+- [01:46:27] A gente precisa de base.
+- [01:47:01] Então, eu vou te ensinar um um processo de estratégia.
+- [01:47:31] A é que é 50 dias de moving avérge. A é que é a que é a? B é a Bollinger Band. Bollinger Band é B. C é a Green Cat. É que é confluência de daily chart. É que é a gente vai dar uma coisa.
+- [01:48:01] Eu vou fazer isso.
+- [01:49:01] Então, é que é aplicável.
+- [01:49:31] Então, eu vou dar um colom.
+- [01:49:37] Eu vou dar um colom.
+- [01:49:39] Então, eu vou dar um colom.
+- [01:49:42] 6.31%.
+- [01:49:44] Clear?
+- [01:49:47] Se você for 6.31%, eu vou dar um colom.
+- [01:49:52] 365
+- [01:49:53] dividido por colom.
+- [01:49:57] 6.31.
+- [01:50:00] 1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1
+- [01:50:30] Apoio é que você quer dizer?
+- [01:52:30] Nenhuma, não é?
+- [01:53:30] Eu não posso dar uma scana para você.
+- [01:53:34] Então, eu posso dar uma scana para você.
+- [01:53:37] Eu posso dar uma scana para você.
+- [01:53:38] Quando eu estou dando uma scana para você, eu posso dar uma scana para você.
+- [01:53:42] Mas, eu posso dar uma scana para você.
+- [01:53:45] Eu posso dar uma scana para você.
+- [01:53:49] Então, eu posso dar uma scana para você.
+- [01:53:53] Eu posso dar uma scana para você.
+- [01:53:55] Eu posso dar uma companhia para você.
+- [01:54:27] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [01:54:57] Como é que você conhece, como é o mercado de commodities.
+- [01:55:57] Comodidade é que se tornou com a empresa.
+- [01:56:27] Apoor não tem que se desculpe.
+- [01:56:57] A ideia é que você pode fazer uma aplicação?
+- [01:57:09] A ideia é que o conhecimento é muito mais difícil.
+- [01:57:15] Você pode fazer uma técnica que você aprende.
+- [01:57:53] é que se tornou a segurança.
+- [01:58:23] Então, basicamente, o canal é o clôs, então eu vou fazer a entrada, e a swing-louro, então eu vou fazer a stop-loss. E quando eu vou fazer a move, eu vou fazer a 50-days de moving average. Então, está tudo bem?
+- [01:59:23] ...
+- [01:59:53] E aí, eu vou colocar em 1 de 30%.
+- [02:00:11] E aí, eu vou colocar em 1 de 30.
+- [02:00:16] 365 dividido por 1 de 30.
+- [02:00:20] 5 de 30.
+- [02:00:23] Abrela.
+- [02:00:53] A gente vai dar uma coisa
+- [02:01:23] ...
+- [02:01:53] Então, eu vou fazer isso.
+- [02:02:53] A gente tem que se vê no arra do bolo de ashani.
+- [02:03:44] 2x5x3x3x3x3x3x3x3x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4x4
+- [02:04:14] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [02:04:44] A gente vai dar uma coisa para fazer.
+- [02:05:44] 14 vezes 10 vezes 140, ou 2 vezes 14 vezes 18 vezes 168?
+- [02:05:58] Ok, SDFC e Coal India, olha aqui.
+- [02:06:44] Então, como é que é o derivado de uma empresa?
+- [02:09:44] ELECTROM.COM
+- [02:10:14] E aí
+- [02:10:44] Ok, então vamos ler a partir de nós.
+- [02:11:44] Nenhuma, não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é? Não é?
+- [02:12:14] e-sempos, derivativ e e-future é o mesmo.
+- [02:12:19] Intraday, quando a gente tem que ter interdê, a gente tem que ter interdê, a gente tem que ter interdê.
+- [02:12:27] A gente tem que ter interdê.
+- [02:12:42] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [02:13:42] .
+- [02:14:12] Apoio é muito importante.
+- [02:14:42] Apoio é que eu vou fazer uma questão de investimento.
+- [02:15:12] Apoio, você pode falar sobre a voz de sua voz.
+- [02:15:42] Apoio é que eu falo de hoje?
+- [02:15:46] 5%, 10%?
+- [02:15:50] Não, não, isso é um contexto de trading.
+- [02:15:54] Você não tem que falar de longa-term?
+- [02:15:57] Isso é um contexto de trading. Não há nada de longa-term.
+- [02:16:02] Como é um contexto de technical, mas um contexto de short-term.
+- [02:16:41] Eu já estou aprendendo, mas não é o que eu aprendendo.
+- [02:18:11] Eu sou a pessoa que me chamou de uma empresa.
+- [02:18:41] A gente tem que se tornou com uma coisa.
+- [02:21:41] Apoio é a range de uma área.
+- [02:22:11] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [02:22:41] Ainda não é que eu acho que é interessante.
+- [02:24:11] Então, é que eu acho que é o objetivo. Então, eu acho que é o objetivo.
+- [02:25:11] e-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-segredi-se
+- [02:25:41] Ainda não é que a gente tem que fazer.
+- [02:26:11] E aí, eu falei, nós já fizemos esse curso, então, nós podemos aprender o derivados, não podemos aprender? Não, esse programa é um equipe market, eu vou falar um pouco, derivação é um separado, isso é um equipe market, nós temos um técnico e fundamental analista.
+- [02:26:41] Apoio é que você aprende?
+- [02:28:11] A-sema é um país que se tornou.
+- [02:28:41] Aos anos atrás, o que é que é?
+- [02:29:11] Não, não, não.
+- [02:29:41] Obrigado, obrigado.
+- [02:30:11] e-segum, como é que eu vou fazer a live class.
+- [02:30:18] Por isso, a live class é uma vez que eu vou fazer a live class.
+- [02:30:20] Por isso, eu vou fazer a live class.
+- [02:30:24] Eu vou fazer a live class.
+- [02:30:26] Então, eu vou fazer a live class.
+- [02:30:28] Eu vou fazer a live class.
+- [02:30:34] Então, eu vou fazer a live class.
+- [02:30:36] Eu vou fazer a live class.
+- [02:30:38] Ainda não é que se esqueça, vamos ver.

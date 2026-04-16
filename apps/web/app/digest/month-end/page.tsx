@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +27,7 @@ export default async function MonthEndDigestPage() {
           View Archive
         </Link>
       </PageHeader>
+      <EducationalDisclaimer className="mb-4" />
 
       {!digest ? (
         <Card>

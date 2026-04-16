@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -23,6 +24,7 @@ export default async function ConceptsPage() {
         title="Concepts"
         description="Indicators, patterns, principles, and rules from the course"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {Object.entries(grouped).map(([category, items]) => (
         <div key={category} className="mb-8">

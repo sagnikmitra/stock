@@ -28,6 +28,11 @@ export default async function ScreenerLabPage() {
         >
           API Playground
         </Link>
+        <div className="flex gap-2">
+          <Link href="/screener-lab/presets" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Presets</Link>
+          <Link href="/screener-lab/builder" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Builder</Link>
+          <Link href="/screener-lab/saved" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Saved</Link>
+        </div>
       </PageHeader>
 
       <Card className="mb-6">

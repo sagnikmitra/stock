@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { PageHeader } from "../components/ui/page-header";
+import { EducationalDisclaimer } from "../components/ui/educational-disclaimer";
 import Link from "next/link";
 import { BacktestRunForm } from "./backtest-run-form";
 
@@ -52,6 +53,7 @@ export default async function BacktestDashboardPage({ searchParams }: Props) {
         title="Backtester"
         description="Run and review deterministic historical replays for strategy versions"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       <Card className="mb-6">
         <CardHeader>

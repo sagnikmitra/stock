@@ -2,6 +2,7 @@ import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { PostureIndicator } from "../../components/ui/posture-indicator";
 import { PageHeader } from "../../components/ui/page-header";
+import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,7 @@ export default async function GlobalCuesPage() {
         title="Global Cues"
         description="GIFT Nifty, Dow Futures, Gold, Crude, FII/DII — market posture scoring"
       />
+      <EducationalDisclaimer className="mb-4" />
 
       {contexts.length > 0 ? (
         <div className="space-y-4">

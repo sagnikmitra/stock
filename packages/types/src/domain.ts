@@ -34,6 +34,10 @@ export interface CandleSeries {
   candles: Candle[];
 }
 
+export interface ExchangeCalendar {
+  isMonthEnd(date: Date): boolean;
+}
+
 export interface QuoteSnapshot {
   symbol: string;
   ltp: number;
@@ -71,22 +75,34 @@ export interface IndicatorSet {
 }
 
 export interface StructuralState {
-  higherHighs: boolean;
-  higherLows: boolean;
-  lowerHighs: boolean;
-  lowerLows: boolean;
-  trendDirection: "up" | "down" | "sideways";
-  recentSwingHigh?: number;
-  recentSwingLow?: number;
-  candleBodyPct?: number;
-  candleColor?: "green" | "red" | "doji";
-  priceAboveSuperTrend?: boolean;
-  priceAboveVwap?: boolean;
-  lowerBbTouch?: boolean;
-  upperBbCross?: boolean;
-  trendlineBreakUp?: boolean;
-  maReclaim?: { ma: string; reclaimed: boolean };
-  closeAboveResistancePct?: number;
+  isUptrend: boolean;
+  isDowntrend: boolean;
+  swingHighs: SwingPoint[];
+  swingLows: SwingPoint[];
+  recentSwingHigh: number;
+  recentSwingLow: number;
+}
+
+export interface ConsolidationResult {
+  rangeStart: Date;
+  rangeEnd: Date;
+  ceilingPrice: number;
+  floorPrice: number;
+  compressionScore: number;
+  rangeDepthPct: number;
+  ceilingTouches: number;
+}
+
+export interface SwingPoint {
+  index: number;
+  price: number;
+  date: Date;
+  type: "high" | "low";
+}
+
+export interface FibonacciLevel {
+  level: number;
+  price: number;
 }
 
 // ---------------------------------------------------------------------------
