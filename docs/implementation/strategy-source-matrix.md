@@ -7,7 +7,7 @@ Canonical mapping of requested strategy version labels to seeded strategy keys/v
 | `bb-monthly-breakout.v1.raw-note` | `investment_bb_monthly` | 1 | seeded (inactive) | 6 | raw-note thresholds preserved |
 | `bb-monthly-breakout.v2.normalized-active` | `investment_bb_monthly` | 2 | seeded (active) | 6 | normalized active rule-set |
 | `buying-in-dips.v1.canonical` | `swing_buying_the_dips` | 1 | seeded (active) | 7 | canonical monthly RSI + daily dip |
-| `buying-in-dips.v0.shorthand-rsi` | `swing_buying_the_dips` | 0 | pending explicit seed entry | 7 + shorthand notes | to be stored as non-active shorthand |
+| `buying-in-dips.v0.shorthand-rsi` | `swing_buying_the_dips` | 0 | seeded (inactive) | 7 + shorthand notes | stored as non-default shorthand |
 | `cross-strategy.v1.canonical` | `swing_cross` | 1 | seeded (active) | 7 | BB + trendline + VWAP + green candle |
 | `abc-strategy.v1.canonical` | `swing_abc` | 1 | seeded (active) | 8 | A/B/C pattern with context |
 | `breakout.v1.canonical` | `swing_breakout` | 1 | seeded (active) | 9 | 5-condition breakout logic |
@@ -23,4 +23,3 @@ Canonical mapping of requested strategy version labels to seeded strategy keys/v
 - BB monthly thresholds (`price`, `RSI`) already represented in ambiguity ledger.
 - Buying-in-dips shorthand variant exists in notes but not as explicit version row yet.
 - MBB remains explicitly heuristic and requires manual confirmation in workflow.
-
