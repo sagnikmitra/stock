@@ -13,19 +13,22 @@ Course-informed market operating system for Indian equity cash workflows.
 - Base dashboard, strategies, screener lab, backtest, learning, watchlists, and admin pages
 
 ### In Progress / Partial
-- DSL schema hardening and canonical strategy version normalization tags
-- Internal screener key normalization to requested internal naming set
-- Digest API/UI unification (`/digest`, `/digest/[date]`, pre/close/month-end consistency)
-- Cron idempotency/lock/retry/audit + manual rerun behavior
-- Backtest API completion and admin CMS editing workflows
+- Playwright smoke execution inside sandboxed CI/runtime (Chromium launch permissions)
+- Provider adapters for production data ingestion and trading-calendar month-end gating
 
-### Missing Before Final Acceptance
-- Full docs set (`api-contracts`, `deployment`, `testing`, cron/model specs, screen matrix)
-- Deterministic unit/integration/e2e test coverage across DSL, screener math, month-end gating, degraded digest mode
-- Source reference management UI/API pair
-- Playwright smoke suite for spec-critical routes
+### Recently Completed
+- Digest archive/detail/month-end screens and API list endpoints
+- Strategy detail enhancements (active/raw DSL view, ambiguity display, source references, match history)
+- Screener Lab overlap UI with set operations + explanation drawer
+- Source references page + admin reference manager
+- Risk calculator 2% sizing + 3R worksheet
+- Cron helper framework: month-end gating, retries, degraded digest summary semantics
+- Transparent market context scoring model with factor-level breakdown
+- Backtest execution APIs and run-from-UI flow
+- Admin CMS controls for strategy/screener activation + ambiguity updates
+- Observability page and API over audit/provider run telemetry
+- Expanded docs: API contracts, deployment, testing, cron spec, market context model, screen matrix, env guide
 
 ## Docs
 
 Implementation audit and roadmap live under [`docs/implementation`](docs/implementation).
-
