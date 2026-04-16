@@ -1,0 +1,825 @@
+// =============================================================================
+// Investment Bible OS — Prisma Schema
+// =============================================================================
+// Production-grade schema for course-informed Indian equity market OS.
+// Designed for PostgreSQL on Supabase.
+// =============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// =============================================================================
+// ENUMS
+// =============================================================================
+
+enum StrategyFamily {
+  investment
+  swing
+  market_context
+  risk_foundation
+  knowledge_only
+  intraday_future
+}
+
+enum StrategyStatus {
+  draft
+  active
+  experimental
+  deprecated
+  archived
+}
+
+enum RuleKind {
+  hard
+  soft
+  ambiguity
+  derived
+  informational
+}
+
+enum Timeframe {
+  M1
+  M5
+  M15
+  M30
+  H1
+  H4
+  D1
+  W1
+  MN1
+}
+
+enum DigestType {
+  pre_market
+  post_close
+  strategy
+  week_end
+  month_end
+  ad_hoc
+}
+
+enum ProviderType {
+  official_exchange_reports
+  broker_api
+  market_data_vendor
+  external_reference_page
+  manual_import
+}
+
+enum ConfidenceLevel {
+  low
+  medium
+  high
+}
+
+enum BacktestMode {
+  event_replay
+  batch_historical
+  rolling_window
+  manual_review
+}
+
+enum RunStatus {
+  pending
+  running
+  completed
+  failed
+  partial
+}
+
+enum AmbiguitySeverity {
+  low
+  medium
+  high
+}
+
+// =============================================================================
+// MARKET DATA ENTITIES
+// =============================================================================
+
+model Exchange {
+  id        String   @id @default(cuid())
+  code      String   @unique // "NSE", "BSE"
+  name      String
+  country   String   @default("IN")
+  timezone  String   @default("Asia/Kolkata")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  instruments Instrument[]
+  indices     Index[]
+}
+
+model Instrument {
+  id              String    @id @default(cuid())
+  exchangeId      String
+  symbol          String    // "RELIANCE", "TCS"
+  tradingSymbol   String?   // broker-specific symbol
+  companyName     String
+  isin            String?
+  sector          String?
+  industry        String?
+  marketCapBucket String?   // "large_cap", "mid_cap", "small_cap"
+  listingDate     DateTime?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  exchange        Exchange @relation(fields: [exchangeId], references: [id])
+
+  candles           Candle[]
+  quotes            QuoteSnapshot[]
+  indicators        IndicatorSnapshot[]
+  strategyResults   StrategyResult[]
+  screenerResults   ScreenerResult[]
+  confluenceResults ConfluenceResult[]
+  watchlistItems    WatchlistItem[]
+  notes             Note[]
+  journalEntries    JournalEntry[]
+  mutualFundHolds   MutualFundHolding[]
+  digestMentions    DigestStockMention[]
+  backtestTrades    BacktestTrade[]
+  alertEvents       AlertEvent[]
+
+  @@unique([exchangeId, symbol])
+  @@index([symbol])
+  @@index([sector])
+  @@index([isActive])
+}
+
+model Index {
+  id         String   @id @default(cuid())
+  exchangeId String?
+  symbol     String   @unique // "NIFTY 50", "SENSEX"
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  exchange Exchange? @relation(fields: [exchangeId], references: [id])
+}
+
+/// OHLCV candle data — partitioned by timeframe for query performance.
+/// Composite index on (instrumentId, timeframe, ts) is the hot path.
+model Candle {
+  id           String    @id @default(cuid())
+  instrumentId String
+  timeframe    Timeframe
+  ts           DateTime  // candle open timestamp
+  open         Decimal   @db.Decimal(18, 4)
+  high         Decimal   @db.Decimal(18, 4)
+  low          Decimal   @db.Decimal(18, 4)
+  close        Decimal   @db.Decimal(18, 4)
+  volume       BigInt?
+  deliveryPct  Decimal?  @db.Decimal(10, 4)
+  providerId   String?
+  sourceAsOf   DateTime? // when provider last confirmed this data
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  instrument Instrument @relation(fields: [instrumentId], references: [id])
+  provider   Provider?  @relation(fields: [providerId], references: [id])
+
+  @@unique([instrumentId, timeframe, ts])
+  @@index([timeframe, ts])
+  @@index([instrumentId, ts])
+}
+
+model QuoteSnapshot {
+  id           String    @id @default(cuid())
+  instrumentId String
+  ts           DateTime
+  ltp          Decimal   @db.Decimal(18, 4)
+  open         Decimal?  @db.Decimal(18, 4)
+  high         Decimal?  @db.Decimal(18, 4)
+  low          Decimal?  @db.Decimal(18, 4)
+  close        Decimal?  @db.Decimal(18, 4)
+  changePct    Decimal?  @db.Decimal(10, 4)
+  volume       BigInt?
+  providerId   String?
+  sourceAsOf   DateTime?
+
+  createdAt DateTime @default(now())
+
+  instrument Instrument @relation(fields: [instrumentId], references: [id])
+  provider   Provider?  @relation(fields: [providerId], references: [id])
+
+  @@index([instrumentId, ts])
+}
+
+/// Pre-computed indicator values per instrument per timeframe per date.
+/// Avoids recomputing indicators on every page load.
+model IndicatorSnapshot {
+  id             String    @id @default(cuid())
+  instrumentId   String
+  timeframe      Timeframe
+  ts             DateTime
+  rsi14          Decimal?  @db.Decimal(10, 4)
+  sma13          Decimal?  @db.Decimal(18, 4)
+  sma34          Decimal?  @db.Decimal(18, 4)
+  sma44          Decimal?  @db.Decimal(18, 4)
+  sma50          Decimal?  @db.Decimal(18, 4)
+  sma200         Decimal?  @db.Decimal(18, 4)
+  ema9           Decimal?  @db.Decimal(18, 4)
+  ema15          Decimal?  @db.Decimal(18, 4)
+  bbUpper        Decimal?  @db.Decimal(18, 4)
+  bbMiddle       Decimal?  @db.Decimal(18, 4)
+  bbLower        Decimal?  @db.Decimal(18, 4)
+  superTrend     Decimal?  @db.Decimal(18, 4)
+  superTrendDir  String?   // "up" or "down"
+  vwap           Decimal?  @db.Decimal(18, 4)
+  atr14          Decimal?  @db.Decimal(18, 4)
+  relativeVolume Decimal?  @db.Decimal(10, 4)
+  providerId     String?
+  sourceAsOf     DateTime?
+
+  createdAt DateTime @default(now())
+
+  instrument Instrument @relation(fields: [instrumentId], references: [id])
+  provider   Provider?  @relation(fields: [providerId], references: [id])
+
+  @@unique([instrumentId, timeframe, ts])
+  @@index([timeframe, ts])
+}
+
+// =============================================================================
+// GLOBAL CONTEXT
+// =============================================================================
+
+model GlobalContextSnapshot {
+  id               String    @id @default(cuid())
+  date             DateTime  @unique @db.Date
+  giftNiftyChange  Decimal?  @db.Decimal(10, 4)
+  dowIndexChange   Decimal?  @db.Decimal(10, 4)
+  dowFuturesChange Decimal?  @db.Decimal(10, 4)
+  goldChange       Decimal?  @db.Decimal(10, 4)
+  crudeChange      Decimal?  @db.Decimal(10, 4)
+  marketPosture    String?   // "favorable", "mixed", "hostile"
+  postureScore     Decimal?  @db.Decimal(10, 4)
+  narrative        String?   @db.Text
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model FiiDiiSnapshot {
+  id                 String    @id @default(cuid())
+  date               DateTime  @unique @db.Date
+  fiiCashNet         Decimal?  @db.Decimal(18, 2)
+  diiCashNet         Decimal?  @db.Decimal(18, 2)
+  fiiIndexFuturesNet Decimal?  @db.Decimal(18, 2)
+  fiiIndexOptionsNet Decimal?  @db.Decimal(18, 2)
+  narrative          String?   @db.Text
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model MarketBreadthSnapshot {
+  id             String   @id @default(cuid())
+  date           DateTime @unique @db.Date
+  advances       Int?
+  declines       Int?
+  unchanged      Int?
+  new52WeekHighs Int?
+  new52WeekLows  Int?
+  narrative      String?  @db.Text
+  createdAt      DateTime @default(now())
+}
+
+// =============================================================================
+// STRATEGY ENGINE
+// =============================================================================
+
+model Strategy {
+  id                 String          @id @default(cuid())
+  key                String          @unique // "investment_bb_monthly_v1"
+  name               String
+  family             StrategyFamily
+  status             StrategyStatus  @default(draft)
+  description        String          @db.Text
+  reviewFrequency    String?         // "daily", "month_end", etc.
+  primaryTimeframe   Timeframe?
+  secondaryTimeframe Timeframe?
+  confidence         ConfidenceLevel @default(medium)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  versions         StrategyVersion[]
+  results          StrategyResult[]
+  ambiguityRecords AmbiguityRecord[]
+  screeners        Screener[]
+}
+
+model StrategyVersion {
+  id                  String   @id @default(cuid())
+  strategyId          String
+  version             Int
+  isActive            Boolean  @default(false)
+  sourceSessions      String   // CSV: "6", "7,8"
+  sourceSummary       String?  @db.Text
+  implementationNotes String?  @db.Text
+  normalizedDsl       Json     // StrategyDSL JSON
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  strategy  Strategy       @relation(fields: [strategyId], references: [id])
+  rules     StrategyRule[]
+  runs      StrategyRun[]
+  backtests Backtest[]
+
+  @@unique([strategyId, version])
+}
+
+model StrategyRule {
+  id                String   @id @default(cuid())
+  strategyVersionId String
+  key               String   // "price_filter", "rsi_check"
+  label             String
+  kind              RuleKind
+  description       String   @db.Text
+  expressionDsl     Json?    // individual FilterCondition JSON
+  uiHint            String?
+  sortOrder         Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  strategyVersion StrategyVersion @relation(fields: [strategyVersionId], references: [id])
+}
+
+model StrategyRun {
+  id                String    @id @default(cuid())
+  strategyVersionId String
+  runAt             DateTime
+  runScope          String    // "daily", "month_end", "manual"
+  marketDate        DateTime? @db.Date
+  status            RunStatus @default(pending)
+  summaryJson       Json?
+  createdAt         DateTime  @default(now())
+
+  strategyVersion StrategyVersion  @relation(fields: [strategyVersionId], references: [id])
+  results         StrategyResult[]
+
+  @@index([marketDate])
+}
+
+model StrategyResult {
+  id              String          @id @default(cuid())
+  strategyId      String
+  strategyRunId   String?
+  instrumentId    String
+  marketDate      DateTime        @db.Date
+  matched         Boolean
+  confluenceScore Decimal?        @db.Decimal(10, 4)
+  confidence      ConfidenceLevel?
+  ruleResults     Json            // Record<string, {passed, value, reason}>
+  explanation     String?         @db.Text
+  ambiguityFlags  Json?           // string[]
+  priorityBucket  String?
+  createdAt       DateTime        @default(now())
+
+  strategy    Strategy     @relation(fields: [strategyId], references: [id])
+  strategyRun StrategyRun? @relation(fields: [strategyRunId], references: [id])
+  instrument  Instrument   @relation(fields: [instrumentId], references: [id])
+
+  @@index([marketDate])
+  @@index([strategyId, marketDate])
+  @@index([instrumentId, marketDate])
+}
+
+// =============================================================================
+// SCREENER ENGINE
+// =============================================================================
+
+model Screener {
+  id                  String   @id @default(cuid())
+  key                 String   @unique
+  name                String
+  description         String   @db.Text
+  expressionDsl       Json?    // ScreenerDSL JSON
+  linkedStrategyId    String?
+  isExternalReference Boolean  @default(false)
+  externalUrl         String?
+  tags                Json?    // string[]
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  linkedStrategy Strategy?       @relation(fields: [linkedStrategyId], references: [id])
+  versions       ScreenerVersion[]
+  runs           ScreenerRun[]
+}
+
+model ScreenerVersion {
+  id            String   @id @default(cuid())
+  screenerId    String
+  version       Int
+  isActive      Boolean  @default(false)
+  expressionDsl Json
+  createdAt     DateTime @default(now())
+
+  screener Screener @relation(fields: [screenerId], references: [id])
+
+  @@unique([screenerId, version])
+}
+
+model ScreenerRun {
+  id         String    @id @default(cuid())
+  screenerId String
+  runAt      DateTime
+  marketDate DateTime? @db.Date
+  scope      String
+  status     RunStatus @default(pending)
+  summaryJson Json?
+  createdAt  DateTime  @default(now())
+
+  screener Screener        @relation(fields: [screenerId], references: [id])
+  results  ScreenerResult[]
+
+  @@index([marketDate])
+}
+
+model ScreenerResult {
+  id            String   @id @default(cuid())
+  screenerRunId String
+  instrumentId  String
+  marketDate    DateTime @db.Date
+  matched       Boolean
+  metricsJson   Json?    // indicator values at match time
+  explanation   String?  @db.Text
+  createdAt     DateTime @default(now())
+
+  screenerRun ScreenerRun @relation(fields: [screenerRunId], references: [id])
+  instrument  Instrument  @relation(fields: [instrumentId], references: [id])
+
+  @@index([marketDate])
+  @@index([instrumentId, marketDate])
+}
+
+/// Pre-computed overlap/confluence results across screeners per stock per day.
+model ConfluenceResult {
+  id            String   @id @default(cuid())
+  instrumentId  String
+  marketDate    DateTime @db.Date
+  overlapCount  Int
+  overlapKeys   Json     // string[]
+  weightedScore Decimal? @db.Decimal(10, 4)
+  familyMix     Json?    // Record<string, number>
+  explanation   String?  @db.Text
+  createdAt     DateTime @default(now())
+
+  instrument Instrument @relation(fields: [instrumentId], references: [id])
+
+  @@unique([instrumentId, marketDate])
+  @@index([marketDate])
+}
+
+// =============================================================================
+// DIGEST
+// =============================================================================
+
+model Digest {
+  id          String     @id @default(cuid())
+  digestType  DigestType
+  marketDate  DateTime   @db.Date
+  title       String
+  summary     String     @db.Text
+  posture     String?
+  metricsJson Json?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  sections DigestSection[]
+  mentions DigestStockMention[]
+
+  @@index([digestType, marketDate])
+  @@unique([digestType, marketDate])
+}
+
+model DigestSection {
+  id           String   @id @default(cuid())
+  digestId     String
+  key          String
+  title        String
+  bodyMarkdown String   @db.Text
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  digest Digest @relation(fields: [digestId], references: [id], onDelete: Cascade)
+}
+
+model DigestStockMention {
+  id           String   @id @default(cuid())
+  digestId     String
+  instrumentId String
+  mentionType  String   // "strategy_match", "breakout", "watchlist_change"
+  contextJson  Json?
+  createdAt    DateTime @default(now())
+
+  digest     Digest     @relation(fields: [digestId], references: [id], onDelete: Cascade)
+  instrument Instrument @relation(fields: [instrumentId], references: [id])
+}
+
+// =============================================================================
+// PERSONAL WORKSPACE
+// =============================================================================
+
+model Watchlist {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  kind        String   // "manual", "strategy_generated", "month_end"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  items WatchlistItem[]
+}
+
+model WatchlistItem {
+  id           String   @id @default(cuid())
+  watchlistId  String
+  instrumentId String
+  addedAt      DateTime @default(now())
+  notes        String?  @db.Text
+  tagsJson     Json?
+  isActive     Boolean  @default(true)
+
+  watchlist  Watchlist  @relation(fields: [watchlistId], references: [id], onDelete: Cascade)
+  instrument Instrument @relation(fields: [instrumentId], references: [id])
+
+  @@unique([watchlistId, instrumentId])
+}
+
+model Note {
+  id           String   @id @default(cuid())
+  instrumentId String?
+  title        String
+  bodyMarkdown String   @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  instrument Instrument? @relation(fields: [instrumentId], references: [id])
+}
+
+model JournalEntry {
+  id           String    @id @default(cuid())
+  instrumentId String?
+  kind         String    // "trade_idea", "review", "lesson", "mistake"
+  bodyMarkdown String    @db.Text
+  eventDate    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  instrument Instrument? @relation(fields: [instrumentId], references: [id])
+}
+
+// =============================================================================
+// KNOWLEDGE / COURSE
+// =============================================================================
+
+model KnowledgeDocument {
+  id            String          @id @default(cuid())
+  key           String          @unique // "session_6", "concept_rsi"
+  title         String
+  sourceSession String?
+  summary       String?         @db.Text
+  bodyMarkdown  String          @db.Text
+  confidence    ConfidenceLevel @default(medium)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  sections KnowledgeSection[]
+}
+
+model KnowledgeSection {
+  id                  String   @id @default(cuid())
+  knowledgeDocumentId String
+  key                 String
+  title               String
+  bodyMarkdown        String   @db.Text
+  sortOrder           Int      @default(0)
+  createdAt           DateTime @default(now())
+
+  knowledgeDocument KnowledgeDocument @relation(fields: [knowledgeDocumentId], references: [id], onDelete: Cascade)
+}
+
+model KnowledgeConcept {
+  id                 String   @id @default(cuid())
+  key                String   @unique // "rsi", "bollinger_bands", "2pct_risk"
+  title              String
+  category           String   // "indicator", "pattern", "rule", "principle"
+  definition         String   @db.Text
+  notes              String?  @db.Text
+  linkedStrategyKeys Json?    // string[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model AmbiguityRecord {
+  id               String            @id @default(cuid())
+  strategyId       String?
+  key              String            @unique
+  rawNote          String            @db.Text
+  normalizedNote   String            @db.Text
+  sourcePreference String?
+  severity         AmbiguitySeverity
+  uiBehavior       String            // "show_warning_badge", "show_info_badge"
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  strategy Strategy? @relation(fields: [strategyId], references: [id])
+}
+
+// =============================================================================
+// EXTERNAL RESOURCES
+// =============================================================================
+
+model ExternalResource {
+  id       String   @id @default(cuid())
+  key      String   @unique
+  title    String
+  url      String
+  category String   // "official", "broker", "vendor", "screener", etc.
+  provider String?
+  notes    String?  @db.Text
+  createdAt DateTime @default(now())
+}
+
+// =============================================================================
+// PROVIDERS & JOBS
+// =============================================================================
+
+model Provider {
+  id         String       @id @default(cuid())
+  key        String       @unique // "nse", "kite", "twelvedata"
+  name       String
+  type       ProviderType
+  baseUrl    String?
+  isEnabled  Boolean      @default(true)
+  configJson Json?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  candles    Candle[]
+  quotes     QuoteSnapshot[]
+  indicators IndicatorSnapshot[]
+  jobRuns    ProviderJobRun[]
+}
+
+model ProviderJobRun {
+  id         String    @id @default(cuid())
+  providerId String
+  jobKey     String    // "ingest_eod", "compute_indicators"
+  startedAt  DateTime
+  finishedAt DateTime?
+  status     RunStatus @default(pending)
+  detailJson Json?
+  createdAt  DateTime  @default(now())
+
+  provider Provider @relation(fields: [providerId], references: [id])
+
+  @@index([providerId, startedAt])
+}
+
+// =============================================================================
+// BACKTEST
+// =============================================================================
+
+model Backtest {
+  id                String       @id @default(cuid())
+  strategyVersionId String
+  name              String
+  mode              BacktestMode
+  configJson        Json         // BacktestConfig
+  startedAt         DateTime?
+  finishedAt        DateTime?
+  status            RunStatus    @default(pending)
+  summaryJson       Json?        // BacktestMetrics
+  createdAt         DateTime     @default(now())
+
+  strategyVersion StrategyVersion @relation(fields: [strategyVersionId], references: [id])
+  trades          BacktestTrade[]
+  metrics         BacktestMetric[]
+}
+
+model BacktestTrade {
+  id           String    @id @default(cuid())
+  backtestId   String
+  instrumentId String?
+  entryDate    DateTime?
+  exitDate     DateTime?
+  entryPrice   Decimal?  @db.Decimal(18, 4)
+  exitPrice    Decimal?  @db.Decimal(18, 4)
+  stopPrice    Decimal?  @db.Decimal(18, 4)
+  quantity     Decimal?  @db.Decimal(18, 4)
+  pnlAbs       Decimal?  @db.Decimal(18, 4)
+  pnlPct       Decimal?  @db.Decimal(10, 4)
+  metaJson     Json?
+  createdAt    DateTime  @default(now())
+
+  backtest   Backtest    @relation(fields: [backtestId], references: [id], onDelete: Cascade)
+  instrument Instrument? @relation(fields: [instrumentId], references: [id])
+}
+
+model BacktestMetric {
+  id         String   @id @default(cuid())
+  backtestId String
+  key        String   // "win_rate", "max_drawdown", "expectancy"
+  value      String
+  createdAt  DateTime @default(now())
+
+  backtest Backtest @relation(fields: [backtestId], references: [id], onDelete: Cascade)
+}
+
+// =============================================================================
+// ALERTS
+// =============================================================================
+
+model AlertRule {
+  id            String   @id @default(cuid())
+  key           String   @unique
+  name          String
+  conditionJson Json
+  isEnabled     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  events AlertEvent[]
+}
+
+model AlertEvent {
+  id           String   @id @default(cuid())
+  alertRuleId  String
+  instrumentId String?
+  triggeredAt  DateTime
+  payloadJson  Json
+  createdAt    DateTime @default(now())
+
+  alertRule  AlertRule   @relation(fields: [alertRuleId], references: [id])
+  instrument Instrument? @relation(fields: [instrumentId], references: [id])
+}
+
+// =============================================================================
+// MUTUAL FUND DISCOVERY
+// =============================================================================
+
+model MutualFund {
+  id       String   @id @default(cuid())
+  key      String   @unique
+  name     String
+  amc      String?
+  category String?
+  createdAt DateTime @default(now())
+
+  holdings MutualFundHolding[]
+}
+
+model MutualFundHolding {
+  id           String   @id @default(cuid())
+  mutualFundId String
+  instrumentId String
+  reportDate   DateTime @db.Date
+  weightPct    Decimal? @db.Decimal(10, 4)
+  rank         Int?
+  createdAt    DateTime @default(now())
+
+  mutualFund MutualFund @relation(fields: [mutualFundId], references: [id])
+  instrument Instrument @relation(fields: [instrumentId], references: [id])
+
+  @@index([reportDate])
+  @@index([instrumentId])
+}
+
+// =============================================================================
+// FEATURE FLAGS
+// =============================================================================
+
+model FeatureFlag {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  name      String
+  isEnabled Boolean  @default(false)
+  notes     String?
+  createdAt DateTime @default(now())
+}
+
+// =============================================================================
+// AUDIT LOG
+// =============================================================================
+
+model AuditEvent {
+  id        String   @id @default(cuid())
+  actor     String   @default("system")
+  action    String   // "strategy_version_activated", "screener_run", etc.
+  entityType String?
+  entityId   String?
+  details   Json?
+  createdAt DateTime @default(now())
+
+  @@index([action, createdAt])
+  @@index([entityType, entityId])
+}
