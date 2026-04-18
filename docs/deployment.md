@@ -39,6 +39,15 @@ Set external scheduler hits (with auth):
 Header:
 - `Authorization: Bearer <CRON_SECRET>`
 
+### Free data sync behavior
+
+- `pre-market` and `post-close` routes run free-data ingestion before digest pipelines when `FREE_DATA_SYNC_ENABLED=true`.
+- Ingestion uses provider fallback order from env:
+  - `FREE_QUOTES_PROVIDER_PRIORITY`
+  - `FREE_CONTEXT_PROVIDER_PRIORITY`
+  - `FREE_CANDLE_PROVIDER_PRIORITY`
+- Route response includes an `ingestion` object (counts/provider used/warnings) and optional `ingestionError`.
+
 ## Safety controls
 
 - Idempotent lock key: `<job>:<marketDate>`

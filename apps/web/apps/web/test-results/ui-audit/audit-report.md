@@ -1,0 +1,578 @@
+# UI Design Audit Report
+
+Base URL: http://localhost:3000
+Checks run: 150
+Routes audited: 30
+
+## Severity Summary
+- Critical: 0
+- Major: 120
+- Moderate: 12
+- OK: 18
+
+## Critical Findings
+- None
+
+## Major Findings
+- MAJOR / [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/home__desktop.png
+- MAJOR / [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/home__laptop.png
+- MAJOR / [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/home__tablet.png
+- MAJOR / [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/home__mobile-lg.png
+- MAJOR / [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/home__mobile-sm.png
+- MAJOR /digest [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest__desktop.png
+- MAJOR /digest [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest__laptop.png
+- MAJOR /digest [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest__tablet.png
+- MAJOR /digest [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest__mobile-lg.png
+- MAJOR /digest [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest__mobile-sm.png
+- MAJOR /strategies [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Potential clipped text blocks: 10
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies__mobile-lg.png
+- MAJOR /strategies [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Potential clipped text blocks: 10
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies__mobile-sm.png
+- MAJOR /screener-lab [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/screener-lab__desktop.png
+- MAJOR /screener-lab [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/screener-lab__laptop.png
+- MAJOR /screener-lab [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/screener-lab__tablet.png
+- MAJOR /screener-lab [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/screener-lab__mobile-lg.png
+- MAJOR /screener-lab [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/screener-lab__mobile-sm.png
+- MAJOR /tools/position-size [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/tools-position-size__desktop.png
+- MAJOR /tools/position-size [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/tools-position-size__laptop.png
+- MAJOR /tools/position-size [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 11
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/tools-position-size__tablet.png
+- MAJOR /tools/position-size [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 11
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/tools-position-size__mobile-lg.png
+- MAJOR /tools/position-size [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 11
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/tools-position-size__mobile-sm.png
+- MAJOR /admin/strategies [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-strategies__mobile-lg.png
+- MAJOR /admin/strategies [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-strategies__mobile-sm.png
+- MAJOR /digest/pre-market [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-pre-market__desktop.png
+- MAJOR /digest/pre-market [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-pre-market__laptop.png
+- MAJOR /digest/pre-market [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-pre-market__tablet.png
+- MAJOR /digest/pre-market [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-pre-market__mobile-lg.png
+- MAJOR /digest/pre-market [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-pre-market__mobile-sm.png
+- MAJOR /digest/close [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-close__mobile-lg.png
+- MAJOR /digest/close [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-close__mobile-sm.png
+- MAJOR /digest/weekly [desktop 1440x900] status=200
+  - Heading issue: h1 count=0
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-weekly__desktop.png
+- MAJOR /digest/weekly [laptop 1024x768] status=200
+  - Heading issue: h1 count=0
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-weekly__laptop.png
+- MAJOR /digest/weekly [tablet 768x1024] status=200
+  - Heading issue: h1 count=0
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-weekly__tablet.png
+- MAJOR /digest/weekly [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: h1 count=0
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-weekly__mobile-lg.png
+- MAJOR /digest/weekly [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: h1 count=0
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-weekly__mobile-sm.png
+- MAJOR /digest/month-end [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-month-end__mobile-lg.png
+- MAJOR /digest/month-end [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-month-end__mobile-sm.png
+- MAJOR /market-context/global-cues [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/market-context-global-cues__mobile-lg.png
+- MAJOR /market-context/global-cues [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/market-context-global-cues__mobile-sm.png
+- MAJOR /references [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/references__desktop.png
+- MAJOR /references [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/references__laptop.png
+- MAJOR /references [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/references__tablet.png
+- MAJOR /references [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/references__mobile-lg.png
+- MAJOR /references [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/references__mobile-sm.png
+- MAJOR /stocks [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/stocks__desktop.png
+- MAJOR /stocks [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/stocks__laptop.png
+- MAJOR /stocks [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/stocks__tablet.png
+- MAJOR /stocks [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/stocks__mobile-lg.png
+- MAJOR /stocks [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/stocks__mobile-sm.png
+- MAJOR /watchlists [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/watchlists__mobile-lg.png
+- MAJOR /watchlists [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/watchlists__mobile-sm.png
+- MAJOR /backtest [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/backtest__desktop.png
+- MAJOR /backtest [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/backtest__laptop.png
+- MAJOR /backtest [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 12
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/backtest__tablet.png
+- MAJOR /backtest [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 12
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/backtest__mobile-lg.png
+- MAJOR /backtest [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 12
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/backtest__mobile-sm.png
+- MAJOR /learning/sessions [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-sessions__desktop.png
+- MAJOR /learning/sessions [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-sessions__laptop.png
+- MAJOR /learning/sessions [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-sessions__tablet.png
+- MAJOR /learning/sessions [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-sessions__mobile-lg.png
+- MAJOR /learning/sessions [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-sessions__mobile-sm.png
+- MAJOR /learning/concepts [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 12
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-concepts__mobile-lg.png
+- MAJOR /learning/concepts [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 12
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-concepts__mobile-sm.png
+- MAJOR /learning/ambiguities [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-ambiguities__desktop.png
+- MAJOR /learning/ambiguities [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-ambiguities__laptop.png
+- MAJOR /learning/ambiguities [tablet 768x1024] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 13
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-ambiguities__tablet.png
+- MAJOR /learning/ambiguities [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 13
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-ambiguities__mobile-lg.png
+- MAJOR /learning/ambiguities [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 13
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-ambiguities__mobile-sm.png
+- MAJOR /admin/cms [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-cms__mobile-lg.png
+- MAJOR /admin/cms [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-cms__mobile-sm.png
+- MAJOR /admin/observability [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-observability__mobile-lg.png
+- MAJOR /admin/observability [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-observability__mobile-sm.png
+- MAJOR /admin/references [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-references__mobile-lg.png
+- MAJOR /admin/references [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-references__mobile-sm.png
+- MAJOR /strategies/investment_bb_monthly [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_bb_monthly__desktop.png
+- MAJOR /strategies/investment_bb_monthly [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_bb_monthly__laptop.png
+- MAJOR /strategies/investment_bb_monthly [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+5207px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_bb_monthly__tablet.png
+- MAJOR /strategies/investment_bb_monthly [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_bb_monthly__mobile-lg.png
+- MAJOR /strategies/investment_bb_monthly [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_bb_monthly__mobile-sm.png
+- MAJOR /strategies/investment_mbb [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_mbb__desktop.png
+- MAJOR /strategies/investment_mbb [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_mbb__laptop.png
+- MAJOR /strategies/investment_mbb [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+3522px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_mbb__tablet.png
+- MAJOR /strategies/investment_mbb [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_mbb__mobile-lg.png
+- MAJOR /strategies/investment_mbb [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-investment_mbb__mobile-sm.png
+- MAJOR /strategies/swing_buying_the_dips [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_buying_the_dips__desktop.png
+- MAJOR /strategies/swing_buying_the_dips [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_buying_the_dips__laptop.png
+- MAJOR /strategies/swing_buying_the_dips [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+4048px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_buying_the_dips__tablet.png
+- MAJOR /strategies/swing_buying_the_dips [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_buying_the_dips__mobile-lg.png
+- MAJOR /strategies/swing_buying_the_dips [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_buying_the_dips__mobile-sm.png
+- MAJOR /strategies/swing_cross [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_cross__desktop.png
+- MAJOR /strategies/swing_cross [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_cross__laptop.png
+- MAJOR /strategies/swing_cross [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+5481px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_cross__tablet.png
+- MAJOR /strategies/swing_cross [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_cross__mobile-lg.png
+- MAJOR /strategies/swing_cross [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_cross__mobile-sm.png
+- MAJOR /strategies/swing_abc [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_abc__desktop.png
+- MAJOR /strategies/swing_abc [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_abc__laptop.png
+- MAJOR /strategies/swing_abc [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+4271px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_abc__tablet.png
+- MAJOR /strategies/swing_abc [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_abc__mobile-lg.png
+- MAJOR /strategies/swing_abc [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_abc__mobile-sm.png
+- MAJOR /strategies/swing_breakout [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_breakout__desktop.png
+- MAJOR /strategies/swing_breakout [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_breakout__laptop.png
+- MAJOR /strategies/swing_breakout [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+5157px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_breakout__tablet.png
+- MAJOR /strategies/swing_breakout [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_breakout__mobile-lg.png
+- MAJOR /strategies/swing_breakout [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_breakout__mobile-sm.png
+- MAJOR /strategies/swing_btst [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_btst__desktop.png
+- MAJOR /strategies/swing_btst [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_btst__laptop.png
+- MAJOR /strategies/swing_btst [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+3695px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_btst__tablet.png
+- MAJOR /strategies/swing_btst [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_btst__mobile-lg.png
+- MAJOR /strategies/swing_btst [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_btst__mobile-sm.png
+- MAJOR /strategies/swing_trend_continuation [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_trend_continuation__desktop.png
+- MAJOR /strategies/swing_trend_continuation [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_trend_continuation__laptop.png
+- MAJOR /strategies/swing_trend_continuation [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+4221px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_trend_continuation__tablet.png
+- MAJOR /strategies/swing_trend_continuation [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_trend_continuation__mobile-lg.png
+- MAJOR /strategies/swing_trend_continuation [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_trend_continuation__mobile-sm.png
+- MAJOR /strategies/swing_sma_13_34_200 [desktop 1440x900] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_sma_13_34_200__desktop.png
+- MAJOR /strategies/swing_sma_13_34_200 [laptop 1024x768] status=200
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_sma_13_34_200__laptop.png
+- MAJOR /strategies/swing_sma_13_34_200 [tablet 768x1024] status=200
+  - Top overflow offender: div > div.MuiPaper-root.MuiPaper-elevation > div.grid.gap-4 > div.rounded-xl.border (+3918px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_sma_13_34_200__tablet.png
+- MAJOR /strategies/swing_sma_13_34_200 [mobile-lg 430x932] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_sma_13_34_200__mobile-lg.png
+- MAJOR /strategies/swing_sma_13_34_200 [mobile-sm 360x740] status=200
+  - Top overflow offender: div > header.MuiPaper-root.MuiPaper-elevation > div.MuiBox-root.css-1h0b6q6 > a.MuiButtonBase-root.MuiChip-root (+55px)
+  - Heading issue: skipped heading levels (e.g., h2->h4)
+  - Mobile tap targets <40px: 15
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies-swing_sma_13_34_200__mobile-sm.png
+
+## Moderate Findings
+- MODERATE /strategies [desktop 1440x900] status=200
+  - Potential clipped text blocks: 10
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies__desktop.png
+- MODERATE /strategies [laptop 1024x768] status=200
+  - Potential clipped text blocks: 10
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies__laptop.png
+- MODERATE /strategies [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 6
+  - Potential clipped text blocks: 10
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/strategies__tablet.png
+- MODERATE /admin/strategies [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-strategies__tablet.png
+- MODERATE /digest/close [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-close__tablet.png
+- MODERATE /digest/month-end [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 7
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/digest-month-end__tablet.png
+- MODERATE /market-context/global-cues [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/market-context-global-cues__tablet.png
+- MODERATE /watchlists [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 6
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/watchlists__tablet.png
+- MODERATE /learning/concepts [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 12
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/learning-concepts__tablet.png
+- MODERATE /admin/cms [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-cms__tablet.png
+- MODERATE /admin/observability [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-observability__tablet.png
+- MODERATE /admin/references [tablet 768x1024] status=200
+  - Mobile tap targets <40px: 9
+  - Screenshot: /Users/sagnikmitra/Desktop/GitHub/stock/apps/web/apps/web/test-results/ui-audit/admin-references__tablet.png
+
+## Route Coverage
+- /
+- /admin/cms
+- /admin/observability
+- /admin/references
+- /admin/strategies
+- /backtest
+- /digest
+- /digest/close
+- /digest/month-end
+- /digest/pre-market
+- /digest/weekly
+- /learning/ambiguities
+- /learning/concepts
+- /learning/sessions
+- /market-context/global-cues
+- /references
+- /screener-lab
+- /stocks
+- /strategies
+- /strategies/investment_bb_monthly
+- /strategies/investment_mbb
+- /strategies/swing_abc
+- /strategies/swing_breakout
+- /strategies/swing_btst
+- /strategies/swing_buying_the_dips
+- /strategies/swing_cross
+- /strategies/swing_sma_13_34_200
+- /strategies/swing_trend_continuation
+- /tools/position-size
+- /watchlists

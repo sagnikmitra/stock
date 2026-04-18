@@ -13,10 +13,12 @@
     "db:seed": "turbo db:seed",
     "db:migrate": "turbo db:migrate",
     "db:setup:supabase": "bash ./scripts/connect-supabase.sh",
+    "db:import:course": "tsx scripts/import-course-sessions.ts",
+    "bootstrap:personal": "tsx scripts/bootstrap-personal-system.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\""
   },
   "devDependencies": {
-    "pnpm": "^9.15.0",
+    "pnpm": "^9.15.9",
     "prettier": "^3.3.0",
     "tsx": "^4.21.0",
     "turbo": "^2.3.0",

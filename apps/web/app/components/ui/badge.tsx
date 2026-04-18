@@ -1,3 +1,6 @@
+"use client";
+
+import { Chip, type ChipProps } from "@mui/material";
 import { cn } from "@/lib/cn";
 
 type BadgeVariant =
@@ -10,15 +13,15 @@ type BadgeVariant =
   | "ambiguity"
   | "muted";
 
-const variantClasses: Record<BadgeVariant, string> = {
-  default: "bg-slate-100 text-slate-700",
-  investment: "bg-blue-100 text-blue-800",
-  swing: "bg-purple-100 text-purple-800",
-  favorable: "bg-green-100 text-green-800",
-  hostile: "bg-red-100 text-red-800",
-  mixed: "bg-amber-100 text-amber-800",
-  ambiguity: "bg-orange-100 text-orange-800",
-  muted: "bg-slate-50 text-slate-500",
+const variantStyles: Record<BadgeVariant, ChipProps["sx"]> = {
+  default: { borderColor: "divider", backgroundColor: "background.paper", color: "text.primary" },
+  investment: { borderColor: "#bfdbfe", backgroundColor: "#dbeafe", color: "#1e3a8a" },
+  swing: { borderColor: "#99f6e4", backgroundColor: "#ccfbf1", color: "#115e59" },
+  favorable: { borderColor: "#bbf7d0", backgroundColor: "#dcfce7", color: "#166534" },
+  hostile: { borderColor: "#fecaca", backgroundColor: "#fee2e2", color: "#991b1b" },
+  mixed: { borderColor: "#fde68a", backgroundColor: "#fef3c7", color: "#92400e" },
+  ambiguity: { borderColor: "#fed7aa", backgroundColor: "#ffedd5", color: "#9a3412" },
+  muted: { borderColor: "#e2e8f0", backgroundColor: "#f8fafc", color: "#475569" },
 };
 
 interface BadgeProps {
@@ -29,14 +32,18 @@ interface BadgeProps {
 
 export function Badge({ children, variant = "default", className }: BadgeProps) {
   return (
-    <span
-      className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
-        variantClasses[variant],
-        className,
-      )}
-    >
-      {children}
-    </span>
+    <Chip
+      className={cn(className)}
+      label={children}
+      size="small"
+      variant="outlined"
+      sx={{
+        height: 24,
+        borderRadius: 1,
+        fontWeight: 600,
+        "& .MuiChip-label": { px: 1.25, fontSize: 11.5, letterSpacing: 0.15 },
+        ...variantStyles[variant],
+      }}
+    />
   );
 }

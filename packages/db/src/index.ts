@@ -64,10 +64,27 @@ const makePrismaMock = () =>
     },
   ) as PrismaClient;
 
+// Build datasource URL with pool tuning. Injects params only if not already present.
+function buildDatasourceUrl(): string | undefined {
+  const base = process.env.DATABASE_URL;
+  if (!base) return undefined;
+  try {
+    const url = new URL(base);
+    if (!url.searchParams.has("connection_limit")) url.searchParams.set("connection_limit", "5");
+    if (!url.searchParams.has("pool_timeout")) url.searchParams.set("pool_timeout", "20");
+    return url.toString();
+  } catch {
+    return base;
+  }
+}
+
 export const prisma = isDatabaseConfigured
   ? globalForPrisma.prisma ??
     new PrismaClient({
-      log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+      datasources: { db: { url: buildDatasourceUrl() } },
+      // Disable query logging — it serializes every SQL string to stdout which
+      // adds measurable per-request CPU overhead. Use warn+error only.
+      log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
     })
   : makePrismaMock();
 

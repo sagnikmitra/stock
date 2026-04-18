@@ -3,7 +3,7 @@ import { distanceFrom52WeekHigh, is52WeekHigh, is52WeekLow } from "@ibo/strategy
 import type { Candle } from "@ibo/types";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function FiftyTwoWeekPage() {
   const instruments = await prisma.instrument.findMany({
@@ -12,25 +12,42 @@ export default async function FiftyTwoWeekPage() {
     take: 300,
   });
 
+  const instrumentIds = instruments.map((instrument) => instrument.id);
+  const oneYearAgo = new Date(Date.now() - 370 * 24 * 60 * 60 * 1000);
+  const candlesByInstrument = new Map<string, Candle[]>();
+
+  if (instrumentIds.length > 0) {
+    const rows = await prisma.candle.findMany({
+      where: {
+        instrumentId: { in: instrumentIds },
+        timeframe: "D1",
+        ts: { gte: oneYearAgo },
+      },
+      orderBy: [{ instrumentId: "asc" }, { ts: "asc" }],
+      select: { instrumentId: true, ts: true, open: true, high: true, low: true, close: true, volume: true, deliveryPct: true },
+    });
+
+    for (const row of rows) {
+      const arr = candlesByInstrument.get(row.instrumentId) ?? [];
+      arr.push({
+        ts: row.ts,
+        open: Number(row.open),
+        high: Number(row.high),
+        low: Number(row.low),
+        close: Number(row.close),
+        volume: Number(row.volume ?? 0),
+        deliveryPct: row.deliveryPct ? Number(row.deliveryPct) : undefined,
+      });
+      candlesByInstrument.set(row.instrumentId, arr);
+    }
+  }
+
   const highs: Array<{ symbol: string; companyName: string; distance: number }> = [];
   const lows: Array<{ symbol: string; companyName: string }> = [];
 
   for (const instrument of instruments) {
-    const rows = await prisma.candle.findMany({
-      where: { instrumentId: instrument.id, timeframe: "D1" },
-      orderBy: { ts: "asc" },
-      take: 260,
-    });
-    if (rows.length < 100) continue;
-    const candles: Candle[] = rows.map((row) => ({
-      ts: row.ts,
-      open: Number(row.open),
-      high: Number(row.high),
-      low: Number(row.low),
-      close: Number(row.close),
-      volume: Number(row.volume ?? 0),
-      deliveryPct: row.deliveryPct ? Number(row.deliveryPct) : undefined,
-    }));
+    const candles = (candlesByInstrument.get(instrument.id) ?? []).slice(-260);
+    if (candles.length < 100) continue;
 
     if (is52WeekHigh(candles)) highs.push({ symbol: instrument.symbol, companyName: instrument.companyName, distance: distanceFrom52WeekHigh(candles) });
     if (is52WeekLow(candles)) lows.push({ symbol: instrument.symbol, companyName: instrument.companyName });
@@ -64,4 +81,3 @@ export default async function FiftyTwoWeekPage() {
     </div>
   );
 }
-

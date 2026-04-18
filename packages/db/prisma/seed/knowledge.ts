@@ -216,18 +216,28 @@ export async function seedKnowledge(prisma: PrismaClient) {
   console.log("  📚 Seeding knowledge...");
 
   for (const s of sessions) {
-    const doc = await prisma.knowledgeDocument.upsert({
-      where: { key: s.key },
-      update: { title: s.title, summary: s.summary, bodyMarkdown: s.bodyMarkdown },
-      create: {
-        key: s.key,
-        title: s.title,
-        sourceSession: s.sourceSession,
-        summary: s.summary,
-        bodyMarkdown: s.bodyMarkdown,
-        confidence: s.confidence,
-      },
-    });
+    const existing = await prisma.knowledgeDocument.findUnique({ where: { key: s.key } });
+    const shouldPreserveImportedDocument =
+      Boolean(existing) && (existing?.bodyMarkdown.length ?? 0) > 2500;
+
+    const doc = shouldPreserveImportedDocument
+      ? existing!
+      : await prisma.knowledgeDocument.upsert({
+          where: { key: s.key },
+          update: { title: s.title, summary: s.summary, bodyMarkdown: s.bodyMarkdown },
+          create: {
+            key: s.key,
+            title: s.title,
+            sourceSession: s.sourceSession,
+            summary: s.summary,
+            bodyMarkdown: s.bodyMarkdown,
+            confidence: s.confidence,
+          },
+        });
+
+    if (shouldPreserveImportedDocument) {
+      continue;
+    }
 
     for (const sec of s.sections) {
       const sectionKey = `${s.key}_${sec.key}`;

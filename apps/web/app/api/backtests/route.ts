@@ -121,29 +121,42 @@ export async function POST(req: Request) {
       where: config.universe === "active_nse" ? { isActive: true } : { isActive: true },
       take: 500,
     });
+    const universeIds = universe.map((instrument) => instrument.id);
 
     const preloadStart = toUtcDate(config.startDate);
     preloadStart.setUTCDate(preloadStart.getUTCDate() - 450);
+    const endDate = toUtcDate(config.endDate);
 
     const candlesBySymbol = new Map<string, Candle[]>();
     const instrumentIdBySymbol = new Map<string, string>();
+    const candles = await prisma.candle.findMany({
+      where: {
+        instrumentId: { in: universeIds },
+        timeframe: "D1",
+        ts: {
+          gte: preloadStart,
+          lte: endDate,
+        },
+      },
+      orderBy: [{ instrumentId: "asc" }, { ts: "asc" }],
+    });
+
+    const candlesByInstrumentId = new Map<string, typeof candles>();
+    for (const candle of candles) {
+      const bucket = candlesByInstrumentId.get(candle.instrumentId);
+      if (bucket) {
+        bucket.push(candle);
+      } else {
+        candlesByInstrumentId.set(candle.instrumentId, [candle]);
+      }
+    }
 
     for (const instrument of universe) {
-      const candles = await prisma.candle.findMany({
-        where: {
-          instrumentId: instrument.id,
-          timeframe: "D1",
-          ts: {
-            gte: preloadStart,
-            lte: toUtcDate(config.endDate),
-          },
-        },
-        orderBy: { ts: "asc" },
-      });
+      const instrumentCandles = candlesByInstrumentId.get(instrument.id) ?? [];
 
-      if (candles.length < 220) continue;
+      if (instrumentCandles.length < 220) continue;
 
-      const normalized: Candle[] = candles.map((candle) => ({
+      const normalized: Candle[] = instrumentCandles.map((candle) => ({
         ts: candle.ts,
         open: Number(candle.open),
         high: Number(candle.high),
@@ -169,30 +182,44 @@ export async function POST(req: Request) {
       },
     });
 
+    const tradesToCreate: Array<{
+      backtestId: string;
+      instrumentId?: string | null;
+      entryDate?: Date | null;
+      exitDate?: Date | null;
+      entryPrice?: number | null;
+      exitPrice?: number | null;
+      quantity?: number | null;
+      pnlPct?: number | null;
+      pnlAbs?: number | null;
+      metaJson?: Prisma.InputJsonValue;
+    }> = [];
+
     for (const trade of result.trades) {
       const instrumentId = instrumentIdBySymbol.get(trade.symbol);
       const quantity = trade.entryPrice > 0 ? (config.capital * (config.riskPerTradePct / 100)) / trade.entryPrice : 0;
 
-      await prisma.backtestTrade.create({
-        data: {
-          backtestId: backtest.id,
-          instrumentId,
-          entryDate: trade.entryDate ? toUtcDate(trade.entryDate) : null,
-          exitDate: trade.exitDate ? toUtcDate(trade.exitDate) : null,
-          entryPrice: trade.entryPrice,
-          exitPrice: trade.exitPrice ?? null,
-          quantity,
-          pnlPct: trade.pnlPct ?? null,
-          pnlAbs:
-            trade.pnlPct !== undefined
-              ? (config.capital * trade.pnlPct) / 100
-              : null,
-          metaJson: {
-            holdDays: trade.holdDays,
-            slippageBps: config.slippageBps,
-          } as Prisma.InputJsonValue,
-        },
+      tradesToCreate.push({
+        backtestId: backtest.id,
+        instrumentId: instrumentId ?? null,
+        entryDate: trade.entryDate ? toUtcDate(trade.entryDate) : null,
+        exitDate: trade.exitDate ? toUtcDate(trade.exitDate) : null,
+        entryPrice: trade.entryPrice,
+        exitPrice: trade.exitPrice ?? null,
+        quantity,
+        pnlPct: trade.pnlPct ?? null,
+        pnlAbs:
+          trade.pnlPct !== undefined
+            ? (config.capital * trade.pnlPct) / 100
+            : null,
+        metaJson: {
+          holdDays: trade.holdDays,
+          slippageBps: config.slippageBps,
+        } as Prisma.InputJsonValue,
       });
+    }
+    if (tradesToCreate.length > 0) {
+      await prisma.backtestTrade.createMany({ data: tradesToCreate });
     }
 
     const metrics = result.metrics;
@@ -208,15 +235,13 @@ export async function POST(req: Request) {
       { key: "median_hold_days", value: String(metrics.medianHoldDays) },
     ];
 
-    for (const metric of metricEntries) {
-      await prisma.backtestMetric.create({
-        data: {
-          backtestId: backtest.id,
-          key: metric.key,
-          value: metric.value,
-        },
-      });
-    }
+    await prisma.backtestMetric.createMany({
+      data: metricEntries.map((metric) => ({
+        backtestId: backtest.id,
+        key: metric.key,
+        value: metric.value,
+      })),
+    });
 
     await prisma.auditEvent.create({
       data: {

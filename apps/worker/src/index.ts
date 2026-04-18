@@ -6,6 +6,7 @@ import {
   runWeeklySummaryPipelineCore,
 } from "@ibo/pipelines";
 import { getAllAdapters } from "./adapters";
+import { isFreeDataSyncEnabled, runFreePostCloseSync, runFreePreMarketSync } from "./ingestion/free-mode";
 
 /**
  * Worker CLI entry point.
@@ -34,6 +35,10 @@ type PipelineName = (typeof VALID_PIPELINES)[number];
 async function main() {
   const args = process.argv.slice(2);
   const pipeline = args[0] as PipelineName | undefined;
+  const isWatchDev =
+    process.env.WORKER_DEV_KEEPALIVE === "1" ||
+    process.env.TSX_WATCH === "true" ||
+    process.env.TSX_WATCH === "1";
 
   if (!pipeline || !VALID_PIPELINES.includes(pipeline)) {
     console.log("IBO Worker — Pipeline Runner\n");
@@ -54,6 +59,16 @@ async function main() {
       process.exit(1);
     }
 
+    if (isWatchDev && !pipeline) {
+      console.log(
+        "\n[worker:dev] No pipeline argument provided. Keeping worker alive for monorepo dev.\n" +
+          "Run a pipeline manually when needed, e.g.:\n" +
+          "  pnpm --filter @ibo/worker start post-close\n",
+      );
+      await new Promise(() => undefined);
+      return;
+    }
+
     process.exit(0);
   }
 
@@ -66,10 +81,24 @@ async function main() {
   try {
     switch (pipeline) {
       case "pre-market":
+        if (isFreeDataSyncEnabled()) {
+          console.log("[pre-market] Running free data sync...");
+          const sync = await runFreePreMarketSync();
+          console.log(
+            `[pre-market] free sync done: quotes=${sync.counts.quoteSnapshots}, fiiDii=${sync.counts.fiiDiiRows}, breadth=${sync.counts.breadthRows}, warnings=${sync.warnings.length}`,
+          );
+        }
         await runPreMarketPipelineCore();
         break;
 
       case "post-close":
+        if (isFreeDataSyncEnabled()) {
+          console.log("[post-close] Running free data sync...");
+          const sync = await runFreePostCloseSync();
+          console.log(
+            `[post-close] free sync done: quotes=${sync.counts.quoteSnapshots}, candles=${sync.counts.candleRows}, covered=${sync.counts.candleSymbolsCovered}, missing=${sync.counts.candleSymbolsMissing}, warnings=${sync.warnings.length}`,
+          );
+        }
         await runPostClosePipelineCore();
         break;
 
@@ -88,8 +117,20 @@ async function main() {
       case "all":
         console.log("[all] Running all pipelines sequentially...\n");
         console.log("--- PRE-MARKET ---");
+        if (isFreeDataSyncEnabled()) {
+          const preSync = await runFreePreMarketSync();
+          console.log(
+            `[all] pre-market free sync: quotes=${preSync.counts.quoteSnapshots}, warnings=${preSync.warnings.length}`,
+          );
+        }
         await runPreMarketPipelineCore();
         console.log("\n--- POST-CLOSE ---");
+        if (isFreeDataSyncEnabled()) {
+          const postSync = await runFreePostCloseSync();
+          console.log(
+            `[all] post-close free sync: candles=${postSync.counts.candleRows}, covered=${postSync.counts.candleSymbolsCovered}, missing=${postSync.counts.candleSymbolsMissing}, warnings=${postSync.warnings.length}`,
+          );
+        }
         await runPostClosePipelineCore();
         console.log("\n--- MONTH-END ---");
         await runMonthEndPipelineCore();

@@ -5,11 +5,16 @@ import { PageHeader } from "../components/ui/page-header";
 import Link from "next/link";
 import { ScreenerLabClient } from "./screener-lab-client";
 
-export const dynamic = "force-dynamic";
+// Screeners change only on seed/admin updates — cache for 30s
+export const revalidate = 30;
 
 export default async function ScreenerLabPage() {
   const screeners = await prisma.screener.findMany({
-    include: { linkedStrategy: { select: { key: true, name: true } } },
+    select: {
+      key: true, name: true, description: true, isExternalReference: true,
+      externalUrl: true, tags: true,
+      linkedStrategy: { select: { key: true, name: true } },
+    },
     orderBy: { name: "asc" },
   });
 
@@ -20,22 +25,37 @@ export default async function ScreenerLabPage() {
     <>
       <PageHeader
         title="Screener Lab"
-        description="Set operations, overlap analysis, and explanation-first candidate review"
+        description="Build deterministic overlap sets, inspect explanation trails, and save high-confluence watchlists."
       >
-        <Link
-          href="/screener-lab/intersections"
-          className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
-        >
-          API Playground
-        </Link>
-        <div className="flex gap-2">
-          <Link href="/screener-lab/presets" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Presets</Link>
-          <Link href="/screener-lab/builder" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Builder</Link>
-          <Link href="/screener-lab/saved" className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Saved</Link>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/screener-lab/intersections"
+            className="rounded-xl border border-slate-200 bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-200 hover:bg-cyan-50/60"
+          >
+            API Playground
+          </Link>
+          <Link
+            href="/screener-lab/presets"
+            className="rounded-xl border border-slate-200 bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-200 hover:bg-cyan-50/60"
+          >
+            Presets
+          </Link>
+          <Link
+            href="/screener-lab/builder"
+            className="rounded-xl border border-slate-200 bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-200 hover:bg-cyan-50/60"
+          >
+            Builder
+          </Link>
+          <Link
+            href="/screener-lab/saved"
+            className="rounded-xl border border-slate-200 bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-cyan-200 hover:bg-cyan-50/60"
+          >
+            Saved
+          </Link>
         </div>
       </PageHeader>
 
-      <Card className="mb-6">
+      <Card className="mb-6 bg-gradient-to-r from-white/90 to-cyan-50/55">
         <CardHeader>
           <CardTitle>Disclaimer</CardTitle>
           <CardDescription>
@@ -48,15 +68,14 @@ export default async function ScreenerLabPage() {
         screeners={screeners.map((screener) => ({
           key: screener.key,
           name: screener.name,
-          description: screener.description,
           isExternalReference: screener.isExternalReference,
         }))}
       />
 
-      <h2 className="mb-3 mt-6 text-lg font-semibold text-slate-800">Reference-Linked External Screeners</h2>
+      <h2 className="mb-3 mt-6 text-lg font-semibold tracking-tight text-slate-900">Reference-Linked External Screeners</h2>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {external.map((screener) => (
-          <Card key={screener.key} className="h-full">
+          <Card key={screener.key} className="h-full border-slate-200/70 bg-white/82">
             <CardHeader>
               <CardTitle>{screener.name}</CardTitle>
               <CardDescription>{screener.description}</CardDescription>
@@ -66,7 +85,7 @@ export default async function ScreenerLabPage() {
                 href={screener.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-block text-sm text-brand-600 hover:underline"
+                className="mt-2 inline-block rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-brand-700 hover:bg-brand-50"
               >
                 Open external screener
               </a>
@@ -75,10 +94,10 @@ export default async function ScreenerLabPage() {
         ))}
       </div>
 
-      <h2 className="mb-3 mt-6 text-lg font-semibold text-slate-800">Internal Screener Registry</h2>
+      <h2 className="mb-3 mt-6 text-lg font-semibold tracking-tight text-slate-900">Internal Screener Registry</h2>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {internal.map((screener) => (
-          <Card key={screener.key} className="h-full">
+          <Card key={screener.key} className="h-full border-slate-200/70 bg-white/82">
             <CardHeader>
               <CardTitle>{screener.name}</CardTitle>
               <CardDescription>{screener.description}</CardDescription>

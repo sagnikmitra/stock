@@ -46,6 +46,7 @@
 - `GET /api/cron/month-end?force=0|1&attempts=n`
 - `GET /api/cron/provider-health?force=0|1&attempts=n`
 - `POST /api/admin/cron/trigger` — manual rerun request logging
+- Pre/post cron responses include `ingestion` summary when free-data sync is enabled.
 
 ## Observability
 

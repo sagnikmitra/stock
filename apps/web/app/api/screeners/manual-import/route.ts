@@ -32,15 +32,15 @@ export async function POST(req: Request) {
     select: { id: true, symbol: true },
   });
 
-  for (const instrument of instruments) {
-    await prisma.screenerResult.create({
-      data: {
+  if (instruments.length > 0) {
+    await prisma.screenerResult.createMany({
+      data: instruments.map((instrument) => ({
         screenerRunId: run.id,
         instrumentId: instrument.id,
         marketDate,
         matched: true,
         explanation: "Manually imported screener hit",
-      },
+      })),
     });
   }
 
@@ -63,4 +63,3 @@ export async function POST(req: Request) {
     },
   });
 }
-

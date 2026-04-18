@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 const severityVariant = (severity: string) => {
   switch (severity) {

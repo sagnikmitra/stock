@@ -8,6 +8,11 @@ function toDateKey(date: Date): string {
   return date.toISOString().split("T")[0];
 }
 
+function pctChange(current: number, previous: number): number {
+  if (!Number.isFinite(previous) || previous === 0) return 0;
+  return ((current - previous) / previous) * 100;
+}
+
 export async function runPreMarketPipelineCore() {
   const today = new Date();
   const todayStr = toDateKey(today);
@@ -158,7 +163,54 @@ export async function runPostClosePipelineCore() {
     }));
 
     const ind = buildIndicatorSet(series);
+    const prevInd = buildIndicatorSet(series.slice(0, -1));
     const last = series[series.length - 1];
+    const prev = series[series.length - 2] ?? last;
+    const recent20 = series.slice(-20);
+    const recent22 = series.slice(-22);
+    const recent252 = series.slice(-252);
+    const resistance20 = recent20.length > 0 ? Math.max(...recent20.map((c) => c.high)) : last.high;
+    const high52Week = recent252.length > 0 ? Math.max(...recent252.map((c) => c.high)) : last.high;
+    const candleRange = Math.max(last.high - last.low, 0.0001);
+    const candleBodyPct = (Math.abs(last.close - last.open) / candleRange) * 100;
+    const candleColor = last.close >= last.open ? "green" : "red";
+    const relativeVolume = ind.relativeVolume ?? 0;
+    const dayChangePct = pctChange(last.close, prev.close);
+    const closeAboveResistancePct = resistance20 > 0 ? pctChange(last.close, resistance20) : 0;
+    const closeAbove52WeekHigh = high52Week > 0 ? last.close >= high52Week * 0.995 : false;
+    const lowerBbTouch = ind.bbLower !== undefined ? last.low <= ind.bbLower * 1.01 : false;
+    const lowerBbInteraction = ind.bbLower !== undefined ? last.low <= ind.bbLower * 1.02 : false;
+    const sma50 = ind.sma50 ?? last.close;
+    const sma44 = ind.sma44 ?? last.close;
+    const sma200 = ind.sma200 ?? last.close;
+    const nearSma50 = sma50 > 0 ? Math.abs(last.close - sma50) / sma50 <= 0.02 : false;
+    const trendlineBreakUp = sma50 > 0 ? last.open <= sma50 && last.close > sma50 : last.close > last.open;
+    const dailyDipInUptrend =
+      sma50 > 0
+        ? last.close >= sma50 && last.low <= (ind.sma34 ?? sma50)
+        : last.close >= prev.close;
+    const bullishResolution = last.close > prev.close && candleColor === "green";
+    const primaryTrendNotBearish = ind.sma200 !== undefined ? last.close >= ind.sma200 : true;
+    const vwapApprox = (last.high + last.low + last.close) / 3;
+    const prevDayVolume = prev.volume;
+    const notPreHolidayOrExpiry = true;
+    const priceAboveSuperTrend = ind.superTrend !== undefined ? last.close >= ind.superTrend : last.close >= sma50;
+    const sma13CrossAboveSma34 =
+      ind.sma13 !== undefined &&
+      ind.sma34 !== undefined &&
+      prevInd.sma13 !== undefined &&
+      prevInd.sma34 !== undefined
+        ? ind.sma13 > ind.sma34 && prevInd.sma13 <= prevInd.sma34
+        : false;
+    const primaryUptrend = last.close >= sma44 && sma44 >= sma200;
+    const reclaimAfterPullback = prev.close <= sma44 && last.close > sma44;
+    const consolidationWindow = series.slice(-120);
+    const consolidationCeiling = consolidationWindow.length > 0 ? Math.max(...consolidationWindow.map((c) => c.high)) : last.high;
+    const consolidationFloor = consolidationWindow.length > 0 ? Math.min(...consolidationWindow.map((c) => c.low)) : last.low;
+    const longConsolidationDetected =
+      consolidationFloor > 0 ? (consolidationCeiling - consolidationFloor) / consolidationFloor <= 0.35 : false;
+    const alphaApprox = recent20.length >= 2 ? pctChange(last.close, recent20[0].close) : dayChangePct;
+    const betaApprox = recent20.length >= 2 ? Math.max(0, Math.min(1, Math.abs(dayChangePct) / 4)) : 0.8;
 
     const ctx: DataContext = {
       "daily.open": last.open,
@@ -167,19 +219,75 @@ export async function runPostClosePipelineCore() {
       "daily.close": last.close,
       "daily.volume": last.volume,
       "daily.rsi14": ind.rsi14,
+      "daily.rsi_14": ind.rsi14,
       "daily.sma_13": ind.sma13,
+      "daily.sma13": ind.sma13,
       "daily.sma_34": ind.sma34,
+      "daily.sma34": ind.sma34,
       "daily.sma_44": ind.sma44,
+      "daily.sma44": ind.sma44,
       "daily.sma_50": ind.sma50,
+      "daily.sma50": ind.sma50,
       "daily.sma_200": ind.sma200,
+      "daily.sma200": ind.sma200,
       "daily.ema_9": ind.ema9,
+      "daily.ema9": ind.ema9,
       "daily.ema_15": ind.ema15,
+      "daily.ema15": ind.ema15,
       "daily.bb_upper_20_2": ind.bbUpper,
+      "daily.bbUpper": ind.bbUpper,
       "daily.bb_middle_20": ind.bbMiddle,
+      "daily.bbMiddle": ind.bbMiddle,
       "daily.bb_lower_20_2": ind.bbLower,
+      "daily.bbLower": ind.bbLower,
       "daily.supertrend_10_3": ind.superTrendDir,
+      "daily.superTrend": ind.superTrend,
+      "daily.superTrendDir": ind.superTrendDir,
       "daily.atr_14": ind.atr14,
       "daily.volume_ratio_20": ind.relativeVolume,
+      "daily.relativeVolume": ind.relativeVolume,
+      "daily.deliveryPct": last.deliveryPct,
+      "daily.candleBodyPct": candleBodyPct,
+      "daily.candleColor": candleColor,
+      "daily.vwap": vwapApprox,
+
+      // Screener compatibility aliases for 4H and monthly source fields
+      "h4.ema9": ind.ema9,
+      "h4.ema15": ind.ema15,
+      "h4.close": last.close,
+      "h4.superTrendDir": ind.superTrendDir,
+      "h4.candleColor": candleColor,
+
+      "monthly.high": recent22.length > 0 ? Math.max(...recent22.map((c) => c.high)) : last.high,
+      "monthly.close": last.close,
+      "monthly.rsi14": ind.rsi14,
+      "monthly.bbUpper": ind.bbUpper,
+      "monthly.bbMiddle": ind.bbMiddle,
+      "instrument.marketCapBucket": inst.marketCapBucket ?? "large_cap",
+
+      // Derived helpers used by candidate and confluence screeners
+      "derived.closeAbove52WeekHigh": closeAbove52WeekHigh,
+      "derived.closeAboveResistancePct": closeAboveResistancePct,
+      "derived.isTopGainer": dayChangePct >= 2,
+      "derived.isVolumeShocker": relativeVolume >= 1.8,
+      "derived.dailyDipInUptrend": dailyDipInUptrend,
+      "derived.lowerBbTouch": lowerBbTouch,
+      "derived.lowerBbInteraction": lowerBbInteraction,
+      "derived.trendlineBreakUp": trendlineBreakUp,
+      "derived.nearSma50": nearSma50,
+      "derived.bullishResolution": bullishResolution,
+      "derived.primaryTrendNotBearish": primaryTrendNotBearish,
+      "derived.candleBodyPct": candleBodyPct,
+      "derived.prevDayVolume": prevDayVolume,
+      "derived.notPreHolidayOrExpiry": notPreHolidayOrExpiry,
+      "derived.priceAboveSuperTrend": priceAboveSuperTrend,
+      "derived.sma13CrossAboveSma34": sma13CrossAboveSma34,
+      "derived.primaryUptrend": primaryUptrend,
+      "derived.reclaimAfterPullback": reclaimAfterPullback,
+      "derived.consolidationCeiling": consolidationCeiling,
+      "derived.longConsolidationDetected": longConsolidationDetected,
+      "derived.alpha": alphaApprox,
+      "derived.beta": betaApprox,
     };
     contexts.set(inst.id, { ctx, symbol: inst.symbol, name: inst.companyName });
 

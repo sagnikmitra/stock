@@ -1,5 +1,6 @@
 import { getDatabaseUnavailableReason, isDatabaseConfigured, prisma } from "@ibo/db";
 import { nseCalendar } from "@ibo/utils";
+import { unstable_cache } from "next/cache";
 import { Card, CardHeader, CardTitle, CardDescription } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
 import { PostureIndicator } from "./components/ui/posture-indicator";
@@ -7,57 +8,73 @@ import { PageHeader } from "./components/ui/page-header";
 import { EducationalDisclaimer } from "./components/ui/educational-disclaimer";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+// Dashboard is force-dynamic (live digest/provider data), but static strategy
+// metadata is cached for 60s to avoid repeated Supabase round-trips.
+const getStaticDashboardData = unstable_cache(
+  async () => {
+    const strategies = await prisma.strategy.findMany({
+      where: { status: "active" },
+      include: { _count: { select: { results: true } } },
+      orderBy: { family: "asc" },
+    });
+    return { strategies };
+  },
+  ["dashboard-static"],
+  { revalidate: 60 }
+);
+
+export const revalidate = 15;
 
 export default async function DashboardPage() {
-  let strategies: Awaited<ReturnType<typeof prisma.strategy.findMany>> = [];
-  let screeners: Awaited<ReturnType<typeof prisma.screener.findMany>> = [];
-  let ambiguities: Awaited<ReturnType<typeof prisma.ambiguityRecord.findMany>> = [];
-  let flags: Awaited<ReturnType<typeof prisma.featureFlag.findMany>> = [];
-  let recentDigest: Awaited<ReturnType<typeof prisma.digest.findFirst>> = null;
+  type StaticDashboardData = Awaited<ReturnType<typeof getStaticDashboardData>>;
+  let strategies: StaticDashboardData["strategies"] = [];
+  let recentDigest: {
+    id: string;
+    title: string;
+    summary: string;
+    marketDate: Date;
+    updatedAt: Date;
+    digestType: string;
+  } | null = null;
   let databaseWarning = "";
   let latestProviderRuns: Array<any> = [];
   let topConfluence: Array<any> = [];
   let watchlistDelta = { added: 0, removed: 0, invalidated: 0 };
+  let watchlistRecentAdds: number = 0;
+  let watchlistInvalidated: number = 0;
   let reviewQueue: Array<any> = [];
   let monthEndReminder = false;
   let lastRefresh: Date | null = null;
 
   if (isDatabaseConfigured) {
     try {
-      [strategies, screeners, ambiguities, flags, recentDigest, latestProviderRuns, topConfluence, reviewQueue] = await Promise.all([
-        prisma.strategy.findMany({
-          where: { status: "active" },
-          include: { _count: { select: { results: true } } },
-          orderBy: { family: "asc" },
-        }),
-        prisma.screener.findMany({ orderBy: { name: "asc" } }),
-        prisma.ambiguityRecord.findMany({ where: { severity: "high" } }),
-        prisma.featureFlag.findMany({ where: { isEnabled: true } }),
-        prisma.digest.findFirst({ orderBy: { marketDate: "desc" } }),
+      const staticData = await getStaticDashboardData();
+      strategies = staticData.strategies;
+
+      [recentDigest, latestProviderRuns, topConfluence, reviewQueue, watchlistRecentAdds, watchlistInvalidated] = await Promise.all([
+        prisma.digest.findFirst({ orderBy: { marketDate: "desc" }, select: { id: true, title: true, summary: true, marketDate: true, updatedAt: true, digestType: true } }),
         prisma.providerJobRun.findMany({
           orderBy: { startedAt: "desc" },
-          include: { provider: true },
           take: 8,
+          select: { id: true, startedAt: true, finishedAt: true, status: true, provider: { select: { name: true } } },
         }),
         prisma.confluenceResult.findMany({
-          include: { instrument: { select: { symbol: true, companyName: true } } },
           orderBy: [{ marketDate: "desc" }, { overlapCount: "desc" }],
           take: 10,
+          select: { id: true, overlapCount: true, marketDate: true, instrument: { select: { symbol: true, companyName: true } } },
         }),
         prisma.strategyResult.findMany({
           where: { OR: [{ matched: false }, { explanation: { contains: "ambig", mode: "insensitive" } }] },
-          include: { instrument: { select: { symbol: true } }, strategy: { select: { name: true } } },
           orderBy: { createdAt: "desc" },
           take: 12,
+          select: { id: true, explanation: true, instrument: { select: { symbol: true } }, strategy: { select: { name: true } } },
         }),
+        // These two were previously fired sequentially AFTER the batch — now parallel
+        prisma.watchlistItem.count({ where: { addedAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } } }),
+        prisma.watchlistItem.count({ where: { isActive: false } }),
       ]);
+      watchlistDelta = { added: watchlistRecentAdds as number, removed: 0, invalidated: watchlistInvalidated as number };
 
-      const watchlistRecentAdds = await prisma.watchlistItem.count({
-        where: { addedAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } },
-      });
-      const watchlistInvalidated = await prisma.watchlistItem.count({ where: { isActive: false } });
-      watchlistDelta = { added: watchlistRecentAdds, removed: 0, invalidated: watchlistInvalidated };
       lastRefresh = recentDigest?.updatedAt ?? null;
       const today = new Date();
       let remainingTradingDays = 0;
@@ -81,22 +98,52 @@ export default async function DashboardPage() {
 
   return (
     <>
-      <PageHeader
-        title="Dashboard"
-        description="Your daily market operating system"
-      />
+      <PageHeader title="Dashboard" description="Live operating console for digests, strategy health, and review queue." />
       <EducationalDisclaimer className="mb-4" />
 
-      <div className="mb-4 rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
-        <p>Last refresh: {lastRefresh ? lastRefresh.toISOString() : "Unknown"}</p>
-        {lastRefresh ? null : <p className="text-xs text-amber-600">Data freshness warning: no recent digest timestamp found.</p>}
-      </div>
+      <div className="mb-6 grid gap-4 lg:grid-cols-[1.5fr_1fr]">
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle>Session Snapshot</CardTitle>
+            <CardDescription>Operational signal quality and refresh posture for today.</CardDescription>
+          </CardHeader>
+          <div className="grid gap-3 text-sm sm:grid-cols-2">
+            <div className="rounded-md border border-slate-200 px-3 py-2">
+              <p className="text-xs uppercase tracking-wide text-slate-500">Last Refresh</p>
+              <p className="mt-1 font-semibold text-slate-800">{lastRefresh ? lastRefresh.toISOString() : "Unknown"}</p>
+            </div>
+            <div className="rounded-md border border-slate-200 px-3 py-2">
+              <p className="text-xs uppercase tracking-wide text-slate-500">Market Mode</p>
+              <p className="mt-1 font-semibold text-slate-800">Educational Research Workspace</p>
+            </div>
+            <div className="rounded-md border border-slate-200 px-3 py-2">
+              <p className="text-xs uppercase tracking-wide text-slate-500">Watchlist Added (24h)</p>
+              <p className="mt-1 text-xl font-bold tracking-tight text-slate-900">{watchlistDelta.added}</p>
+            </div>
+            <div className="rounded-md border border-slate-200 px-3 py-2">
+              <p className="text-xs uppercase tracking-wide text-slate-500">Invalidated</p>
+              <p className="mt-1 text-xl font-bold tracking-tight text-slate-900">{watchlistDelta.invalidated}</p>
+            </div>
+          </div>
+          {lastRefresh ? null : (
+            <p className="mt-3 text-xs text-amber-700">
+              Data freshness warning: no recent digest timestamp found.
+            </p>
+          )}
+        </Card>
 
-      {monthEndReminder ? (
-        <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
-          Month-end reminder: within 3 trading days of month-end review window.
-        </div>
-      ) : null}
+        <Card className={monthEndReminder ? "border-amber-200 bg-amber-50" : "bg-white"}>
+          <CardHeader>
+            <CardTitle>Month-End Gate</CardTitle>
+            <CardDescription>Tracks proximity to the month-end review window.</CardDescription>
+          </CardHeader>
+          <p className="text-sm text-slate-700">
+            {monthEndReminder
+              ? "Within 3 trading days of month-end review window."
+              : "Outside month-end window."}
+          </p>
+        </Card>
+      </div>
 
       {databaseWarning ? (
         <div className="mb-6">
@@ -114,11 +161,11 @@ export default async function DashboardPage() {
 
       {/* Market Posture — placeholder until real data flows */}
       <div className="mb-6">
-        <Card>
+        <Card className="bg-white">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-slate-500">Market Posture</p>
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="text-sm font-medium uppercase tracking-wide text-slate-500">Market Posture</p>
+              <p className="mt-1 text-sm text-slate-600">
                 Awaiting market data. Connect a provider to see live context.
               </p>
             </div>
@@ -128,7 +175,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Strategy Radar */}
-      <div className="mb-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-6 grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle>Investment Strategies</CardTitle>
@@ -139,7 +186,7 @@ export default async function DashboardPage() {
               <Link
                 key={s.key}
                 href={`/strategies/${s.key}`}
-                className="flex items-center justify-between rounded-lg px-3 py-2 text-sm hover:bg-slate-50"
+                className="flex items-center justify-between rounded-xl border border-transparent px-3 py-2 text-sm hover:border-cyan-100 hover:bg-cyan-50/60"
               >
                 <span className="font-medium text-slate-700">{s.name}</span>
                 <Badge variant="investment">{s.confidence}</Badge>
@@ -161,7 +208,7 @@ export default async function DashboardPage() {
               <Link
                 key={s.key}
                 href={`/strategies/${s.key}`}
-                className="flex items-center justify-between rounded-lg px-3 py-2 text-sm hover:bg-slate-50"
+                className="flex items-center justify-between rounded-xl border border-transparent px-3 py-2 text-sm hover:border-teal-100 hover:bg-teal-50/60"
               >
                 <span className="font-medium text-slate-700">{s.name}</span>
                 <Badge variant="swing">{s.confidence}</Badge>
@@ -172,34 +219,10 @@ export default async function DashboardPage() {
             )}
           </div>
         </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Stats</CardTitle>
-          </CardHeader>
-          <div className="space-y-3 text-sm">
-            <div className="flex justify-between">
-              <span className="text-slate-500">Active Strategies</span>
-              <span className="font-semibold">{strategies.length}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">Screeners</span>
-              <span className="font-semibold">{screeners.length}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">High Ambiguities</span>
-              <span className="font-semibold text-orange-600">{ambiguities.length}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">Enabled Features</span>
-              <span className="font-semibold">{flags.length}</span>
-            </div>
-          </div>
-        </Card>
       </div>
 
       {/* Digest Highlights */}
-      <Card className="mb-6">
+      <Card className="mb-6 bg-white">
         <CardHeader>
           <CardTitle>Latest Digest</CardTitle>
         </CardHeader>
@@ -222,7 +245,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <div className="space-y-2 text-sm">
             {latestProviderRuns.map((run) => (
-              <div key={run.id} className="flex items-center justify-between rounded border border-slate-100 px-2 py-1 dark:border-slate-700">
+              <div key={run.id} className="flex items-center justify-between rounded-md border border-slate-200 px-2.5 py-1.5">
                 <span>{run.provider.name}</span>
                 <Badge variant={run.status === "completed" ? "favorable" : run.status === "failed" ? "hostile" : "mixed"}>{run.status}</Badge>
               </div>
@@ -237,7 +260,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <div className="space-y-2 text-sm">
             {topConfluence.map((item) => (
-              <div key={item.id} className="flex items-center justify-between rounded border border-slate-100 px-2 py-1 dark:border-slate-700">
+              <div key={item.id} className="flex items-center justify-between rounded-md border border-slate-200 px-2.5 py-1.5">
                 <span>{item.instrument.symbol}</span>
                 <span>{item.overlapCount}</span>
               </div>
@@ -265,7 +288,7 @@ export default async function DashboardPage() {
         </CardHeader>
         <div className="space-y-2 text-sm">
           {reviewQueue.map((item) => (
-            <div key={item.id} className="rounded border border-slate-100 p-2 dark:border-slate-700">
+            <div key={item.id} className="rounded-md border border-slate-200 p-2.5">
               <p>{item.instrument.symbol} • {item.strategy.name}</p>
               <p className="text-xs text-slate-500">{item.explanation ?? "No explanation"}</p>
             </div>

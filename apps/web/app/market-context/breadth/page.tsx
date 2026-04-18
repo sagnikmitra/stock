@@ -1,6 +1,6 @@
 import { prisma } from "@ibo/db";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30;
 
 export default async function MarketBreadthPage() {
   const rows = await prisma.marketBreadthSnapshot.findMany({
@@ -47,4 +47,3 @@ export default async function MarketBreadthPage() {
     </div>
   );
 }
-

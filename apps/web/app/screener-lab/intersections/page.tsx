@@ -15,9 +15,19 @@ export default function ScreenerIntersectionsPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("/api/screeners")
+    fetch("/api/screeners?full=1")
       .then((r) => r.json())
-      .then((payload) => setScreeners((payload.data ?? []).map((item: any) => ({ key: item.key, name: item.name }))))
+      .then((payload) =>
+        setScreeners(
+          ((payload.data?.screeners ?? []) as Array<{
+            key: string;
+            name: string;
+            isExternalReference?: boolean;
+          }>)
+            .filter((item) => !item.isExternalReference)
+            .map((item) => ({ key: item.key, name: item.name })),
+        ),
+      )
       .catch(() => setScreeners([]));
   }, []);
 
@@ -114,4 +124,3 @@ export default function ScreenerIntersectionsPage() {
     </div>
   );
 }
-

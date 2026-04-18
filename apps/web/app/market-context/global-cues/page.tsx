@@ -4,7 +4,7 @@ import { PostureIndicator } from "../../components/ui/posture-indicator";
 import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30;
 
 export default async function GlobalCuesPage() {
   const contexts = await prisma.globalContextSnapshot.findMany({

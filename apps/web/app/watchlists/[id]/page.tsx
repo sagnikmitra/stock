@@ -6,7 +6,7 @@ import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 15;
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -20,7 +20,7 @@ export default async function WatchlistDetailPage({ params }: Props) {
     include: {
       items: {
         where: { isActive: true },
-        include: { instrument: true },
+        include: { instrument: { select: { symbol: true, companyName: true } } },
         orderBy: { addedAt: "desc" },
       },
     },
@@ -36,6 +36,7 @@ export default async function WatchlistDetailPage({ params }: Props) {
           where: { instrumentId: { in: instrumentIds } },
           orderBy: { ts: "desc" },
           distinct: ["instrumentId"],
+          select: { instrumentId: true, ltp: true, changePct: true },
         })
       : [];
 

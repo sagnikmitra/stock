@@ -167,10 +167,54 @@ export class NseOfficialAdapter extends BaseAdapter {
   /* ---- MarketDataAdapter implementation ---------------------------------- */
 
   /**
-   * Fetch the list of F&O equity symbols from NSE.
-   * Returns SymbolMaster objects with symbol, company name, and ISIN where available.
+   * Fetch NSE symbol universe.
+   *
+   * Primary source: pre-open ALL endpoint (broad NSE equity universe).
+   * Fallback source: F&O constituents endpoint.
+   *
+   * Returns SymbolMaster objects with best-effort metadata.
    */
   async getSymbols(): Promise<SymbolMaster[]> {
+    interface NsePreOpenRow {
+      metadata?: {
+        symbol?: string;
+        identifier?: string;
+        series?: string;
+      };
+    }
+
+    try {
+      const preOpen = await this.nseFetch<{ data?: NsePreOpenRow[] }>(
+        "/api/market-data-pre-open?key=ALL"
+      );
+
+      if (Array.isArray(preOpen?.data)) {
+        const unique = new Map<string, SymbolMaster>();
+
+        for (const row of preOpen.data) {
+          const symbol = String(row.metadata?.symbol ?? "").trim().toUpperCase();
+          if (!symbol) continue;
+
+          unique.set(symbol, {
+            symbol,
+            companyName: symbol,
+            exchange: "NSE",
+          });
+        }
+
+        if (unique.size > 0) {
+          return Array.from(unique.values()).sort((a, b) => a.symbol.localeCompare(b.symbol));
+        }
+      }
+
+      console.warn("[NSE] getSymbols: pre-open ALL returned no rows, falling back to F&O list");
+    } catch (err) {
+      console.warn(
+        "[NSE] getSymbols: pre-open ALL failed, falling back to F&O list:",
+        err instanceof Error ? err.message : err
+      );
+    }
+
     try {
       interface NseStockRow {
         symbol?: string;

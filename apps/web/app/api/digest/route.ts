@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@ibo/db";
 
+export const revalidate = 30;
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type");
@@ -10,7 +12,14 @@ export async function GET(req: Request) {
     where: type ? { digestType: type as never } : undefined,
     orderBy: [{ marketDate: "desc" }, { createdAt: "desc" }],
     take: Number.isFinite(limit) ? Math.max(1, Math.min(limit, 100)) : 30,
-    include: {
+    select: {
+      id: true,
+      digestType: true,
+      marketDate: true,
+      title: true,
+      summary: true,
+      posture: true,
+      createdAt: true,
       _count: { select: { sections: true, mentions: true } },
     },
   });

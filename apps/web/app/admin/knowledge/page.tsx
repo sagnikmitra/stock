@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from "../../components/u
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function AdminKnowledgePage() {
   const [documents, concepts] = await Promise.all([
@@ -52,11 +52,7 @@ export default async function AdminKnowledgePage() {
                       </Badge>
                     </div>
                   </div>
-                  {doc.summary && (
-                    <p className="mt-2 text-sm text-slate-600 line-clamp-2">
-                      {doc.summary}
-                    </p>
-                  )}
+                  {doc.summary && <p className="mt-2 text-sm text-slate-600">{doc.summary}</p>}
                   <div className="mt-2 flex items-center gap-3 text-xs text-slate-400">
                     <span>{doc._count.sections} sections</span>
                     {doc.sourceSession && <span>Source: {doc.sourceSession}</span>}
@@ -90,9 +86,7 @@ export default async function AdminKnowledgePage() {
                       </div>
                       <Badge variant="muted">{concept.category}</Badge>
                     </div>
-                    <p className="mt-2 text-sm text-slate-600 line-clamp-2">
-                      {concept.definition}
-                    </p>
+                    <p className="mt-2 text-sm text-slate-600">{concept.definition}</p>
                     {linkedKeys.length > 0 && (
                       <div className="mt-2 flex flex-wrap gap-1">
                         <span className="text-xs text-slate-400">Linked strategies:</span>

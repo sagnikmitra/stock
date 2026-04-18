@@ -4,7 +4,7 @@ import { Badge } from "../components/ui/badge";
 import { PageHeader } from "../components/ui/page-header";
 import { EducationalDisclaimer } from "../components/ui/educational-disclaimer";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60; // Cache for 60s — data changes only on pipeline/admin runs
 
 export default async function ReferencesPage() {
   const resources = await prisma.externalResource.findMany({

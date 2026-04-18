@@ -3,6 +3,8 @@ import { prisma } from "@ibo/db";
 import { computeIntersection, computeConfluenceScore, type SymbolMatches } from "@ibo/strategy-engine";
 import { SCREENER_BUNDLES, getScreenerBundle } from "../../lib/screener-bundles";
 
+export const revalidate = 30;
+
 type Mode = "intersection" | "union" | "difference";
 
 function parseMarketDate(input?: string): Date {
@@ -10,12 +12,40 @@ function parseMarketDate(input?: string): Date {
   return new Date(`${dateStr}T00:00:00.000Z`);
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const full = searchParams.get("full") === "1";
+
+  if (!full) {
+    const [screeners, bundles] = await Promise.all([
+      prisma.screener.findMany({
+        select: {
+          key: true,
+          name: true,
+        },
+        orderBy: [{ isExternalReference: "asc" }, { name: "asc" }],
+      }),
+      Promise.resolve(SCREENER_BUNDLES),
+    ]);
+
+    return NextResponse.json({
+      data: {
+        screeners,
+        bundles,
+      },
+    });
+  }
+
   const [screeners, bundles] = await Promise.all([
     prisma.screener.findMany({
-      include: {
+      select: {
+        key: true,
+        name: true,
+        description: true,
+        isExternalReference: true,
+        externalUrl: true,
+        tags: true,
         linkedStrategy: { select: { key: true, name: true, family: true } },
-        versions: { where: { isActive: true }, take: 1, orderBy: { version: "desc" } },
       },
       orderBy: [{ isExternalReference: "asc" }, { name: "asc" }],
     }),
@@ -31,19 +61,8 @@ export async function GET() {
         isExternalReference: screener.isExternalReference,
         externalUrl: screener.externalUrl,
         tags: (screener.tags as string[] | null) ?? [],
-        linkedStrategy: screener.linkedStrategy
-          ? {
-              key: screener.linkedStrategy.key,
-              name: screener.linkedStrategy.name,
-              family: screener.linkedStrategy.family,
-            }
-          : null,
-        activeVersion: screener.versions[0]
-          ? {
-              version: screener.versions[0].version,
-              expressionDsl: screener.versions[0].expressionDsl,
-            }
-          : null,
+        linkedStrategy: screener.linkedStrategy ?? null,
+        activeVersion: null,
       })),
       bundles,
     },
@@ -143,22 +162,27 @@ export async function POST(req: Request) {
       },
     });
 
-    for (const row of intersection) {
-      const instrumentId = instrumentIdBySymbol.get(row.symbol);
-      if (!instrumentId) continue;
-      await prisma.watchlistItem.upsert({
+    const candidateInstrumentIds = intersection
+      .map((row) => instrumentIdBySymbol.get(row.symbol))
+      .filter((id): id is string => Boolean(id));
+
+    if (candidateInstrumentIds.length > 0) {
+      await prisma.watchlistItem.updateMany({
         where: {
-          watchlistId_instrumentId: {
-            watchlistId: watchlist.id,
-            instrumentId,
-          },
+          watchlistId: watchlist.id,
+          instrumentId: { in: candidateInstrumentIds },
         },
-        update: { isActive: true },
-        create: {
+        data: { isActive: true },
+      });
+
+      await prisma.watchlistItem.createMany({
+        data: candidateInstrumentIds.map((instrumentId) => ({
           watchlistId: watchlist.id,
           instrumentId,
           notes: `Saved from bundle ${bundle.name}`,
-        },
+          isActive: true,
+        })),
+        skipDuplicates: true,
       });
     }
 

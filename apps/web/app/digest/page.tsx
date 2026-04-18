@@ -2,9 +2,8 @@ import Link from "next/link";
 import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
-import { PageHeader } from "../components/ui/page-header";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 const digestBadgeVariant = (type: string) => {
   switch (type) {
@@ -29,33 +28,7 @@ export default async function DigestListPage() {
 
   return (
     <>
-      <PageHeader
-        title="Digest Archive"
-        description="Pre-market, post-close, and month-end digests with transparent context and rule outputs"
-      >
-        <div className="flex flex-wrap gap-2">
-          <Link
-            href="/digest/pre-market"
-            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Latest Pre-Market
-          </Link>
-          <Link
-            href="/digest/close"
-            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Latest Post-Close
-          </Link>
-          <Link
-            href="/digest/month-end"
-            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Latest Month-End
-          </Link>
-        </div>
-      </PageHeader>
-
-      <Card className="mb-6">
+      <Card className="mb-6 bg-gradient-to-r from-white/92 to-cyan-50/55">
         <CardHeader>
           <CardTitle>Disclaimer</CardTitle>
           <CardDescription>
@@ -76,7 +49,7 @@ export default async function DigestListPage() {
             const marketDate = digest.marketDate.toISOString().split("T")[0];
             return (
               <Link key={digest.id} href={`/digest/${marketDate}`}>
-                <Card className="h-full transition-colors hover:border-brand-200">
+                <Card className="h-full border-slate-200/70 bg-white/86">
                   <div className="mb-2 flex items-center gap-2">
                     <Badge variant={digestBadgeVariant(digest.digestType)}>
                       {digest.digestType.replace(/_/g, " ")}
@@ -97,7 +70,7 @@ export default async function DigestListPage() {
                     ) : null}
                   </div>
                   <h2 className="text-base font-semibold text-slate-900">{digest.title}</h2>
-                  <p className="mt-1 line-clamp-3 text-sm text-slate-600">{digest.summary}</p>
+                  <p className="mt-1 text-sm text-slate-600">{digest.summary}</p>
                   <div className="mt-3 flex gap-3 text-xs text-slate-400">
                     <span>{digest._count.sections} sections</span>
                     <span>{digest._count.mentions} mentions</span>

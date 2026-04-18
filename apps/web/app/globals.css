@@ -2,83 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============================================================
-   Investment Bible OS — Global Styles
-   ============================================================ */
-
 @layer base {
-  :root {
-    --color-brand-600: #2563eb;
-    --color-favorable: #22c55e;
-    --color-hostile: #ef4444;
-    --color-mixed: #f59e0b;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
 
   html {
-    @apply antialiased;
+    @apply antialiased scroll-smooth;
     color-scheme: light;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   }
 
   body {
-    @apply bg-surface-muted text-slate-800;
+    overflow-x: hidden;
   }
 
-  input,
-  select,
-  textarea {
-    @apply border-slate-300 bg-white text-slate-900 placeholder:text-slate-400;
+  p,
+  li,
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  td,
+  th,
+  label,
+  blockquote,
+  code,
+  pre {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
-  input:focus,
-  select:focus,
-  textarea:focus {
-    @apply border-brand-500 ring-2 ring-brand-100 outline-none;
-  }
-
-  select option {
-    @apply bg-white text-slate-900;
+  pre,
+  code {
+    white-space: pre-wrap;
   }
 }
 
 @layer components {
-  /* Card base */
-  .card {
-    @apply rounded-xl border border-slate-200 bg-white p-5 shadow-sm;
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
   }
-
-  /* Badge system */
-  .badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300;
   }
-  .badge-favorable { @apply bg-green-100 text-green-800; }
-  .badge-hostile   { @apply bg-red-100 text-red-800; }
-  .badge-mixed     { @apply bg-amber-100 text-amber-800; }
-  .badge-investment { @apply bg-blue-100 text-blue-800; }
-  .badge-swing     { @apply bg-purple-100 text-purple-800; }
-  .badge-ambiguity { @apply bg-orange-100 text-orange-800; }
-
-  /* Strategy family color strips */
-  .family-strip-investment     { @apply border-l-4 border-l-blue-600; }
-  .family-strip-swing          { @apply border-l-4 border-l-emerald-500; }
-  .family-strip-market_context { @apply border-l-4 border-l-amber-500; }
-  .family-strip-risk_foundation { @apply border-l-4 border-l-rose-500; }
-  .family-strip-knowledge_only { @apply border-l-4 border-l-violet-500; }
-
-  /* Posture glow */
-  .posture-glow-favorable { @apply shadow-[0_0_12px_rgba(34,197,94,0.3)]; }
-  .posture-glow-hostile   { @apply shadow-[0_0_12px_rgba(239,68,68,0.3)]; }
-  .posture-glow-mixed     { @apply shadow-[0_0_12px_rgba(245,158,11,0.3)]; }
-
-  /* Card hover lift */
-  .card-hover { @apply transition-shadow duration-200 hover:shadow-md; }
-
-  /* Scrollbar */
-  .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-  .custom-scrollbar::-webkit-scrollbar-track { @apply bg-transparent; }
-  .custom-scrollbar::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-300; }
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
 }

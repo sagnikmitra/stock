@@ -2,9 +2,11 @@ import type { MarketDataAdapter } from "@ibo/types";
 import { NseOfficialAdapter } from "./nse-official";
 import { TwelveDataAdapter } from "./twelvedata";
 import { FmpAdapter } from "./fmp";
+import { IndianStockMarketApiAdapter } from "./indian-stock-market-api";
 
 const adapters: Record<string, () => MarketDataAdapter> = {
   nse_official: () => new NseOfficialAdapter(),
+  indian_stock_market_api: () => new IndianStockMarketApiAdapter(),
   twelvedata: () => new TwelveDataAdapter(),
   fmp: () => new FmpAdapter(),
 };

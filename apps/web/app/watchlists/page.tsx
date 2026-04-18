@@ -5,7 +5,7 @@ import { PageHeader } from "../components/ui/page-header";
 import { EducationalDisclaimer } from "../components/ui/educational-disclaimer";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 15;
 
 export default async function WatchlistsPage() {
   const watchlists = await prisma.watchlist.findMany({

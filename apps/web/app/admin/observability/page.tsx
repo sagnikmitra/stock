@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from "../../components/u
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function AdminObservabilityPage() {
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000);

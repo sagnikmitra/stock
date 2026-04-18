@@ -5,7 +5,7 @@ import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60; // Cache for 60s — data changes only on pipeline/admin runs
 
 export default async function ConceptsPage() {
   const concepts = await prisma.knowledgeConcept.findMany({

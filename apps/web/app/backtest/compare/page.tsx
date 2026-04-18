@@ -1,6 +1,6 @@
 import { prisma } from "@ibo/db";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 type MetricKey = "winRate" | "maxDrawdown" | "profitFactor" | "expectancy";
 

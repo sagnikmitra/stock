@@ -5,7 +5,7 @@ import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60; // Cache for 60s — data changes only on pipeline/admin runs
 
 export default async function SessionsPage() {
   const docs = await prisma.knowledgeDocument.findMany({
@@ -24,11 +24,11 @@ export default async function SessionsPage() {
 
       <div className="space-y-4">
         {docs.map((doc) => (
-          <Link key={doc.key} href={`/learning/${doc.key}`}>
+          <Link key={doc.key} href={`/learning/${doc.key}`} className="block">
             <Card className="transition-shadow hover:shadow-md">
               <CardHeader>
-                <div className="flex items-center gap-3">
-                  <CardTitle>{doc.title}</CardTitle>
+                <div className="flex flex-wrap items-center gap-2">
+                  <CardTitle className="min-w-0">{doc.title}</CardTitle>
                   <Badge variant={doc.confidence === "high" ? "favorable" : "mixed"}>
                     {doc.confidence}
                   </Badge>
@@ -36,9 +36,14 @@ export default async function SessionsPage() {
                 {doc.summary && <CardDescription>{doc.summary}</CardDescription>}
               </CardHeader>
               <div className="flex flex-wrap gap-1.5">
-                {doc.sections.map((sec) => (
+                <Badge variant="default">Session {doc.sourceSession ?? "N/A"}</Badge>
+                <Badge variant="muted">{doc.sections.length} sections</Badge>
+                {doc.sections.slice(0, 6).map((sec) => (
                   <Badge key={sec.id} variant="muted">{sec.title}</Badge>
                 ))}
+                {doc.sections.length > 6 ? (
+                  <Badge variant="muted">+{doc.sections.length - 6} more</Badge>
+                ) : null}
               </div>
             </Card>
           </Link>

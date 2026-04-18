@@ -3,6 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  AppBar,
+  Box,
+  Chip,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import {
   LayoutDashboard,
   Newspaper,
   Target,
@@ -11,24 +25,25 @@ import {
   BookOpen,
   Settings,
   TrendingUp,
-  List,
+  List as ListIcon,
   FlaskConical,
   Eye,
   Calculator,
   Link2,
 } from "lucide-react";
-import { cn } from "@/lib/cn";
 
-const NAV_SECTIONS = [
+type NavItem = {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+const NAV_SECTIONS: Array<{ label: string; items: NavItem[] }> = [
   {
     label: "Core",
     items: [
       { href: "/", label: "Dashboard", icon: LayoutDashboard },
       { href: "/digest", label: "Digest Archive", icon: Newspaper },
-      { href: "/digest/pre-market", label: "Pre-Market", icon: Newspaper },
-      { href: "/digest/close", label: "Post-Close", icon: Newspaper },
-      { href: "/digest/weekly", label: "Weekly Summary", icon: Newspaper },
-      { href: "/digest/month-end", label: "Month-End", icon: Newspaper },
     ],
   },
   {
@@ -44,7 +59,7 @@ const NAV_SECTIONS = [
     label: "Research",
     items: [
       { href: "/stocks", label: "Stocks", icon: TrendingUp },
-      { href: "/watchlists", label: "Watchlists", icon: List },
+      { href: "/watchlists", label: "Watchlists", icon: ListIcon },
       { href: "/backtest", label: "Backtester", icon: FlaskConical },
     ],
   },
@@ -77,76 +92,141 @@ const MOBILE_QUICK_LINKS = [
   { href: "/admin/strategies", label: "Admin" },
 ];
 
+const SIDEBAR_WIDTH = 292;
+
+function isActive(pathname: string, href: string): boolean {
+  return pathname === href || (href !== "/" && pathname.startsWith(href));
+}
+
 export function Sidebar() {
   const pathname = usePathname();
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white px-3 py-2 lg:hidden">
-        <div className="mb-2 flex items-center justify-between">
-          <Link href="/" className="text-sm font-bold text-brand-700">
-            Investment Bible OS
-          </Link>
-          <span className="text-[11px] text-slate-500">Educational use</span>
-        </div>
-        <nav className="custom-scrollbar flex gap-2 overflow-x-auto pb-1" aria-label="Mobile navigation">
-          {MOBILE_QUICK_LINKS.map((item) => {
-            const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium",
-                  active ? "bg-brand-50 text-brand-700" : "bg-slate-100 text-slate-700",
-                )}
+      <AppBar
+        position="fixed"
+        color="inherit"
+        elevation={0}
+        sx={{
+          display: { xs: "block", lg: "none" },
+          borderBottom: "1px solid",
+          borderColor: "divider",
+          backgroundColor: "rgba(255,255,255,0.92)",
+          backdropFilter: "blur(8px)",
+          zIndex: 1201,
+        }}
+      >
+        <Toolbar sx={{ minHeight: "56px !important", px: 2 }}>
+          <Stack direction="row" spacing={2} sx={{ width: "100%", alignItems: "center", justifyContent: "space-between" }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+              Investment Bible OS
+            </Typography>
+            <Chip label="Educational use" size="small" />
+          </Stack>
+        </Toolbar>
+        <Box sx={{ px: 1.5, pb: 1.25, display: "flex", gap: 1, overflowX: "auto" }}>
+          {MOBILE_QUICK_LINKS.map((item) => (
+            <Chip
+              key={item.href}
+              component={Link}
+              href={item.href}
+              clickable
+              label={item.label}
+              color={isActive(pathname, item.href) ? "primary" : "default"}
+              variant={isActive(pathname, item.href) ? "filled" : "outlined"}
+              sx={{
+                height: 40,
+                borderRadius: 1.5,
+                "& .MuiChip-label": { px: 1.5, fontWeight: 600 },
+              }}
+            />
+          ))}
+        </Box>
+      </AppBar>
+
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", lg: "block" },
+          width: SIDEBAR_WIDTH,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: SIDEBAR_WIDTH,
+            boxSizing: "border-box",
+            borderRight: "1px solid #dbe3ee",
+            background: "linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)",
+          },
+        }}
+      >
+        <Toolbar
+          sx={{
+            minHeight: "68px !important",
+            borderBottom: "1px solid #e2e8f0",
+            px: 2.5,
+          }}
+        >
+          <Stack>
+            <Typography variant="h6" sx={{ fontWeight: 800, lineHeight: 1 }}>
+              IBO
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              Investment Bible OS
+            </Typography>
+          </Stack>
+        </Toolbar>
+        <Box sx={{ px: 1.25, py: 1.5, overflowY: "auto" }}>
+          {NAV_SECTIONS.map((section, index) => (
+            <Box key={section.label} sx={{ mb: 2.5 }}>
+              {index > 0 ? <Divider sx={{ mb: 1.25 }} /> : null}
+              <Typography
+                variant="caption"
+                sx={{ px: 1.25, color: "text.secondary", fontWeight: 700, letterSpacing: "0.08em" }}
               >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-      </header>
-
-      <aside className="hidden w-64 shrink-0 border-r border-slate-200 bg-white lg:block">
-        <div className="flex h-14 items-center border-b border-slate-200 px-5">
-          <Link href="/" className="text-lg font-bold text-brand-700">
-            IBO
-          </Link>
-          <span className="ml-2 text-xs text-slate-400">Investment Bible OS</span>
-        </div>
-
-        <nav className="space-y-6 p-4" aria-label="Desktop navigation">
-          {NAV_SECTIONS.map((section) => (
-            <div key={section.label}>
-              <p className="mb-1.5 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                {section.label}
-              </p>
-              <ul className="space-y-0.5">
+                {section.label.toUpperCase()}
+              </Typography>
+              <List dense disablePadding sx={{ mt: 0.5 }}>
                 {section.items.map((item) => {
-                  const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+                  const active = isActive(pathname, item.href);
+                  const Icon = item.icon;
                   return (
-                    <li key={item.href}>
-                      <Link
+                    <ListItem key={item.href} disablePadding sx={{ mb: 0.25 }}>
+                      <ListItemButton
+                        component={Link}
                         href={item.href}
-                        className={cn(
-                          "flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition-colors",
-                          isActive
-                            ? "bg-brand-50 font-medium text-brand-700"
-                            : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
-                        )}
+                        selected={active}
+                        sx={{
+                          borderRadius: 2,
+                          border: active ? "1px solid #bfdbfe" : "1px solid transparent",
+                          backgroundColor: active ? "rgba(13,110,253,0.09)" : "transparent",
+                          "&.Mui-selected": {
+                            backgroundColor: "rgba(13,110,253,0.09)",
+                          },
+                          "&:hover": {
+                            backgroundColor: active ? "rgba(13,110,253,0.13)" : "rgba(15,23,42,0.04)",
+                          },
+                        }}
                       >
-                        <item.icon className="h-4 w-4 shrink-0" />
-                        {item.label}
-                      </Link>
-                    </li>
+                        <Box sx={{ width: 22, display: "inline-flex", alignItems: "center" }}>
+                          <Icon className="h-4 w-4" />
+                        </Box>
+                        <ListItemText
+                          primary={
+                            <Typography sx={{ fontSize: 14, fontWeight: active ? 700 : 500 }}>
+                              {item.label}
+                            </Typography>
+                          }
+                        />
+                      </ListItemButton>
+                    </ListItem>
                   );
                 })}
-              </ul>
-            </div>
+              </List>
+            </Box>
           ))}
-        </nav>
-      </aside>
+        </Box>
+      </Drawer>
+
+      <Box sx={{ display: { xs: "block", lg: "none" }, height: 98 }} />
     </>
   );
 }

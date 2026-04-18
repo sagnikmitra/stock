@@ -28,7 +28,9 @@ Course-informed market operating system for Indian equity cash workflows.
 - Admin CMS controls for strategy/screener activation + ambiguity updates
 - Observability page and API over audit/provider run telemetry
 - Expanded docs: API contracts, deployment, testing, cron spec, market context model, screen matrix, env guide
+- Free-data sync layer for pre-market/post-close cron and worker CLI (provider fallback + persisted quote/FII/breadth/candle snapshots)
 
 ## Docs
 
 Implementation audit and roadmap live under [`docs/implementation`](docs/implementation).
+Free setup guide for personal use: [`docs/free-data-setup.md`](docs/free-data-setup.md).

@@ -6,7 +6,7 @@ import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -47,7 +47,7 @@ export default async function BacktestDetailPage({ params }: Props) {
       strategyVersion: { include: { strategy: true } },
       trades: {
         include: { instrument: true },
-        orderBy: { entryDate: "desc" },
+        orderBy: { entryDate: "asc" },
       },
       metrics: true,
     },

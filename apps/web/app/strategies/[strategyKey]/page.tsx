@@ -6,7 +6,7 @@ import { PageHeader } from "../../components/ui/page-header";
 import Link from "next/link";
 import { OhlcChart } from "../../components/charts/ohlc-chart";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 interface Props {
   params: Promise<{ strategyKey: string }>;
@@ -14,10 +14,15 @@ interface Props {
 
 function stringifyJson(value: unknown): string {
   try {
-    return JSON.stringify(value, null, 2);
+    return JSON.stringify(value);
   } catch {
     return "{}";
   }
+}
+
+function truncate(text: string, maxChars: number): string {
+  if (text.length <= maxChars) return text;
+  return `${text.slice(0, maxChars)}\n…[truncated for performance]`;
 }
 
 export default async function StrategyDetailPage({ params }: Props) {
@@ -25,13 +30,49 @@ export default async function StrategyDetailPage({ params }: Props) {
 
   const strategy = await prisma.strategy.findUnique({
     where: { key: strategyKey },
-    include: {
-      versions: { orderBy: { version: "desc" } },
-      ambiguityRecords: true,
+    select: {
+      id: true,
+      key: true,
+      name: true,
+      description: true,
+      family: true,
+      confidence: true,
+      reviewFrequency: true,
+      primaryTimeframe: true,
+      secondaryTimeframe: true,
+      versions: {
+        orderBy: { version: "desc" },
+        select: {
+          id: true,
+          version: true,
+          isActive: true,
+          sourceSessions: true,
+          sourceSummary: true,
+          normalizedDsl: true,
+          implementationNotes: true,
+        },
+      },
+      ambiguityRecords: {
+        select: {
+          id: true,
+          key: true,
+          severity: true,
+          rawNote: true,
+          normalizedNote: true,
+          sourcePreference: true,
+        },
+      },
       results: {
         orderBy: { marketDate: "desc" },
-        include: { instrument: { select: { symbol: true, companyName: true } } },
-        take: 50,
+        take: 12,
+        select: {
+          id: true,
+          instrumentId: true,
+          marketDate: true,
+          matched: true,
+          ruleResults: true,
+          instrument: { select: { symbol: true, companyName: true } },
+        },
       },
     },
   });
@@ -39,34 +80,11 @@ export default async function StrategyDetailPage({ params }: Props) {
   if (!strategy) notFound();
 
   const activeVersion = strategy.versions.find((v) => v.isActive);
-  const rules = activeVersion
-    ? await prisma.strategyRule.findMany({
-        where: { strategyVersionId: activeVersion.id },
-        orderBy: { sortOrder: "asc" },
-      })
-    : [];
-
-  const sourceResources = await prisma.externalResource.findMany({
-    where: { category: { in: ["official", "screener", "user_reference"] } },
-    take: 8,
-    orderBy: { category: "asc" },
-  });
-
   const matchesByDate = new Map<string, number>();
   for (const match of strategy.results) {
     const key = match.marketDate.toISOString().split("T")[0];
     matchesByDate.set(key, (matchesByDate.get(key) ?? 0) + 1);
   }
-
-  const relatedScreeners = await prisma.screener.findMany({
-    where: { linkedStrategyId: strategy.id },
-    orderBy: { name: "asc" },
-  });
-
-  const learningNote = await prisma.knowledgeDocument.findFirst({
-    where: { OR: [{ key: { contains: strategy.key } }, { bodyMarkdown: { contains: strategy.name } }] },
-    orderBy: { updatedAt: "desc" },
-  });
 
   const sampleMatch = strategy.results[0];
   const sourceSessionKeys = (activeVersion?.sourceSessions ?? "")
@@ -74,13 +92,44 @@ export default async function StrategyDetailPage({ params }: Props) {
     .map((item) => item.trim())
     .filter(Boolean);
   const latestRuleResults = (sampleMatch?.ruleResults ?? {}) as Record<string, { passed?: boolean; reason?: string }>;
-  const sampleCandles = sampleMatch
-    ? await prisma.candle.findMany({
-      where: { instrumentId: sampleMatch.instrumentId, timeframe: "D1" },
-      orderBy: { ts: "asc" },
-      take: 200,
-    })
-    : [];
+  const [rules, sourceResources, relatedScreeners, learningNote, sampleCandles] = await Promise.all([
+    activeVersion
+      ? prisma.strategyRule.findMany({
+          where: { strategyVersionId: activeVersion.id },
+          orderBy: { sortOrder: "asc" },
+        })
+      : Promise.resolve([]),
+    prisma.externalResource.findMany({
+      where: { category: { in: ["official", "screener", "user_reference"] } },
+      take: 8,
+      orderBy: { category: "asc" },
+      select: { id: true, title: true, url: true, category: true, provider: true },
+    }),
+    prisma.screener.findMany({
+      where: { linkedStrategyId: strategy.id },
+      orderBy: { name: "asc" },
+      select: { id: true, name: true, key: true },
+    }),
+    prisma.knowledgeDocument.findFirst({
+      where: {
+        OR: [
+          { key: strategy.key },
+          { key: { startsWith: strategy.key } },
+          { title: { startsWith: strategy.name } },
+        ],
+      },
+      orderBy: { updatedAt: "desc" },
+      select: { key: true, title: true, summary: true },
+    }),
+    sampleMatch
+      ? prisma.candle.findMany({
+          where: { instrumentId: sampleMatch.instrumentId, timeframe: "D1" },
+          orderBy: { ts: "asc" },
+          take: 120,
+          select: { ts: true, open: true, high: true, low: true, close: true },
+        })
+      : Promise.resolve([]),
+  ]);
 
   return (
     <>
@@ -88,19 +137,19 @@ export default async function StrategyDetailPage({ params }: Props) {
         <div className="flex flex-wrap gap-2">
           <Link
             href={`/strategies/${strategy.key}/backtest`}
-            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"
+            className="rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(8,145,178,0.22)] hover:bg-brand-700"
           >
             Run Backtest
           </Link>
           <Link
             href={`/strategies/${strategy.key}/history`}
-            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="rounded-xl border border-slate-200 bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 hover:border-cyan-200 hover:bg-cyan-50/60"
           >
             View History
           </Link>
           <Link
             href="/learning/ambiguities"
-            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="rounded-xl border border-slate-200 bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 hover:border-cyan-200 hover:bg-cyan-50/60"
           >
             Ambiguity Ledger
           </Link>
@@ -117,7 +166,7 @@ export default async function StrategyDetailPage({ params }: Props) {
         {strategy.secondaryTimeframe ? <Badge variant="muted">{strategy.secondaryTimeframe}</Badge> : null}
       </div>
 
-      <Card className="mb-6">
+      <Card className="mb-6 bg-gradient-to-r from-white/92 to-cyan-50/52">
         <CardHeader>
           <CardTitle>Active vs Raw Strategy Source</CardTitle>
           <CardDescription>
@@ -127,17 +176,20 @@ export default async function StrategyDetailPage({ params }: Props) {
 
         {activeVersion ? (
           <div className="grid gap-4 lg:grid-cols-2">
-            <div className="rounded-lg border border-orange-200 bg-orange-50 p-3">
+            <div className="rounded-xl border border-orange-200/90 bg-orange-50/90 p-3">
               <p className="mb-2 text-sm font-semibold text-orange-900">Raw Source Context</p>
               <p className="whitespace-pre-wrap text-sm text-orange-800">
-                {activeVersion.sourceSummary ??
-                  "No raw summary captured for this version. Refer to ambiguity ledger entries for shorthand conflicts."}
+                {truncate(
+                  activeVersion.sourceSummary ??
+                    "No raw summary captured for this version. Refer to ambiguity ledger entries for shorthand conflicts.",
+                  2500,
+                )}
               </p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-slate-900 p-3">
+            <div className="rounded-xl border border-slate-700 bg-slate-900 p-3">
               <p className="mb-2 text-sm font-semibold text-slate-100">Normalized Active DSL</p>
               <pre className="max-h-80 overflow-auto text-xs text-slate-200">
-                {stringifyJson(activeVersion.normalizedDsl)}
+                {truncate(stringifyJson(activeVersion.normalizedDsl), 2000)}
               </pre>
             </div>
           </div>
@@ -153,7 +205,7 @@ export default async function StrategyDetailPage({ params }: Props) {
             Hard/soft/ambiguity-labeled rule list from the active version.
           </CardDescription>
         </CardHeader>
-        <div className="mb-3 grid gap-2 rounded-lg border border-slate-200 p-3 text-sm md:grid-cols-3 dark:border-slate-700">
+        <div className="mb-3 grid gap-2 rounded-xl border border-slate-200 p-3 text-sm md:grid-cols-3">
           <div>
             <p className="text-xs text-slate-500">When to run</p>
             <p>{strategy.reviewFrequency ?? "daily"}</p>
@@ -170,7 +222,7 @@ export default async function StrategyDetailPage({ params }: Props) {
         {rules.length > 0 ? (
           <div className="space-y-3">
             {rules.map((rule) => (
-              <div key={rule.id} className="flex items-start gap-3 rounded-lg border border-slate-100 p-3">
+              <div key={rule.id} className="flex items-start gap-3 rounded-xl border border-slate-100 p-3">
                 <Badge
                   variant={
                     rule.kind === "hard" ? "hostile" : rule.kind === "ambiguity" ? "ambiguity" : "muted"
@@ -198,7 +250,7 @@ export default async function StrategyDetailPage({ params }: Props) {
         {sourceSessionKeys.length > 0 ? (
           <div className="flex flex-wrap gap-2 text-sm">
             {sourceSessionKeys.map((session) => (
-              <Link key={session} href={`/learning/sessions`} className="rounded border border-slate-200 px-2 py-1 hover:border-brand-300">
+              <Link key={session} href={`/learning/sessions`} className="rounded-lg border border-slate-200 px-2 py-1 hover:border-brand-300">
                 {session}
               </Link>
             ))}
@@ -220,7 +272,7 @@ export default async function StrategyDetailPage({ params }: Props) {
               .map((rule) => {
                 const status = latestRuleResults[rule.key];
                 return (
-                  <div key={rule.key} className="flex items-center justify-between rounded border border-slate-200 p-2 text-sm dark:border-slate-700">
+                  <div key={rule.key} className="flex items-center justify-between rounded-xl border border-slate-200 p-2 text-sm">
                     <span>{rule.label}</span>
                     <span className={`rounded px-2 py-0.5 text-xs ${status?.passed ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"}`}>
                       {status?.passed ? "PASS" : "FAIL"}
@@ -242,7 +294,7 @@ export default async function StrategyDetailPage({ params }: Props) {
           </CardHeader>
           <div className="space-y-3">
             {strategy.ambiguityRecords.map((ambiguity) => (
-              <div key={ambiguity.id} className="rounded-lg border border-orange-200 bg-orange-50 p-3">
+              <div key={ambiguity.id} className="rounded-xl border border-orange-200 bg-orange-50/90 p-3">
                 <div className="mb-1 flex items-center gap-2">
                   <Badge variant="ambiguity">{ambiguity.severity}</Badge>
                   <span className="text-sm font-medium text-orange-900">{ambiguity.key}</span>
@@ -267,7 +319,7 @@ export default async function StrategyDetailPage({ params }: Props) {
           {strategy.results.length > 0 ? (
             <div className="space-y-2">
               {strategy.results.slice(0, 10).map((match) => (
-                <div key={match.id} className="flex items-center justify-between rounded-lg border border-slate-100 p-2 text-sm">
+                <div key={match.id} className="flex items-center justify-between rounded-xl border border-slate-100 p-2 text-sm">
                   <div>
                     <p className="font-medium text-slate-800">{match.instrument.symbol}</p>
                     <p className="text-xs text-slate-500">{match.instrument.companyName}</p>
@@ -294,7 +346,7 @@ export default async function StrategyDetailPage({ params }: Props) {
               {Array.from(matchesByDate.entries())
                 .slice(0, 12)
                 .map(([dateKey, count]) => (
-                  <div key={dateKey} className="flex items-center justify-between rounded-lg border border-slate-100 p-2">
+                  <div key={dateKey} className="flex items-center justify-between rounded-xl border border-slate-100 p-2">
                     <span className="text-slate-600">{dateKey}</span>
                     <span className="font-semibold text-slate-900">{count}</span>
                   </div>

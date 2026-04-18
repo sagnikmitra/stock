@@ -3,7 +3,7 @@ import { OhlcChart } from "../../components/charts/ohlc-chart";
 import { buildIndicatorSet, evaluateStrategy, type DataContext } from "@ibo/strategy-engine";
 import type { Candle, StrategyDSL } from "@ibo/types";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function BacktestReplayPage({
   searchParams,

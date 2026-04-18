@@ -12,6 +12,13 @@ export async function seedProviders(prisma: PrismaClient) {
       isEnabled: true,
     },
     {
+      key: "indian_stock_market_api",
+      name: "Indian Stock Market API (0xramm)",
+      type: "market_data_vendor" as const,
+      baseUrl: "https://nse-api-ruby.vercel.app",
+      isEnabled: true,
+    },
+    {
       key: "kite",
       name: "Zerodha Kite Connect",
       type: "broker_api" as const,

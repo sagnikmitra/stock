@@ -9,7 +9,7 @@ import { IndicatorChart } from "../../components/charts/indicator-chart";
 import { WatchlistButton } from "../../components/stocks/watchlist-button";
 import { NoteForm } from "../../components/stocks/note-form";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30;
 
 interface Props {
   params: Promise<{ symbol: string }>;
@@ -21,7 +21,15 @@ export default async function StockDetailPage({ params }: Props) {
 
   const instrument = await prisma.instrument.findFirst({
     where: { symbol: sym },
-    include: { exchange: true },
+    select: {
+      id: true,
+      symbol: true,
+      companyName: true,
+      sector: true,
+      industry: true,
+      marketCapBucket: true,
+      exchange: { select: { code: true, name: true } },
+    },
   });
   if (!instrument) notFound();
 
@@ -40,33 +48,36 @@ export default async function StockDetailPage({ params }: Props) {
       where: { instrumentId: instrument.id, timeframe: "D1" },
       orderBy: { ts: "asc" },
       take: 260,
+      select: { ts: true, open: true, high: true, low: true, close: true },
     }),
     prisma.indicatorSnapshot.findFirst({
       where: { instrumentId: instrument.id, timeframe: "D1" },
       orderBy: { ts: "desc" },
+      select: { rsi14: true, sma50: true, sma200: true, superTrendDir: true, bbUpper: true, bbLower: true },
     }),
     prisma.strategyResult.findMany({
       where: { instrumentId: instrument.id, matched: true },
-      include: { strategy: true },
       orderBy: { marketDate: "desc" },
       take: 20,
+      select: { id: true, marketDate: true, strategy: { select: { key: true, name: true, family: true } } },
     }),
     prisma.digestStockMention.findMany({
       where: { instrumentId: instrument.id },
-      include: { digest: true },
       orderBy: { createdAt: "desc" },
       take: 20,
+      select: { id: true, mentionType: true, digest: { select: { marketDate: true } } },
     }),
     prisma.screenerResult.findMany({
       where: { instrumentId: instrument.id, matched: true },
-      include: { screenerRun: { include: { screener: true } } },
       orderBy: { marketDate: "desc" },
       take: 20,
+      select: { id: true, marketDate: true, screenerRun: { select: { screener: { select: { name: true } } } } },
     }),
     prisma.note.findMany({
       where: { instrumentId: instrument.id },
       orderBy: { createdAt: "desc" },
       take: 20,
+      select: { id: true, title: true, createdAt: true, bodyMarkdown: true },
     }),
     prisma.watchlist.findFirst({
       where: { kind: "manual" },
@@ -82,9 +93,14 @@ export default async function StockDetailPage({ params }: Props) {
     }),
     prisma.knowledgeDocument.findMany({
       where: {
-        OR: [{ bodyMarkdown: { contains: sym } }, { summary: { contains: sym } }],
+        OR: [
+          { key: { contains: sym, mode: "insensitive" } },
+          { title: { contains: sym, mode: "insensitive" } },
+          { summary: { contains: sym, mode: "insensitive" } },
+        ],
       },
       take: 10,
+      select: { id: true, key: true, title: true },
     }),
   ]);
 

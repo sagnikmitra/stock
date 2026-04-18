@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getDatabaseUnavailableReason, isDatabaseConfigured, prisma } from "@ibo/db";
 
+export const revalidate = 15;
+
 export async function GET() {
   if (!isDatabaseConfigured) {
     return NextResponse.json({
@@ -29,7 +31,10 @@ export async function GET() {
         take: 10,
         include: { instrument: { select: { symbol: true, companyName: true } } },
       }),
-      prisma.digest.findFirst({ orderBy: { marketDate: "desc" } }),
+      prisma.digest.findFirst({
+        orderBy: { marketDate: "desc" },
+        select: { title: true },
+      }),
       prisma.featureFlag.findMany({ where: { isEnabled: true }, select: { key: true } }),
     ]);
 

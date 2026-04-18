@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@ibo/db";
 import { buildIndicatorSet, computeIntersection, computeConfluenceScore, type SymbolMatches } from "@ibo/strategy-engine";
 import type { Candle } from "@ibo/types";
+import { chunk } from "@ibo/utils";
 
 type Mode = "intersection" | "union" | "difference";
 type ConditionOperator = ">=" | "<=" | ">" | "<" | "==" | "crosses_above";
@@ -67,11 +68,17 @@ function evaluateCondition(
   }
 }
 
-async function runCustomConditions(conditions: CustomCondition[]) {
+function normalizeUniverseLimit(input: unknown): number {
+  const parsed = Number(input);
+  if (!Number.isFinite(parsed)) return 80;
+  return Math.max(25, Math.min(500, Math.floor(parsed)));
+}
+
+async function runCustomConditions(conditions: CustomCondition[], universeLimit: number) {
   const instruments = await prisma.instrument.findMany({
     where: { isActive: true },
     select: { id: true, symbol: true, companyName: true },
-    take: 500,
+    take: universeLimit,
   });
 
   const results: Array<{
@@ -84,63 +91,71 @@ async function runCustomConditions(conditions: CustomCondition[]) {
     confluenceBucket: "low" | "medium" | "high";
   }> = [];
 
-  for (const instrument of instruments) {
-    const rows = await prisma.candle.findMany({
-      where: { instrumentId: instrument.id, timeframe: "D1" },
-      orderBy: { ts: "asc" },
-      take: 260,
-    });
-    if (rows.length < 30) continue;
-
-    const candles: Candle[] = rows.map((row) => ({
-      ts: row.ts,
-      open: Number(row.open),
-      high: Number(row.high),
-      low: Number(row.low),
-      close: Number(row.close),
-      volume: Number(row.volume ?? 0),
-      deliveryPct: row.deliveryPct ? Number(row.deliveryPct) : undefined,
-    }));
-
-    const currentCandle = candles[candles.length - 1];
-    const previousCandle = candles[candles.length - 2];
-    const currentIndicators = buildIndicatorSet(candles);
-    const previousIndicators = buildIndicatorSet(candles.slice(0, -1));
-
-    const matchedBy: Array<{ key: string; label: string }> = [];
-    const reasons: string[] = [];
-
-    for (const condition of conditions) {
-      const threshold = toNumber(condition.value);
-      if (threshold === null) continue;
-
-      const current = resolveIndicatorValue(condition.indicator, currentCandle, currentIndicators);
-      const previous = resolveIndicatorValue(condition.indicator, previousCandle, previousIndicators);
-      const passed = evaluateCondition(condition, current, previous, threshold);
-      if (passed) {
-        matchedBy.push({
-          key: `custom_${condition.indicator.toLowerCase()}_${condition.operator}`,
-          label: `${condition.indicator} ${condition.operator} ${threshold}`,
+  for (const instrumentBatch of chunk(instruments, 100)) {
+    const batchResults = await Promise.all(
+      instrumentBatch.map(async (instrument) => {
+        const rows = await prisma.candle.findMany({
+          where: { instrumentId: instrument.id, timeframe: "D1" },
+          orderBy: { ts: "asc" },
+          take: 100,
         });
-      } else {
-        reasons.push(`${condition.indicator} failed (${current.toFixed(2)} ${condition.operator} ${threshold})`);
-      }
-    }
+        if (rows.length < 30) return null;
 
-    if (matchedBy.length === conditions.length && matchedBy.length > 0) {
-      const overlapCount = matchedBy.length;
-      const confluenceScore = Math.min(1, overlapCount / Math.max(conditions.length, 1));
-      results.push({
-        symbol: instrument.symbol,
-        companyName: instrument.companyName,
-        overlapCount,
-        explanation: `Matched ${overlapCount}/${conditions.length} custom condition(s).`,
-        matchedBy,
-        confluenceScore,
-        confluenceBucket: confluenceScore >= 0.8 ? "high" : confluenceScore >= 0.5 ? "medium" : "low",
-      });
-    } else if (reasons.length > 0) {
-      // no-op: only return matched rows for now
+        const candles: Candle[] = rows.map((row) => ({
+          ts: row.ts,
+          open: Number(row.open),
+          high: Number(row.high),
+          low: Number(row.low),
+          close: Number(row.close),
+          volume: Number(row.volume ?? 0),
+          deliveryPct: row.deliveryPct ? Number(row.deliveryPct) : undefined,
+        }));
+
+        const currentCandle = candles[candles.length - 1];
+        const previousCandle = candles[candles.length - 2];
+        const currentIndicators = buildIndicatorSet(candles);
+        const previousIndicators = buildIndicatorSet(candles.slice(0, -1));
+        const matchedBy: Array<{ key: string; label: string }> = [];
+
+        for (const condition of conditions) {
+          const threshold = toNumber(condition.value);
+          if (threshold === null) continue;
+
+          const current = resolveIndicatorValue(condition.indicator, currentCandle, currentIndicators);
+          const previous = resolveIndicatorValue(condition.indicator, previousCandle, previousIndicators);
+          const passed = evaluateCondition(condition, current, previous, threshold);
+          if (passed) {
+            matchedBy.push({
+              key: `custom_${condition.indicator.toLowerCase()}_${condition.operator}`,
+              label: `${condition.indicator} ${condition.operator} ${threshold}`,
+            });
+          }
+        }
+
+        if (matchedBy.length !== conditions.length || matchedBy.length === 0) return null;
+
+        const overlapCount = matchedBy.length;
+        const confluenceScore = Math.min(1, overlapCount / Math.max(conditions.length, 1));
+        const confluenceBucket =
+          confluenceScore >= 0.8
+            ? ("high" as const)
+            : confluenceScore >= 0.5
+              ? ("medium" as const)
+              : ("low" as const);
+        return {
+          symbol: instrument.symbol,
+          companyName: instrument.companyName,
+          overlapCount,
+          explanation: `Matched ${overlapCount}/${conditions.length} custom condition(s).`,
+          matchedBy,
+          confluenceScore,
+          confluenceBucket,
+        };
+      }),
+    );
+
+    for (const row of batchResults) {
+      if (row) results.push(row);
     }
   }
 
@@ -166,7 +181,10 @@ export async function POST(req: Request) {
         : [];
 
     if (customConditions.length > 0) {
-      const customResults = await runCustomConditions(customConditions);
+      const customResults = await runCustomConditions(
+        customConditions,
+        normalizeUniverseLimit(body.limit),
+      );
       return NextResponse.json({
         data: {
           marketDate: marketDate.toISOString().split("T")[0],

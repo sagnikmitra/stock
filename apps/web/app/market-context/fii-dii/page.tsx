@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30;
 
 export default async function FiiDiiPage() {
   const flows = await prisma.fiiDiiSnapshot.findMany({

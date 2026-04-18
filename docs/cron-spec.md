@@ -29,6 +29,15 @@ All cron endpoints require:
 - `force=1`: bypass completed/active lock checks.
 - `attempts=<n>`: retry attempts for retriable jobs.
 
+## Free Data Sync Hook
+
+- `pre-market` and `post-close` execute free-data ingestion before digest generation when `FREE_DATA_SYNC_ENABLED=true`.
+- Ingestion writes `providerJobRun` records per provider attempt and returns `ingestion` metadata in cron responses.
+- Fallback order is configurable with:
+  - `FREE_QUOTES_PROVIDER_PRIORITY`
+  - `FREE_CONTEXT_PROVIDER_PRIORITY`
+  - `FREE_CANDLE_PROVIDER_PRIORITY`
+
 ## Month-End Gating
 
 - `month-end` route is gated by `isCalendarMonthEnd(date)` unless `force=1`.

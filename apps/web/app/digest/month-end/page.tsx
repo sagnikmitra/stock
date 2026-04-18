@@ -1,11 +1,10 @@
 import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
-import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function MonthEndDigestPage() {
   const digest = await prisma.digest.findFirst({
@@ -16,17 +15,15 @@ export default async function MonthEndDigestPage() {
 
   return (
     <>
-      <PageHeader
-        title="Month-End Digest"
-        description="Investment-only month-end review for BB and MBB workflows"
-      >
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <h2 className="text-xl font-semibold text-slate-900">Month-End Digest</h2>
         <Link
           href="/digest"
           className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
         >
           View Archive
         </Link>
-      </PageHeader>
+      </div>
       <EducationalDisclaimer className="mb-4" />
 
       {!digest ? (

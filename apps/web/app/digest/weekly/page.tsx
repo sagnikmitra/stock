@@ -2,7 +2,7 @@ import { prisma } from "@ibo/db";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function WeeklyDigestPage() {
   const digests = await prisma.digest.findMany({
@@ -13,6 +13,8 @@ export default async function WeeklyDigestPage() {
 
   return (
     <div className="space-y-4">
+      <h2 className="text-xl font-semibold text-slate-900">Weekly Summary Digest</h2>
+
       <Card>
         <CardHeader>
           <CardTitle>Weekly Summary Digest</CardTitle>
@@ -35,4 +37,3 @@ export default async function WeeklyDigestPage() {
     </div>
   );
 }
-

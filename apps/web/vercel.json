@@ -1,0 +1,20 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/pre-market",
+      "schedule": "0 3 * * 1-5"
+    },
+    {
+      "path": "/api/cron/post-close",
+      "schedule": "0 11 * * 1-5"
+    },
+    {
+      "path": "/api/cron/month-end",
+      "schedule": "0 11 L * 1-5"
+    },
+    {
+      "path": "/api/cron/provider-health",
+      "schedule": "*/30 * * * *"
+    }
+  ]
+}

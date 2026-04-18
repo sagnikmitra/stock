@@ -1,10 +1,9 @@
 import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle } from "../../components/ui/card";
 import { PostureIndicator } from "../../components/ui/posture-indicator";
-import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function PreMarketDigestPage() {
   const digest = await prisma.digest.findFirst({
@@ -19,10 +18,7 @@ export default async function PreMarketDigestPage() {
 
   return (
     <>
-      <PageHeader
-        title="Pre-Market Digest"
-        description="Daily pre-market brief with global cues, FII/DII, and market posture"
-      />
+      <h2 className="mb-2 text-xl font-semibold text-slate-900">Pre-Market Digest</h2>
       <EducationalDisclaimer className="mb-4" />
 
       {/* Market Context */}

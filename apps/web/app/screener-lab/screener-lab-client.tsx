@@ -7,7 +7,6 @@ type Mode = "intersection" | "union" | "difference";
 type ScreenerOption = {
   key: string;
   name: string;
-  description: string;
   isExternalReference: boolean;
 };
 
@@ -106,8 +105,8 @@ export function ScreenerLabClient({ screeners }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="mb-3 text-sm font-semibold text-slate-800">Set Operations</p>
+      <div className="rounded-2xl border border-slate-200/80 bg-white/88 p-4 shadow-[0_8px_24px_rgba(15,23,42,0.07)]">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-700">Set Operations</p>
 
         <div className="grid gap-4 lg:grid-cols-3">
           <div>
@@ -117,7 +116,7 @@ export function ScreenerLabClient({ screeners }: Props) {
             <select
               value={mode}
               onChange={(event) => setMode(event.target.value as Mode)}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="w-full rounded-xl border border-slate-300/80 bg-white px-3 py-2.5 text-sm font-medium"
             >
               <option value="intersection">Intersection</option>
               <option value="union">Union</option>
@@ -135,7 +134,7 @@ export function ScreenerLabClient({ screeners }: Props) {
               max={10}
               value={minOverlap}
               onChange={(event) => setMinOverlap(Number(event.target.value))}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="w-full rounded-xl border border-slate-300/80 bg-white px-3 py-2.5 text-sm font-medium"
             />
           </div>
 
@@ -144,7 +143,7 @@ export function ScreenerLabClient({ screeners }: Props) {
               type="button"
               onClick={run}
               disabled={running}
-              className="w-full rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-xl bg-brand-600 px-3 py-2.5 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(8,145,178,0.22)] hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {running ? "Running..." : "Run Intersection"}
             </button>
@@ -156,8 +155,8 @@ export function ScreenerLabClient({ screeners }: Props) {
         </p>
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="mb-3 text-sm font-semibold text-slate-800">Internal Screeners</p>
+      <div className="rounded-2xl border border-slate-200/80 bg-white/88 p-4 shadow-[0_8px_24px_rgba(15,23,42,0.07)]">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-700">Internal Screeners</p>
         <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
           {internal.map((screener) => {
             const isSelected = selected.includes(screener.key);
@@ -166,8 +165,8 @@ export function ScreenerLabClient({ screeners }: Props) {
                 key={screener.key}
                 className={`rounded-lg border px-3 py-2 text-left text-sm transition-colors ${
                   isSelected
-                    ? "border-brand-400 bg-brand-50 text-brand-800"
-                    : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
+                    ? "border-brand-300 bg-brand-50/70 text-brand-900 shadow-[0_6px_14px_rgba(8,145,178,0.16)]"
+                    : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50/70"
                 }`}
               >
                 <div className="mb-1 flex items-center gap-2">
@@ -185,8 +184,8 @@ export function ScreenerLabClient({ screeners }: Props) {
         </div>
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <p className="mb-3 text-sm font-semibold text-slate-800">Overlap View</p>
+      <div className="rounded-2xl border border-slate-200/80 bg-white/88 p-4 shadow-[0_8px_24px_rgba(15,23,42,0.07)]">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-700">Overlap View</p>
         {error ? <p className="mb-2 text-sm text-red-600">{error}</p> : null}
 
         {results.length === 0 ? (
@@ -196,14 +195,14 @@ export function ScreenerLabClient({ screeners }: Props) {
             <button
               type="button"
               onClick={exportCsv}
-              className="rounded-lg border border-slate-300 px-2 py-1 text-xs"
+              className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
             >
               Export CSV
             </button>
             {results.map((row) => {
               const open = expanded[row.symbol] ?? false;
               return (
-                <div key={row.symbol} className="rounded-lg border border-slate-100 p-3">
+                <div key={row.symbol} className="rounded-xl border border-slate-200/80 bg-white/90 p-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <p className="text-sm font-semibold text-slate-900">{row.symbol}</p>
@@ -220,12 +219,12 @@ export function ScreenerLabClient({ screeners }: Props) {
                   <button
                     type="button"
                     onClick={() => setExpanded((current) => ({ ...current, [row.symbol]: !open }))}
-                    className="mt-2 text-xs font-medium text-brand-600 hover:underline"
+                    className="mt-2 rounded-lg border border-cyan-200 bg-cyan-50 px-2 py-1 text-xs font-semibold text-brand-700 hover:bg-cyan-100"
                   >
                     {open ? "Hide Explanation" : "Show Explanation"}
                   </button>
                   {open ? (
-                    <div className="mt-2 rounded-lg bg-slate-50 p-2 text-xs text-slate-600">
+                    <div className="mt-2 rounded-xl border border-slate-200 bg-slate-50/90 p-2 text-xs text-slate-700">
                       <p>{row.explanation}</p>
                       <p className="mt-1">
                         Matched by: {row.matchedBy.map((item) => item.label).join(", ") || "n/a"}

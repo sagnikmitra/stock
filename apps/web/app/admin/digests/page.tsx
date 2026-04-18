@@ -4,7 +4,7 @@ import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 const digestTypeVariant = (type: string) => {
   switch (type) {
@@ -76,7 +76,7 @@ export default async function AdminDigestsPage() {
                 </div>
               </div>
 
-              <p className="mt-2 text-sm text-slate-600 line-clamp-2">{d.summary}</p>
+              <p className="mt-2 text-sm text-slate-600">{d.summary}</p>
 
               <div className="mt-3 grid grid-cols-2 gap-2 text-center text-xs">
                 <div>

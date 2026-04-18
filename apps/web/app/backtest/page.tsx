@@ -6,7 +6,7 @@ import { EducationalDisclaimer } from "../components/ui/educational-disclaimer";
 import Link from "next/link";
 import { BacktestRunForm } from "./backtest-run-form";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 type BacktestMetrics = {
   winRate?: number;
@@ -30,32 +30,41 @@ const statusVariant = (status: string) => {
 };
 
 interface Props {
-  searchParams: Promise<{ strategyKey?: string }>;
+  searchParams: Promise<{ strategyKey?: string; page?: string }>;
 }
 
 export default async function BacktestDashboardPage({ searchParams }: Props) {
-  const { strategyKey } = await searchParams;
+  const { strategyKey, page } = await searchParams;
+  const pageNumber = Math.max(1, Number.parseInt(page ?? "1", 10) || 1);
+  const pageSize = 36;
+  const skip = (pageNumber - 1) * pageSize;
 
-  const [backtests, strategies] = await Promise.all([
+  const [backtests, backtestCount, strategies] = await Promise.all([
     prisma.backtest.findMany({
       include: {
         strategyVersion: { include: { strategy: true } },
         _count: { select: { trades: true } },
       },
       orderBy: { createdAt: "desc" },
+      skip,
+      take: pageSize,
     }),
+    prisma.backtest.count(),
     prisma.strategy.findMany({ where: { status: "active" }, orderBy: { name: "asc" } }),
   ]);
+  const totalPages = Math.max(1, Math.ceil(backtestCount / pageSize));
+  const prevPage = pageNumber > 1 ? pageNumber - 1 : null;
+  const nextPage = pageNumber < totalPages ? pageNumber + 1 : null;
 
   return (
     <>
       <PageHeader
         title="Backtester"
-        description="Run and review deterministic historical replays for strategy versions"
+        description="Deterministic historical replay console for strategy-level validation."
       />
       <EducationalDisclaimer className="mb-4" />
 
-      <Card className="mb-6">
+      <Card className="mb-6 bg-gradient-to-r from-white/92 to-cyan-50/55">
         <CardHeader>
           <CardTitle>Run New Backtest</CardTitle>
           <CardDescription>
@@ -68,6 +77,30 @@ export default async function BacktestDashboardPage({ searchParams }: Props) {
         />
       </Card>
 
+      <div className="mb-4 flex items-center justify-between rounded-2xl border border-slate-200/80 bg-white/88 p-3 text-sm text-slate-600 shadow-[0_8px_20px_rgba(15,23,42,0.06)]">
+        <p>
+          Showing page {pageNumber} of {totalPages} ({backtestCount} backtests)
+        </p>
+        <div className="flex items-center gap-2">
+          {prevPage ? (
+            <Link
+              href={`/backtest?page=${prevPage}${strategyKey ? `&strategyKey=${strategyKey}` : ""}`}
+              className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold hover:bg-slate-50"
+            >
+              Previous
+            </Link>
+          ) : null}
+          {nextPage ? (
+            <Link
+              href={`/backtest?page=${nextPage}${strategyKey ? `&strategyKey=${strategyKey}` : ""}`}
+              className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold hover:bg-slate-50"
+            >
+              Next
+            </Link>
+          ) : null}
+        </div>
+      </div>
+
       {backtests.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {backtests.map((backtest) => {
@@ -78,7 +111,7 @@ export default async function BacktestDashboardPage({ searchParams }: Props) {
 
             return (
               <Link key={backtest.id} href={`/backtest/${backtest.id}`}>
-                <Card className="transition-colors hover:border-brand-200">
+                <Card className="border-slate-200/70 bg-white/86">
                   <CardHeader>
                     <CardTitle>{backtest.name}</CardTitle>
                     <CardDescription>

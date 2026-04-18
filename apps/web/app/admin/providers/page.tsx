@@ -3,7 +3,7 @@ import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { PageHeader } from "../../components/ui/page-header";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function AdminProvidersPage() {
   const providers = await prisma.provider.findMany({
@@ -32,9 +32,7 @@ export default async function AdminProvidersPage() {
                 {p.isEnabled ? "Enabled" : "Disabled"}
               </Badge>
             </div>
-            {p.baseUrl && (
-              <p className="mt-2 truncate text-xs text-slate-400">{p.baseUrl}</p>
-            )}
+            {p.baseUrl && <p className="mt-2 text-xs text-slate-400">{p.baseUrl}</p>}
             <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
               <div>
                 <p className="text-slate-400">Jobs</p>

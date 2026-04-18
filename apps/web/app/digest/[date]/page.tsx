@@ -3,10 +3,9 @@ import { notFound } from "next/navigation";
 import { prisma } from "@ibo/db";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
-import { PageHeader } from "../../components/ui/page-header";
 import { EducationalDisclaimer } from "../../components/ui/educational-disclaimer";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 interface Props {
   params: Promise<{ date: string }>;
@@ -36,17 +35,15 @@ export default async function DigestDatePage({ params }: Props) {
 
   return (
     <>
-      <PageHeader
-        title={`Digest — ${date}`}
-        description="Date-level digest history with sections, posture, stock mentions, and context transparency"
-      >
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <h2 className="text-xl font-semibold text-slate-900">Digest Snapshot — {date}</h2>
         <Link
           href="/digest"
           className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
         >
           Back to Archive
         </Link>
-      </PageHeader>
+      </div>
       <EducationalDisclaimer className="mb-4" />
 
       <Card className="mb-6">

@@ -7,7 +7,7 @@ interface Props {
   searchParams: Promise<{ from?: string; to?: string }>;
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 30; // Cache for 30s — data changes only on pipeline/admin runs
 
 export default async function StrategyHistoryPage({ params, searchParams }: Props) {
   const { strategyKey } = await params;

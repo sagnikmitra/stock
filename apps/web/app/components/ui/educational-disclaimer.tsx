@@ -1,4 +1,6 @@
-import { cn } from "@/lib/cn";
+"use client";
+
+import { Alert } from "@mui/material";
 
 interface EducationalDisclaimerProps {
   className?: string;
@@ -7,18 +9,22 @@ interface EducationalDisclaimerProps {
 
 export function EducationalDisclaimer({ className, compact = false }: EducationalDisclaimerProps) {
   return (
-    <div
-      className={cn(
-        "rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900",
-        className,
-      )}
-      role="note"
-      aria-label="Educational disclaimer"
+    <Alert
+      severity="warning"
+      className={className}
+      sx={{
+        borderRadius: 1,
+        border: "1px solid #fde68a",
+        backgroundColor: "#fffbeb",
+        color: "#78350f",
+        "& .MuiAlert-message": {
+          fontSize: compact ? 12 : 13.5,
+          lineHeight: 1.55,
+        },
+      }}
     >
-      <p className={compact ? "text-xs" : "text-sm"}>
-        Educational use only. Market data, strategy signals, and backtest outputs are research aids, not
-        investment advice or execution recommendations.
-      </p>
-    </div>
+      Educational use only. Market data, strategy signals, and backtest outputs are research aids, not
+      investment advice or execution recommendations.
+    </Alert>
   );
 }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@ibo/db";
+import { parseCourseMarkdown } from "@/lib/course-session-parser";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
@@ -9,6 +10,7 @@ export async function POST(req: Request) {
   const concepts = Array.isArray(body.concepts)
     ? (body.concepts as string[]).map((concept) => concept.trim()).filter(Boolean)
     : [];
+  const sourceSession = String(body.sourceSession ?? sessionKey.replace("session_", "")).trim();
 
   if (!sessionKey || !title || !bodyMarkdown) {
     return NextResponse.json(
@@ -17,34 +19,54 @@ export async function POST(req: Request) {
     );
   }
 
+  const parsed = parseCourseMarkdown({
+    sessionKey,
+    sourceSession,
+    markdown: bodyMarkdown,
+    fallbackTitle: title,
+  });
+
   const document = await prisma.knowledgeDocument.upsert({
     where: { key: sessionKey },
     update: {
-      title,
-      bodyMarkdown,
-      sourceSession: sessionKey,
-      summary: bodyMarkdown.slice(0, 400),
+      title: parsed.title,
+      bodyMarkdown: parsed.bodyMarkdown,
+      sourceSession: parsed.sourceSession,
+      summary: parsed.summary,
+      confidence: parsed.confidence,
     },
     create: {
       key: sessionKey,
-      title,
-      sourceSession: sessionKey,
-      bodyMarkdown,
-      summary: bodyMarkdown.slice(0, 400),
-      confidence: "high",
+      title: parsed.title,
+      sourceSession: parsed.sourceSession,
+      bodyMarkdown: parsed.bodyMarkdown,
+      summary: parsed.summary,
+      confidence: parsed.confidence,
     },
   });
 
   await prisma.knowledgeSection.deleteMany({ where: { knowledgeDocumentId: document.id } });
-  await prisma.knowledgeSection.create({
-    data: {
-      knowledgeDocumentId: document.id,
-      key: `${sessionKey}_body`,
-      title,
-      bodyMarkdown,
-      sortOrder: 0,
-    },
-  });
+  if (parsed.sections.length > 0) {
+    await prisma.knowledgeSection.createMany({
+      data: parsed.sections.map((section) => ({
+        knowledgeDocumentId: document.id,
+        key: section.key,
+        title: section.title,
+        bodyMarkdown: section.bodyMarkdown,
+        sortOrder: section.sortOrder,
+      })),
+    });
+  } else {
+    await prisma.knowledgeSection.create({
+      data: {
+        knowledgeDocumentId: document.id,
+        key: `${sessionKey}_body`,
+        title,
+        bodyMarkdown,
+        sortOrder: 0,
+      },
+    });
+  }
 
   for (const concept of concepts) {
     await prisma.knowledgeConcept.upsert({
@@ -63,8 +85,9 @@ export async function POST(req: Request) {
     data: {
       knowledgeDocumentId: document.id,
       sessionKey,
+      sectionCount: parsed.sections.length,
+      referenceCount: parsed.references.length,
       conceptCount: concepts.length,
     },
   }, { status: 201 });
 }
-

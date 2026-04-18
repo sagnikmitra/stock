@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { runPostClosePipelineCore } from "@ibo/pipelines";
 import { acquireCronLock, releaseCronLock, withRetries } from "../_scheduler";
+import { isFreeDataSyncEnabled, runFreePostCloseSync } from "../../../../../worker/src/ingestion/free-mode";
 
 export async function GET(req: Request) {
   const authHeader = req.headers.get("authorization");
@@ -26,18 +27,41 @@ export async function GET(req: Request) {
   }
 
   try {
+    let ingestion: Awaited<ReturnType<typeof runFreePostCloseSync>> | null = null;
+    let ingestionError: string | null = null;
+    if (isFreeDataSyncEnabled()) {
+      try {
+        ingestion = await withRetries(
+          async () => runFreePostCloseSync(todayStr),
+          1,
+        );
+      } catch (error) {
+        ingestionError = error instanceof Error ? error.message : "Unknown free-data sync error";
+      }
+    }
+
     const result = await withRetries(
       async () => runPostClosePipelineCore(),
       Number.isFinite(retryAttempts) && retryAttempts > 0 ? retryAttempts : 1,
     );
 
+    const payload = {
+      ...result,
+      ingestion,
+      ingestionError,
+    };
+
     await releaseCronLock({
       lockKey: lock.lockKey,
       status: "completed",
-      details: { marketDate: todayStr },
+      details: {
+        marketDate: todayStr,
+        ingestionWarnings: ingestion?.warnings ?? [],
+        ingestionError,
+      },
     });
 
-    return NextResponse.json({ data: result });
+    return NextResponse.json({ data: payload });
   } catch (error) {
     await releaseCronLock({
       lockKey: lock.lockKey,
