@@ -10,11 +10,12 @@ test("scoreMarketContext returns favorable posture for aligned risk-on cues", ()
     goldChangePct: -0.8,
     crudeChangePct: -0.6,
     fiiNetCashCr: 2500,
+    diiNetCashCr: 2500,
   });
 
   assert.equal(scored.posture, "favorable");
   assert.ok(scored.score >= 4);
-  assert.equal(scored.breakdown?.length, 5);
+  assert.equal(scored.breakdown?.length, 6);
   assert.equal(scored.breakdown?.every((factor) => factor.status === "favorable"), true);
 });
 
@@ -28,6 +29,6 @@ test("scoreMarketContext flags degraded mode when factors are missing", () => {
   assert.ok(scored.narrative.includes("Degraded mode active"));
   assert.equal(
     scored.breakdown?.filter((factor) => factor.status === "missing").length,
-    4,
+    5,
   );
 });

@@ -13,6 +13,13 @@ function pctChange(current: number, previous: number): number {
   return ((current - previous) / previous) * 100;
 }
 
+function simpleMovingAverage(values: number[], period: number): number | undefined {
+  if (values.length < period || period <= 0) return undefined;
+  const window = values.slice(-period);
+  const sum = window.reduce((acc, value) => acc + value, 0);
+  return sum / period;
+}
+
 export async function runPreMarketPipelineCore() {
   const today = new Date();
   const todayStr = toDateKey(today);
@@ -24,10 +31,16 @@ export async function runPreMarketPipelineCore() {
   let goldChangePct: number | undefined;
   let crudeChangePct: number | undefined;
   let fiiNetCashCr: number | undefined;
+  let diiNetCashCr: number | undefined;
 
   const latestFii = await prisma.fiiDiiSnapshot.findFirst({ orderBy: { date: "desc" } });
-  if (latestFii?.fiiCashNet) fiiNetCashCr = Number(latestFii.fiiCashNet);
-  else warnings.push("No FII/DII data");
+  if (latestFii) {
+    if (latestFii.fiiCashNet !== null) fiiNetCashCr = Number(latestFii.fiiCashNet);
+    if (latestFii.diiCashNet !== null) diiNetCashCr = Number(latestFii.diiCashNet);
+    if (fiiNetCashCr === undefined && diiNetCashCr === undefined) warnings.push("No FII/DII data");
+  } else {
+    warnings.push("No FII/DII data");
+  }
 
   const prevCtx = await prisma.globalContextSnapshot.findFirst({ orderBy: { date: "desc" } });
   if (prevCtx) {
@@ -46,6 +59,7 @@ export async function runPreMarketPipelineCore() {
     goldChangePct,
     crudeChangePct,
     fiiNetCashCr,
+    diiNetCashCr,
   });
 
   await prisma.globalContextSnapshot.upsert({
@@ -112,8 +126,15 @@ export async function runPreMarketPipelineCore() {
             key: "fii_dii",
             title: "FII/DII Activity",
             bodyMarkdown:
-              fiiNetCashCr !== undefined
-                ? `FII net cash: ₹${fiiNetCashCr.toLocaleString("en-IN")} Cr ${fiiNetCashCr > 0 ? "(buying)" : "(selling)"}`
+              fiiNetCashCr !== undefined || diiNetCashCr !== undefined
+                ? [
+                    fiiNetCashCr !== undefined
+                      ? `- FII net cash: ₹${fiiNetCashCr.toLocaleString("en-IN")} Cr ${fiiNetCashCr > 0 ? "(buying)" : "(selling)"}`
+                      : "- FII net cash: N/A",
+                    diiNetCashCr !== undefined
+                      ? `- DII net cash: ₹${diiNetCashCr.toLocaleString("en-IN")} Cr ${diiNetCashCr > 0 ? "(buying)" : "(selling)"}`
+                      : "- DII net cash: N/A",
+                  ].join("\n")
                 : "No FII/DII data available.",
             sortOrder: 1,
           },
@@ -136,6 +157,7 @@ export async function runPreMarketPipelineCore() {
 export async function runPostClosePipelineCore() {
   const todayStr = toDateKey(new Date());
   const todayDate = new Date(todayStr);
+  const btstGate = nseCalendar.isBtstEligible(todayDate);
 
   let totalStrategyMatches = 0;
   let totalScreenerHits = 0;
@@ -167,17 +189,27 @@ export async function runPostClosePipelineCore() {
     const last = series[series.length - 1];
     const prev = series[series.length - 2] ?? last;
     const recent20 = series.slice(-20);
+    const prior20 = series.slice(-21, -1);
     const recent22 = series.slice(-22);
     const recent252 = series.slice(-252);
     const resistance20 = recent20.length > 0 ? Math.max(...recent20.map((c) => c.high)) : last.high;
+    const donchianHigh20 = prior20.length > 0 ? Math.max(...prior20.map((c) => c.high)) : resistance20;
+    const support20 = prior20.length > 0 ? Math.min(...prior20.map((c) => c.low)) : last.low;
     const high52Week = recent252.length > 0 ? Math.max(...recent252.map((c) => c.high)) : last.high;
+    const rangePct20 = support20 > 0 ? (resistance20 - support20) / support20 : 0;
     const candleRange = Math.max(last.high - last.low, 0.0001);
     const candleBodyPct = (Math.abs(last.close - last.open) / candleRange) * 100;
     const candleColor = last.close >= last.open ? "green" : "red";
     const relativeVolume = ind.relativeVolume ?? 0;
+    const closeSeries = series.map((c) => c.close);
+    const volumeSeries = series.map((c) => c.volume);
+    const ema5 = simpleMovingAverage(closeSeries, 5);
+    const volumeSma20 = simpleMovingAverage(volumeSeries, 20);
     const dayChangePct = pctChange(last.close, prev.close);
     const closeAboveResistancePct = resistance20 > 0 ? pctChange(last.close, resistance20) : 0;
     const closeAbove52WeekHigh = high52Week > 0 ? last.close >= high52Week * 0.995 : false;
+    const nearSupport = support20 > 0 ? Math.abs(last.close - support20) / support20 <= 0.03 : false;
+    const regimeIsSideways = rangePct20 <= 0.12;
     const lowerBbTouch = ind.bbLower !== undefined ? last.low <= ind.bbLower * 1.01 : false;
     const lowerBbInteraction = ind.bbLower !== undefined ? last.low <= ind.bbLower * 1.02 : false;
     const sma50 = ind.sma50 ?? last.close;
@@ -193,7 +225,7 @@ export async function runPostClosePipelineCore() {
     const primaryTrendNotBearish = ind.sma200 !== undefined ? last.close >= ind.sma200 : true;
     const vwapApprox = (last.high + last.low + last.close) / 3;
     const prevDayVolume = prev.volume;
-    const notPreHolidayOrExpiry = true;
+    const notPreHolidayOrExpiry = btstGate.eligible;
     const priceAboveSuperTrend = ind.superTrend !== undefined ? last.close >= ind.superTrend : last.close >= sma50;
     const sma13CrossAboveSma34 =
       ind.sma13 !== undefined &&
@@ -234,6 +266,7 @@ export async function runPostClosePipelineCore() {
       "daily.ema9": ind.ema9,
       "daily.ema_15": ind.ema15,
       "daily.ema15": ind.ema15,
+      "daily.ema5": ema5,
       "daily.bb_upper_20_2": ind.bbUpper,
       "daily.bbUpper": ind.bbUpper,
       "daily.bb_middle_20": ind.bbMiddle,
@@ -246,6 +279,8 @@ export async function runPostClosePipelineCore() {
       "daily.atr_14": ind.atr14,
       "daily.volume_ratio_20": ind.relativeVolume,
       "daily.relativeVolume": ind.relativeVolume,
+      "daily.relativeVolume20": ind.relativeVolume,
+      "daily.volumeSma20": volumeSma20,
       "daily.deliveryPct": last.deliveryPct,
       "daily.candleBodyPct": candleBodyPct,
       "daily.candleColor": candleColor,
@@ -268,6 +303,9 @@ export async function runPostClosePipelineCore() {
       // Derived helpers used by candidate and confluence screeners
       "derived.closeAbove52WeekHigh": closeAbove52WeekHigh,
       "derived.closeAboveResistancePct": closeAboveResistancePct,
+      "derived.donchianHigh20": donchianHigh20,
+      "derived.nearSupport": nearSupport,
+      "derived.regimeIsSideways": regimeIsSideways,
       "derived.isTopGainer": dayChangePct >= 2,
       "derived.isVolumeShocker": relativeVolume >= 1.8,
       "derived.dailyDipInUptrend": dailyDipInUptrend,

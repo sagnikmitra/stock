@@ -32,3 +32,14 @@ test("buildDigestSummary marks degraded mode explicitly", () => {
   });
   assert.ok(degraded.includes("DEGRADED MODE"));
 });
+
+test("BTST gate blocks entries before Tuesday expiry and allows normal non-expiry windows", () => {
+  // Monday before a Tuesday expiry should be blocked.
+  const blocked = nseCalendar.isBtstEligible(new Date("2026-04-20T10:00:00Z"));
+  assert.equal(blocked.eligible, false);
+  assert.equal(blocked.reason, "next_trading_day_is_expiry");
+
+  // Wednesday should usually be eligible unless holiday logic blocks it.
+  const open = nseCalendar.isBtstEligible(new Date("2026-04-22T10:00:00Z"));
+  assert.equal(open.eligible, true);
+});
