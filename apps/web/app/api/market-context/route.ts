@@ -130,6 +130,7 @@ async function buildPayload(limit: number): Promise<MarketContextPayload> {
       goldChangePct: toNum(row.goldChange) ?? undefined,
       crudeChangePct: toNum(row.crudeChange) ?? undefined,
       fiiNetCashCr: flow?.fiiCashNet ?? undefined,
+      diiNetCashCr: flow?.diiCashNet ?? undefined,
     });
 
     return {

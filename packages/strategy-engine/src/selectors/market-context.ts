@@ -12,6 +12,7 @@ export interface ScoreMarketContextInput {
   goldChangePct?: number;
   crudeChangePct?: number;
   fiiNetCashCr?: number;
+  diiNetCashCr?: number;
 }
 
 function clamp(value: number, min: number, max: number): number {
@@ -31,6 +32,12 @@ function summarizeInverseDirection(value: number): "favorable" | "neutral" | "ho
 }
 
 function summarizeFiiFlow(value: number): "favorable" | "neutral" | "hostile" {
+  if (value >= 1500) return "favorable";
+  if (value <= -1500) return "hostile";
+  return "neutral";
+}
+
+function summarizeDiiFlow(value: number): "favorable" | "neutral" | "hostile" {
   if (value >= 1500) return "favorable";
   if (value <= -1500) return "hostile";
   return "neutral";
@@ -129,7 +136,32 @@ export function scoreMarketContext(input: ScoreMarketContextInput): GlobalContex
         return `FII net cash ${value! >= 0 ? "buying" : "selling"} ₹${Math.abs(value!).toLocaleString("en-IN")} Cr.`;
       },
     ),
+    buildFactor(
+      "dii_flow",
+      "DII Cash Flow",
+      input.diiNetCashCr,
+      summarizeDiiFlow,
+      (status, value) => {
+        if (status === "missing") return "Missing DII cash flow; treated as neutral.";
+        return `DII net cash ${value! >= 0 ? "buying" : "selling"} ₹${Math.abs(value!).toLocaleString("en-IN")} Cr.`;
+      },
+    ),
   ];
+
+  // drr-screener rule: FII negative + DII positive => resilience override.
+  // Adds a synthetic favorable factor so posture doesn't go hostile on a pure FII sell when domestic absorbs.
+  const fiiNeg = typeof input.fiiNetCashCr === "number" && input.fiiNetCashCr <= -1500;
+  const diiPos = typeof input.diiNetCashCr === "number" && input.diiNetCashCr >= 1500;
+  if (fiiNeg && diiPos) {
+    breakdown.push({
+      key: "resilience_override",
+      label: "FII−/DII+ resilience",
+      value: (input.diiNetCashCr ?? 0) + (input.fiiNetCashCr ?? 0),
+      status: "favorable",
+      contribution: 1,
+      reason: `FII selling ₹${Math.abs(input.fiiNetCashCr!).toLocaleString("en-IN")} Cr absorbed by DII buying ₹${(input.diiNetCashCr!).toLocaleString("en-IN")} Cr — domestic resilience override applied.`,
+    });
+  }
 
   const raw = breakdown.reduce((acc, factor) => acc + factor.contribution, 0);
   const score = Number(clamp(2.5 + raw / 2, 0, 5).toFixed(2));

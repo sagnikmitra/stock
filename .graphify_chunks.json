@@ -1,33 +1,5 @@
 [
   [
-    "docs/strategy-dsl.md",
-    "docs/learning-content-pipeline.md",
-    "docs/gap-fill-prompt.md",
-    "docs/testing.md",
-    "docs/market-context-model.md",
-    "docs/env.md",
-    "docs/screen-matrix.md",
-    "docs/deployment.md",
-    "docs/cron-spec.md",
-    "docs/free-data-setup.md",
-    "docs/screener-registry.md",
-    "docs/api-contracts.md",
-    "drr-aibot.md",
-    "Classnotes Summary Combined.md",
-    "prompt.md",
-    "drr-screener.md",
-    "README.md",
-    "features.md",
-    "AGENTS.md",
-    "docs/implementation/screener-source-matrix.md",
-    "docs/implementation/gap-audit.md",
-    "docs/implementation/indian-stock-market-api-analysis.md"
-  ],
-  [
-    "docs/implementation/remaining-roadmap.md",
-    "docs/implementation/ui-design-audit-2026-04-17.md",
-    "docs/implementation/strategy-source-matrix.md",
-    "docs/implementation/perf-risk-hotspots.md",
     "docs/course/sessions/session_7.md",
     "docs/course/sessions/session_6.md",
     "docs/course/sessions/session_9.md",
@@ -37,69 +9,13 @@
     "graphify-out/FULL_TRACE.md",
     "graphify-out/GRAPH_REPORT.md",
     "graphify-out/FULL_TRACE_DEEPEST.md",
+    "docs/implementation/ui-design-audit-2026-04-17.md",
+    "docs/implementation/perf-risk-hotspots.md",
+    "AGENTS.md",
     "apps/web/apps/web/test-results/ui-audit/audit-report.md",
     "apps/web/test-results/ui-audit/audit-report.md",
+    "docs/learning-content-pipeline.md",
     "docs/course/classnotes.md"
-  ],
-  [
-    "image/prompt/1776335440520.png"
-  ],
-  [
-    "image/prompt/1776335440282.png"
-  ],
-  [
-    "image/prompt/1776335436276.png"
-  ],
-  [
-    "image/prompt/1776335428883.png"
-  ],
-  [
-    "image/prompt/1776335429933.png"
-  ],
-  [
-    "image/prompt/1776335445816.png"
-  ],
-  [
-    "image/prompt/1776335427263.png"
-  ],
-  [
-    "image/prompt/1776335436597.png"
-  ],
-  [
-    "image/prompt/1776335430291.png"
-  ],
-  [
-    "image/prompt/1776335438154.png"
-  ],
-  [
-    "image/prompt/1776335443928.png"
-  ],
-  [
-    "image/prompt/1776335439064.png"
-  ],
-  [
-    "image/prompt/1776335430487.png"
-  ],
-  [
-    "image/prompt/1776335437328.png"
-  ],
-  [
-    "image/prompt/1776335438581.png"
-  ],
-  [
-    "image/prompt/1776335439983.png"
-  ],
-  [
-    "image/prompt/1776335438334.png"
-  ],
-  [
-    "image/prompt/1776335435629.png"
-  ],
-  [
-    "image/prompt/1776335429639.png"
-  ],
-  [
-    "image/prompt/1776335438873.png"
   ],
   [
     "apps/web/test-results/ui-audit/references__tablet.png"

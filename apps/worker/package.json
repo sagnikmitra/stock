@@ -10,8 +10,9 @@
   "dependencies": {
     "@ibo/db": "workspace:*",
     "@ibo/pipelines": "workspace:*",
+    "@ibo/strategy-engine": "workspace:*",
     "@ibo/types": "workspace:*",
-    "@ibo/strategy-engine": "workspace:*"
+    "yahoo-finance2": "^3.14.0"
   },
   "devDependencies": {
     "tsx": "^4.19.0",

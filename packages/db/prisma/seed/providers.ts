@@ -12,6 +12,20 @@ export async function seedProviders(prisma: PrismaClient) {
       isEnabled: true,
     },
     {
+      key: "nse_bhavcopy",
+      name: "NSE Security-Wise Bhavcopy",
+      type: "official_exchange_reports" as const,
+      baseUrl: "https://archives.nseindia.com/products/content",
+      isEnabled: true,
+    },
+    {
+      key: "yahoo_finance",
+      name: "Yahoo Finance (yahoo-finance2)",
+      type: "market_data_vendor" as const,
+      baseUrl: "https://query1.finance.yahoo.com",
+      isEnabled: true,
+    },
+    {
       key: "indian_stock_market_api",
       name: "Indian Stock Market API (0xramm)",
       type: "market_data_vendor" as const,

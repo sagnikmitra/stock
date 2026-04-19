@@ -624,7 +624,98 @@ const strategies: StrategySeed[] = [
   },
 
   // =========================================================================
-  // 13. Market Context Engine — Session 8
+  // 13a. Sideways Support Reversal — drr-screener gap
+  // =========================================================================
+  {
+    key: "swing_sideways_support_reversal",
+    name: "Sideways Support Reversal",
+    family: "swing",
+    status: "active",
+    description:
+      "Support-area reversal within sideways regime. Delivery % >= 45, volume > 20D avg, close above 5D EMA, entry at support + 15% of support-resistance band. NOT a breakout — confirmation-on-reclaim style entry.",
+    reviewFrequency: "daily",
+    primaryTimeframe: "D1",
+    confidence: "medium",
+    versions: [
+      {
+        version: 1,
+        isActive: true,
+        sourceSessions: "drr-screener",
+        normalizedDsl: {
+          key: "swing_sideways_support_reversal",
+          family: "swing",
+          reviewFrequency: "daily",
+          primaryTimeframe: "D1",
+          canonicalVersionTag: "sideways-support-reversal.v1.canonical",
+          filters: [
+            { field: "derived.regimeIsSideways", operator: "==", value: true, kind: "hard", label: "Sideways regime" },
+            { field: "derived.nearSupport", operator: "==", value: true, kind: "hard", label: "At support zone" },
+            { field: "daily.deliveryPct", operator: ">=", value: 45, kind: "hard", label: "Delivery >= 45%" },
+            { field: "daily.volume", operator: ">", valueRef: "daily.volumeSma20", kind: "hard", label: "Volume > 20D avg" },
+            { field: "daily.close", operator: ">", valueRef: "daily.ema5", kind: "hard", label: "Close above 5 EMA" },
+          ],
+          entry: { type: "support_plus_band_pct", bandPct: 15 },
+          stopLoss: { type: "below_support", timeframe: "D1" },
+        },
+        rules: [
+          { key: "sideways_regime", label: "Sideways regime", kind: "hard", description: "Stock must be in sideways/range regime — not trending. Breakout rules do not apply.", sortOrder: 1 },
+          { key: "at_support", label: "At support zone", kind: "hard", description: "Price action interacting with identified horizontal support.", sortOrder: 2 },
+          { key: "delivery_strong", label: "Delivery >= 45%", kind: "hard", description: "Delivery ratio confirms genuine accumulation not intraday noise.", sortOrder: 3 },
+          { key: "volume_above_avg", label: "Volume above 20D avg", kind: "hard", description: "Above-average volume shows demand at support.", sortOrder: 4 },
+          { key: "close_above_5ema", label: "Close above 5 EMA", kind: "hard", description: "Very short-term momentum turning up.", sortOrder: 5 },
+          { key: "entry_support_plus_15pct_band", label: "Entry: support + 15% of band", kind: "hard", description: "Enter at support + 15% of the support-to-resistance band height. NOT the same as breakout +1% entry.", sortOrder: 6 },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 13b. 20-Day Channel Breakout — drr-screener gap
+  // =========================================================================
+  {
+    key: "swing_twenty_day_channel_breakout",
+    name: "20-Day Channel Breakout",
+    family: "swing",
+    status: "active",
+    description:
+      "True Donchian-style 20-day channel breakout. Close above 20-day highest high, with breakout-quality gates: body >= 65% of range, volume >= 1.5x 20D avg, delivery >= 35%, close >= 1% above resistance.",
+    reviewFrequency: "daily",
+    primaryTimeframe: "D1",
+    confidence: "medium",
+    versions: [
+      {
+        version: 1,
+        isActive: true,
+        sourceSessions: "drr-screener",
+        normalizedDsl: {
+          key: "swing_twenty_day_channel_breakout",
+          family: "swing",
+          reviewFrequency: "daily",
+          primaryTimeframe: "D1",
+          canonicalVersionTag: "twenty-day-channel-breakout.v1.canonical",
+          filters: [
+            { field: "daily.close", operator: ">", valueRef: "derived.donchianHigh20", kind: "hard", label: "Close > 20D highest high" },
+            { field: "daily.candleBodyPct", operator: ">=", value: 65, kind: "hard", label: "Body >= 65%" },
+            { field: "daily.relativeVolume20", operator: ">=", value: 1.5, kind: "hard", label: "Volume >= 1.5x 20D" },
+            { field: "daily.deliveryPct", operator: ">=", value: 35, kind: "hard", label: "Delivery >= 35%" },
+            { field: "derived.closeAboveResistancePct", operator: ">=", value: 1, kind: "hard", label: ">=1% above resistance" },
+          ],
+          entry: { type: "confirmation_close_above_resistance_pct", pct: 1 },
+          stopLoss: { type: "recent_swing_low", timeframe: "D1" },
+        },
+        rules: [
+          { key: "donchian_high20", label: "Close above 20-day high", kind: "hard", description: "Today's close exceeds the highest close of the prior 20 trading days.", sortOrder: 1 },
+          { key: "body_quality", label: "Candle body >= 65% of range", kind: "hard", description: "Strong-bodied candle, not a doji wick.", sortOrder: 2 },
+          { key: "rel_volume", label: "Volume >= 1.5x 20D avg", kind: "hard", description: "Meaningful participation on breakout.", sortOrder: 3 },
+          { key: "delivery_relaxed", label: "Delivery >= 35% (relaxed variant)", kind: "hard", description: "Uses relaxed canonical delivery threshold. Strict variant uses 45%.", sortOrder: 4 },
+          { key: "above_resistance_pct", label: "Close >= 1% above resistance", kind: "hard", description: "Distinguishes true breakout from intrabar tag. NOT the same as support-reversal entry.", sortOrder: 5 },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 14. Market Context Engine — Session 8
   // =========================================================================
   {
     key: "market_context_engine",

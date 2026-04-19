@@ -222,6 +222,44 @@ const screeners: ScreenerSeed[] = [
     },
   },
   {
+    key: "sideways_support_reversal_internal",
+    name: "Sideways Support Reversal Internal",
+    description:
+      "drr-screener gap screener: support-reversal entry inside sideways regime. Entry = support + 15% of support-resistance band. NOT the same as +1% breakout entry.",
+    linkedStrategyKey: "swing_sideways_support_reversal",
+    isExternalReference: false,
+    tags: ["swing", "sideways", "support", "reversal", "internal", "drr-screener"],
+    expressionDsl: {
+      canonicalVersionTag: "sideways-support-reversal.v1.canonical",
+      filters: [
+        { field: "derived.regimeIsSideways", operator: "==", value: true, kind: "hard", label: "Sideways regime" },
+        { field: "derived.nearSupport", operator: "==", value: true, kind: "hard", label: "At support zone" },
+        { field: "daily.deliveryPct", operator: ">=", value: 45, kind: "hard", label: "Delivery >= 45%" },
+        { field: "daily.volume", operator: ">", valueRef: "daily.volumeSma20", kind: "hard", label: "Volume > 20D avg" },
+        { field: "daily.close", operator: ">", valueRef: "daily.ema5", kind: "hard", label: "Close above 5 EMA" },
+      ],
+    },
+  },
+  {
+    key: "twenty_day_channel_breakout_internal",
+    name: "20-Day Channel Breakout Internal",
+    description:
+      "drr-screener gap screener: true Donchian-style 20-day high breakout with body/volume/delivery/resistance gates. Uses RELAXED delivery 35% variant; strict variant uses 45%.",
+    linkedStrategyKey: "swing_twenty_day_channel_breakout",
+    isExternalReference: false,
+    tags: ["swing", "breakout", "donchian", "20day", "channel", "internal", "drr-screener"],
+    expressionDsl: {
+      canonicalVersionTag: "twenty-day-channel-breakout.v1.canonical",
+      filters: [
+        { field: "daily.close", operator: ">", valueRef: "derived.donchianHigh20", kind: "hard", label: "Close > 20D highest high" },
+        { field: "daily.candleBodyPct", operator: ">=", value: 65, kind: "hard", label: "Body >= 65%" },
+        { field: "daily.relativeVolume20", operator: ">=", value: 1.5, kind: "hard", label: "Volume >= 1.5x 20D" },
+        { field: "daily.deliveryPct", operator: ">=", value: 35, kind: "hard", label: "Delivery >= 35%" },
+        { field: "derived.closeAboveResistancePct", operator: ">=", value: 1, kind: "hard", label: ">=1% above resistance" },
+      ],
+    },
+  },
+  {
     key: "chartink_volume_shockers",
     name: "Chartink Volume Shockers",
     description: "External reference screener for unusual volume activity.",

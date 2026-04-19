@@ -123,7 +123,7 @@ export interface GlobalContext {
 }
 
 export interface MarketContextFactorBreakdown {
-  key: "gift_nifty" | "dow_futures" | "gold" | "crude" | "fii_flow";
+  key: "gift_nifty" | "dow_futures" | "gold" | "crude" | "fii_flow" | "dii_flow" | "resilience_override";
   label: string;
   value: number | null;
   contribution: number;
