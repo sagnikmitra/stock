@@ -21,8 +21,12 @@ const FORCE_ROUTES = [
   "/strategies/investment_bb_monthly",
   "/strategies/investment_bb_monthly/history",
   "/strategies/investment_bb_monthly/backtest",
+  "/buying-guide",
   "/screener-lab",
+  "/screener-lab/builder",
   "/screener-lab/intersections",
+  "/screener-lab/presets",
+  "/screener-lab/saved",
   "/digest",
   "/digest/pre-market",
   "/digest/close",
@@ -38,6 +42,14 @@ const FORCE_ROUTES = [
   "/market-context/52-week",
   "/tools/position-size",
 ].sort();
+
+const SKIP_CRAWLED_PREFIXES = [
+  "/stocks/",
+  "/watchlists/",
+  "/backtest/",
+  "/learning/",
+  "/strategies/",
+];
 
 const slugify = (value) =>
   value
@@ -96,6 +108,10 @@ async function crawlRoutes(browser) {
     for (const href of links) {
       const normalized = normalizePath(href);
       if (!normalized || normalized.startsWith("/api") || normalized.startsWith("/_next")) {
+        continue;
+      }
+
+      if (!FORCE_ROUTES.includes(normalized) && SKIP_CRAWLED_PREFIXES.some((prefix) => normalized.startsWith(prefix))) {
         continue;
       }
 

@@ -24,6 +24,36 @@ function ddmmyyyy(d: Date | string): string {
   return `${dd}-${mm}-${yyyy}`;
 }
 
+function parseNseDate(raw: string | undefined): string | null {
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+
+  // Handles NSE format like "17-Apr-2026".
+  const parts = trimmed.split("-");
+  if (parts.length === 3) {
+    const day = Number(parts[0]);
+    const monthRaw = parts[1]?.toUpperCase();
+    const year = Number(parts[2]);
+    const monthMap: Record<string, number> = {
+      JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5,
+      JUL: 6, AUG: 7, SEP: 8, OCT: 9, NOV: 10, DEC: 11,
+    };
+    const month = monthMap[monthRaw ?? ""];
+    if (
+      Number.isFinite(day) &&
+      Number.isFinite(year) &&
+      typeof month === "number"
+    ) {
+      const dt = new Date(Date.UTC(year, month, day));
+      return Number.isNaN(dt.getTime()) ? null : dt.toISOString().slice(0, 10);
+    }
+  }
+
+  const dt = new Date(trimmed);
+  return Number.isNaN(dt.getTime()) ? null : dt.toISOString().slice(0, 10);
+}
+
 /** Standard headers that NSE expects to avoid 403s. */
 const BROWSER_HEADERS: Record<string, string> = {
   "User-Agent":
@@ -451,7 +481,7 @@ export class NseOfficialAdapter extends BaseAdapter {
       }
 
       const data = await this.nseFetch<NseFiiDiiRow[] | { data?: NseFiiDiiRow[] }>(
-        "/api/fiidiiActivity"
+        "/api/fiidiiTradeReact"
       );
 
       const rows: NseFiiDiiRow[] = Array.isArray(data) ? data : (data?.data ?? []);
@@ -477,9 +507,12 @@ export class NseOfficialAdapter extends BaseAdapter {
         return [];
       }
 
+      const rowDate = rows.find((row) => row.date)?.date;
+      const normalizedDate = parseNseDate(rowDate) ?? date;
+
       return [
         {
-          date,
+          date: normalizedDate,
           fiiCashNet,
           diiCashNet,
         },

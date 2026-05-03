@@ -16,6 +16,7 @@ export async function acquireCronLock(input: {
   jobKey: string;
   marketDate: string;
   force: boolean;
+  rerunCompleted?: boolean;
 }): Promise<CronLockResult> {
   const lockKey = lockKeyFor(input.jobKey, input.marketDate);
   const parsedDate = new Date(`${input.marketDate}T00:00:00.000Z`);
@@ -31,7 +32,7 @@ export async function acquireCronLock(input: {
     });
 
     if (existing) {
-      if (existing.status === "completed") {
+      if (existing.status === "completed" && !input.rerunCompleted) {
         return {
           canRun: false,
           lockKey,

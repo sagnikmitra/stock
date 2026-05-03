@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { PageHeader } from "../../../components/ui/page-header";
 
 type BacktestResponse = {
   backtestId: string;
@@ -94,6 +95,11 @@ export default function StrategyBacktestPage() {
 
   return (
     <div className="space-y-6">
+      <PageHeader
+        title={`${strategy?.name ?? strategyKey} Backtest`}
+        description="Run an educational simulation against historical strategy rules."
+      />
+
       <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800">
         <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{strategy?.name ?? strategyKey}</p>
         <p className="text-xs text-slate-500">Family: {strategy?.family ?? "loading"}</p>

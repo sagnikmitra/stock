@@ -168,7 +168,6 @@ model Index {
 /// OHLCV candle data — partitioned by timeframe for query performance.
 /// Composite index on (instrumentId, timeframe, ts) is the hot path.
 model Candle {
-  id           String    @id @default(cuid())
   instrumentId String
   timeframe    Timeframe
   ts           DateTime  // candle open timestamp
@@ -187,9 +186,8 @@ model Candle {
   instrument Instrument @relation(fields: [instrumentId], references: [id])
   provider   Provider?  @relation(fields: [providerId], references: [id])
 
-  @@unique([instrumentId, timeframe, ts])
+  @@id([instrumentId, timeframe, ts])
   @@index([timeframe, ts])
-  @@index([instrumentId, ts])
 }
 
 model QuoteSnapshot {

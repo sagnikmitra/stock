@@ -30,6 +30,8 @@ import {
   Eye,
   Calculator,
   Link2,
+  ClipboardList,
+  Radar,
 } from "lucide-react";
 
 type NavItem = {
@@ -51,7 +53,16 @@ const NAV_SECTIONS: Array<{ label: string; items: NavItem[] }> = [
     items: [
       { href: "/strategies", label: "All Strategies", icon: Target },
       { href: "/screener-lab", label: "Screener Lab", icon: Search },
-      { href: "/market-context/global-cues", label: "Market Context", icon: Globe },
+      {
+        href: "/screener-lab/tradingview",
+        label: "TradingView Screener",
+        icon: Radar,
+      },
+      {
+        href: "/market-context/global-cues",
+        label: "Market Context",
+        icon: Globe,
+      },
       { href: "/references", label: "References", icon: Link2 },
     ],
   },
@@ -60,6 +71,11 @@ const NAV_SECTIONS: Array<{ label: string; items: NavItem[] }> = [
     items: [
       { href: "/stocks", label: "Stocks", icon: TrendingUp },
       { href: "/watchlists", label: "Watchlists", icon: ListIcon },
+      {
+        href: "/buying-guide",
+        label: "Weekly Buying Guide",
+        icon: ClipboardList,
+      },
       { href: "/backtest", label: "Backtester", icon: FlaskConical },
     ],
   },
@@ -74,7 +90,11 @@ const NAV_SECTIONS: Array<{ label: string; items: NavItem[] }> = [
   {
     label: "Tools",
     items: [
-      { href: "/tools/position-size", label: "Risk Calculator", icon: Calculator },
+      {
+        href: "/tools/position-size",
+        label: "Risk Calculator",
+        icon: Calculator,
+      },
       { href: "/admin/strategies", label: "Admin", icon: Settings },
       { href: "/admin/cms", label: "Admin CMS", icon: Settings },
       { href: "/admin/observability", label: "Observability", icon: Eye },
@@ -88,6 +108,8 @@ const MOBILE_QUICK_LINKS = [
   { href: "/digest", label: "Digests" },
   { href: "/strategies", label: "Strategies" },
   { href: "/screener-lab", label: "Screeners" },
+  { href: "/screener-lab/tradingview", label: "TV Screener" },
+  { href: "/buying-guide", label: "Guide" },
   { href: "/tools/position-size", label: "Risk" },
   { href: "/admin/strategies", label: "Admin" },
 ];
@@ -95,6 +117,8 @@ const MOBILE_QUICK_LINKS = [
 const SIDEBAR_WIDTH = 292;
 
 function isActive(pathname: string, href: string): boolean {
+  if (href === "/screener-lab" && pathname.startsWith("/screener-lab/"))
+    return false;
   return pathname === href || (href !== "/" && pathname.startsWith(href));
 }
 
@@ -117,14 +141,29 @@ export function Sidebar() {
         }}
       >
         <Toolbar sx={{ minHeight: "56px !important", px: 2 }}>
-          <Stack direction="row" spacing={2} sx={{ width: "100%", alignItems: "center", justifyContent: "space-between" }}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{
+              width: "100%",
+              minWidth: 0,
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              noWrap
+              variant="subtitle1"
+              sx={{ minWidth: 0, fontWeight: 700 }}
+            >
               Investment Bible OS
             </Typography>
-            <Chip label="Educational use" size="small" />
+            <Chip label="Educational use" size="small" sx={{ flexShrink: 0 }} />
           </Stack>
         </Toolbar>
-        <Box sx={{ px: 1.5, pb: 1.25, display: "flex", gap: 1, overflowX: "auto" }}>
+        <Box
+          sx={{ px: 1.5, pb: 1.25, display: "flex", gap: 1, overflowX: "auto" }}
+        >
           {MOBILE_QUICK_LINKS.map((item) => (
             <Chip
               key={item.href}
@@ -180,7 +219,12 @@ export function Sidebar() {
               {index > 0 ? <Divider sx={{ mb: 1.25 }} /> : null}
               <Typography
                 variant="caption"
-                sx={{ px: 1.25, color: "text.secondary", fontWeight: 700, letterSpacing: "0.08em" }}
+                sx={{
+                  px: 1.25,
+                  color: "text.secondary",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                }}
               >
                 {section.label.toUpperCase()}
               </Typography>
@@ -196,22 +240,39 @@ export function Sidebar() {
                         selected={active}
                         sx={{
                           borderRadius: 2,
-                          border: active ? "1px solid #bfdbfe" : "1px solid transparent",
-                          backgroundColor: active ? "rgba(13,110,253,0.09)" : "transparent",
+                          border: active
+                            ? "1px solid #bfdbfe"
+                            : "1px solid transparent",
+                          backgroundColor: active
+                            ? "rgba(13,110,253,0.09)"
+                            : "transparent",
                           "&.Mui-selected": {
                             backgroundColor: "rgba(13,110,253,0.09)",
                           },
                           "&:hover": {
-                            backgroundColor: active ? "rgba(13,110,253,0.13)" : "rgba(15,23,42,0.04)",
+                            backgroundColor: active
+                              ? "rgba(13,110,253,0.13)"
+                              : "rgba(15,23,42,0.04)",
                           },
                         }}
                       >
-                        <Box sx={{ width: 22, display: "inline-flex", alignItems: "center" }}>
+                        <Box
+                          sx={{
+                            width: 22,
+                            display: "inline-flex",
+                            alignItems: "center",
+                          }}
+                        >
                           <Icon className="h-4 w-4" />
                         </Box>
                         <ListItemText
                           primary={
-                            <Typography sx={{ fontSize: 14, fontWeight: active ? 700 : 500 }}>
+                            <Typography
+                              sx={{
+                                fontSize: 14,
+                                fontWeight: active ? 700 : 500,
+                              }}
+                            >
                               {item.label}
                             </Typography>
                           }

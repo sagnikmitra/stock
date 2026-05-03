@@ -20,6 +20,7 @@ export async function GET(req: Request) {
     jobKey: "provider_health",
     marketDate,
     force,
+    rerunCompleted: true,
   });
   if (!lock.canRun) {
     return NextResponse.json({

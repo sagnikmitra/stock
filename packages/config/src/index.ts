@@ -4,14 +4,20 @@
 
 /** IST-oriented cron schedule constants */
 export const CRON_SCHEDULES = {
-  /** Pre-market digest: 8:30 AM IST (03:00 UTC) */
-  PRE_MARKET: "0 3 * * 1-5",
+  /** Fast EOD candle ingest: 3:50 PM IST (10:20 UTC) */
+  INGEST_EOD_FAST: "20 10 * * 1-5",
+  /** Bhavcopy EOD enrichment: 6:00 PM IST (12:30 UTC) */
+  INGEST_EOD_ENRICH: "30 12 * * 1-5",
+  /** Pre-market digest: 8:45 AM IST (03:15 UTC) */
+  PRE_MARKET: "15 3 * * 1-5",
   /** Post-close pipeline: 4:30 PM IST (11:00 UTC) */
   POST_CLOSE: "0 11 * * 1-5",
-  /** Month-end investment scan: 5:00 PM IST on last business day */
-  MONTH_END: "0 11 28-31 * 1-5",
-  /** Provider health check: every 15 min during market hours */
-  PROVIDER_HEALTH: "*/15 3-11 * * 1-5",
+  /** Month-end investment scan candidates: 7:00 PM IST on final calendar window */
+  MONTH_END: "30 13 28-31 * *",
+  /** Weekly summary digest: Saturday 9:00 AM IST (03:30 UTC) */
+  WEEKLY: "30 3 * * 6",
+  /** Provider health check: every 30 min */
+  PROVIDER_HEALTH: "*/30 * * * *",
 } as const;
 
 /** Rate limits per provider (requests per minute) */

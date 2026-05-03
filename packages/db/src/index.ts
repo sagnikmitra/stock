@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefined };
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
 
 export const isDatabaseConfigured = Boolean(process.env.DATABASE_URL);
 
@@ -70,22 +72,64 @@ function buildDatasourceUrl(): string | undefined {
   if (!base) return undefined;
   try {
     const url = new URL(base);
-    if (!url.searchParams.has("connection_limit")) url.searchParams.set("connection_limit", "5");
-    if (!url.searchParams.has("pool_timeout")) url.searchParams.set("pool_timeout", "20");
+    if (!url.searchParams.has("connection_limit"))
+      url.searchParams.set("connection_limit", "5");
+    if (!url.searchParams.has("pool_timeout"))
+      url.searchParams.set("pool_timeout", "20");
     return url.toString();
   } catch {
     return base;
   }
 }
 
+function isTransientConnectionError(error: unknown) {
+  if (!(error instanceof Error)) return false;
+
+  const code =
+    "code" in error ? String((error as { code?: unknown }).code ?? "") : "";
+  const message = error.message.toLowerCase();
+
+  return (
+    code === "P1001" ||
+    code === "P1017" ||
+    code === "P2024" ||
+    message.includes("connection") ||
+    message.includes("closed") ||
+    message.includes("pool")
+  );
+}
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+function createPrismaClient() {
+  const client = new PrismaClient({
+    datasources: { db: { url: buildDatasourceUrl() } },
+    // Query failures are surfaced to callers. Avoid duplicate Prisma engine
+    // stderr noise for caught/retried connection drops in dev.
+    log: ["warn"],
+  });
+
+  return client.$extends({
+    query: {
+      $allModels: {
+        async $allOperations({ args, query }) {
+          try {
+            return await query(args);
+          } catch (error) {
+            if (!isTransientConnectionError(error)) throw error;
+
+            await client.$disconnect().catch(() => undefined);
+            await delay(100);
+            return query(args);
+          }
+        },
+      },
+    },
+  }) as unknown as PrismaClient;
+}
+
 export const prisma = isDatabaseConfigured
-  ? globalForPrisma.prisma ??
-    new PrismaClient({
-      datasources: { db: { url: buildDatasourceUrl() } },
-      // Disable query logging — it serializes every SQL string to stdout which
-      // adds measurable per-request CPU overhead. Use warn+error only.
-      log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
-    })
+  ? (globalForPrisma.prisma ?? createPrismaClient())
   : makePrismaMock();
 
 if (process.env.NODE_ENV !== "production") {

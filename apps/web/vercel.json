@@ -1,20 +1,12 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
-    {
-      "path": "/api/cron/pre-market",
-      "schedule": "0 3 * * 1-5"
-    },
-    {
-      "path": "/api/cron/post-close",
-      "schedule": "0 11 * * 1-5"
-    },
-    {
-      "path": "/api/cron/month-end",
-      "schedule": "0 11 L * 1-5"
-    },
-    {
-      "path": "/api/cron/provider-health",
-      "schedule": "*/30 * * * *"
-    }
+    { "path": "/api/cron/ingest-eod-fast", "schedule": "20 10 * * 1-5" },
+    { "path": "/api/cron/ingest-eod-enrich", "schedule": "30 12 * * 1-5" },
+    { "path": "/api/cron/pre-market", "schedule": "15 3 * * 1-5" },
+    { "path": "/api/cron/post-close", "schedule": "0 11 * * 1-5" },
+    { "path": "/api/cron/month-end", "schedule": "30 13 28-31 * *" },
+    { "path": "/api/cron/weekly", "schedule": "30 3 * * 6" },
+    { "path": "/api/cron/provider-health", "schedule": "*/30 * * * *" }
   ]
 }

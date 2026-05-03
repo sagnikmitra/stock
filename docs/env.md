@@ -22,6 +22,7 @@ Canonical reference: `.env.example`.
   - `FREE_DATA_PREMARKET_SYMBOL_LIMIT`
   - `FREE_DATA_POSTCLOSE_SYMBOL_LIMIT`
   - `FREE_DATA_BOOTSTRAP_DAYS`
+  - `FREE_DATA_CANDLE_RETENTION_DAYS` (`450` by default)
   - `FREE_DATA_SYMBOL_UNIVERSE_LIMIT` (`0`/unset = uncapped sync)
 - No-key quote fallback:
   - `INDIAN_STOCK_MARKET_API_BASE_URL` (defaults to `https://nse-api-ruby.vercel.app`)

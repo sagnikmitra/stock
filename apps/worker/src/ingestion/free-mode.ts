@@ -1,6 +1,11 @@
 import { prisma } from "@ibo/db";
 import type { Prisma } from "@ibo/db";
-import type { MarketDataAdapter, FiiDiiFlow, MarketBreadth, QuoteSnapshot } from "@ibo/types";
+import type {
+  MarketDataAdapter,
+  FiiDiiFlow,
+  MarketBreadth,
+  QuoteSnapshot,
+} from "@ibo/types";
 import { Timeframe } from "@ibo/types";
 import { getAdapter } from "../adapters";
 
@@ -8,12 +13,18 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const MIN_HISTORY_FOR_INCREMENTAL = 220;
 const INCREMENTAL_OVERLAP_DAYS = 7;
 
-const DEFAULT_QUOTES_PRIORITY = ["nse_official", "indian_stock_market_api", "twelvedata", "fmp"];
+const DEFAULT_QUOTES_PRIORITY = [
+  "nse_official",
+  "indian_stock_market_api",
+  "twelvedata",
+  "fmp",
+];
 const DEFAULT_CONTEXT_PRIORITY = ["nse_official", "twelvedata", "fmp"];
 const DEFAULT_CANDLES_PRIORITY = ["nse_official", "twelvedata", "fmp"];
 const DEFAULT_PREMARKET_SYMBOL_LIMIT = 80;
 const DEFAULT_POSTCLOSE_SYMBOL_LIMIT = 140;
 const DEFAULT_BOOTSTRAP_DAYS = 420;
+const DEFAULT_CANDLE_RETENTION_DAYS = 450;
 const DEFAULT_SYMBOL_UNIVERSE_LIMIT: number | null = null;
 const MIN_EXPECTED_NSE_UNIVERSE = 1500;
 
@@ -39,6 +50,7 @@ interface SyncConfig {
   preMarketSymbolLimit: number;
   postCloseSymbolLimit: number;
   bootstrapDays: number;
+  candleRetentionDays: number;
   symbolUniverseLimit: number | null;
 }
 
@@ -75,7 +87,10 @@ function parsePositiveInt(input: string | undefined, fallback: number): number {
   return Math.floor(parsed);
 }
 
-function parseOptionalPositiveInt(input: string | undefined, fallback: number | null): number | null {
+function parseOptionalPositiveInt(
+  input: string | undefined,
+  fallback: number | null,
+): number | null {
   if (!input || input.trim().length === 0) return fallback;
   const parsed = Number(input);
   if (!Number.isFinite(parsed)) return fallback;
@@ -90,7 +105,10 @@ function toBigIntOrNull(value: unknown): bigint | null {
   return BigInt(Math.max(0, Math.trunc(parsed)));
 }
 
-export function parseProviderPriority(raw: string | undefined, fallback: string[]): string[] {
+export function parseProviderPriority(
+  raw: string | undefined,
+  fallback: string[],
+): string[] {
   if (!raw || raw.trim().length === 0) return [...fallback];
   const unique = new Set(
     raw
@@ -102,18 +120,45 @@ export function parseProviderPriority(raw: string | undefined, fallback: string[
 }
 
 export function isFreeDataSyncEnabled(): boolean {
-  return (process.env.FREE_DATA_SYNC_ENABLED ?? "true").toLowerCase() !== "false";
+  return (
+    (process.env.FREE_DATA_SYNC_ENABLED ?? "true").toLowerCase() !== "false"
+  );
 }
 
 function getSyncConfig(): SyncConfig {
   return {
-    quotePriority: parseProviderPriority(process.env.FREE_QUOTES_PROVIDER_PRIORITY, DEFAULT_QUOTES_PRIORITY),
-    contextPriority: parseProviderPriority(process.env.FREE_CONTEXT_PROVIDER_PRIORITY, DEFAULT_CONTEXT_PRIORITY),
-    candlePriority: parseProviderPriority(process.env.FREE_CANDLE_PROVIDER_PRIORITY, DEFAULT_CANDLES_PRIORITY),
-    preMarketSymbolLimit: parsePositiveInt(process.env.FREE_DATA_PREMARKET_SYMBOL_LIMIT, DEFAULT_PREMARKET_SYMBOL_LIMIT),
-    postCloseSymbolLimit: parsePositiveInt(process.env.FREE_DATA_POSTCLOSE_SYMBOL_LIMIT, DEFAULT_POSTCLOSE_SYMBOL_LIMIT),
-    bootstrapDays: parsePositiveInt(process.env.FREE_DATA_BOOTSTRAP_DAYS, DEFAULT_BOOTSTRAP_DAYS),
-    symbolUniverseLimit: parseOptionalPositiveInt(process.env.FREE_DATA_SYMBOL_UNIVERSE_LIMIT, DEFAULT_SYMBOL_UNIVERSE_LIMIT),
+    quotePriority: parseProviderPriority(
+      process.env.FREE_QUOTES_PROVIDER_PRIORITY,
+      DEFAULT_QUOTES_PRIORITY,
+    ),
+    contextPriority: parseProviderPriority(
+      process.env.FREE_CONTEXT_PROVIDER_PRIORITY,
+      DEFAULT_CONTEXT_PRIORITY,
+    ),
+    candlePriority: parseProviderPriority(
+      process.env.FREE_CANDLE_PROVIDER_PRIORITY,
+      DEFAULT_CANDLES_PRIORITY,
+    ),
+    preMarketSymbolLimit: parsePositiveInt(
+      process.env.FREE_DATA_PREMARKET_SYMBOL_LIMIT,
+      DEFAULT_PREMARKET_SYMBOL_LIMIT,
+    ),
+    postCloseSymbolLimit: parsePositiveInt(
+      process.env.FREE_DATA_POSTCLOSE_SYMBOL_LIMIT,
+      DEFAULT_POSTCLOSE_SYMBOL_LIMIT,
+    ),
+    bootstrapDays: parsePositiveInt(
+      process.env.FREE_DATA_BOOTSTRAP_DAYS,
+      DEFAULT_BOOTSTRAP_DAYS,
+    ),
+    candleRetentionDays: parsePositiveInt(
+      process.env.FREE_DATA_CANDLE_RETENTION_DAYS,
+      DEFAULT_CANDLE_RETENTION_DAYS,
+    ),
+    symbolUniverseLimit: parseOptionalPositiveInt(
+      process.env.FREE_DATA_SYMBOL_UNIVERSE_LIMIT,
+      DEFAULT_SYMBOL_UNIVERSE_LIMIT,
+    ),
   };
 }
 
@@ -124,7 +169,10 @@ async function getProviderMap(): Promise<Map<string, ProviderRow>> {
   return new Map(rows.map((row) => [row.key, row]));
 }
 
-async function createProviderJob(providerId: string, jobKey: string): Promise<string> {
+async function createProviderJob(
+  providerId: string,
+  jobKey: string,
+): Promise<string> {
   const job = await prisma.providerJobRun.create({
     data: {
       providerId,
@@ -151,7 +199,10 @@ async function completeProviderJob(input: {
   });
 }
 
-function adapterSupports(adapter: MarketDataAdapter, capability: Capability): boolean {
+function adapterSupports(
+  adapter: MarketDataAdapter,
+  capability: Capability,
+): boolean {
   switch (capability) {
     case "quotes":
       return adapter.supports.quotes;
@@ -197,7 +248,9 @@ async function fetchWithFallback<T>(input: {
       continue;
     }
     if (!adapterSupports(adapter, input.capability)) {
-      warnings.push(`Provider '${providerKey}' does not support ${input.capability}`);
+      warnings.push(
+        `Provider '${providerKey}' does not support ${input.capability}`,
+      );
       continue;
     }
 
@@ -210,7 +263,9 @@ async function fetchWithFallback<T>(input: {
       });
 
       if (!input.isUsable(value)) {
-        warnings.push(`Provider '${providerKey}' returned empty ${input.capability} payload`);
+        warnings.push(
+          `Provider '${providerKey}' returned empty ${input.capability} payload`,
+        );
         await completeProviderJob({
           jobId,
           status: "failed",
@@ -232,8 +287,11 @@ async function fetchWithFallback<T>(input: {
       });
       return { value, providerKey, warnings };
     } catch (error) {
-      const message = error instanceof Error ? error.message : "unknown provider error";
-      warnings.push(`Provider '${providerKey}' failed ${input.capability}: ${message}`);
+      const message =
+        error instanceof Error ? error.message : "unknown provider error";
+      warnings.push(
+        `Provider '${providerKey}' failed ${input.capability}: ${message}`,
+      );
       await completeProviderJob({
         jobId,
         status: "failed",
@@ -249,7 +307,9 @@ async function fetchWithFallback<T>(input: {
   return { value: null, providerKey: null, warnings };
 }
 
-async function getInstrumentScope(limit: number): Promise<Array<{ id: string; symbol: string }>> {
+async function getInstrumentScope(
+  limit: number,
+): Promise<Array<{ id: string; symbol: string }>> {
   const watchlistItems = await prisma.watchlistItem.findMany({
     where: { isActive: true },
     select: {
@@ -290,7 +350,11 @@ async function syncInstrumentUniverseWithFallback(input: {
   providerOrder: string[];
   providersByKey: Map<string, ProviderRow>;
   targetLimit: number | null;
-}): Promise<{ synced: number; providerUsed: string | null; warnings: string[] }> {
+}): Promise<{
+  synced: number;
+  providerUsed: string | null;
+  warnings: string[];
+}> {
   const warnings: string[] = [];
   const exchange = await prisma.exchange.findUnique({
     where: { code: "NSE" },
@@ -326,7 +390,9 @@ async function syncInstrumentUniverseWithFallback(input: {
     try {
       const symbols = await adapter.getSymbols();
       if (!Array.isArray(symbols) || symbols.length === 0) {
-        warnings.push(`Provider '${providerKey}' returned empty symbols payload`);
+        warnings.push(
+          `Provider '${providerKey}' returned empty symbols payload`,
+        );
         await completeProviderJob({
           jobId,
           status: "failed",
@@ -337,9 +403,21 @@ async function syncInstrumentUniverseWithFallback(input: {
         continue;
       }
 
-      const unique = new Map<string, { symbol: string; companyName: string; exchange: string; isin?: string; sector?: string; industry?: string }>();
+      const unique = new Map<
+        string,
+        {
+          symbol: string;
+          companyName: string;
+          exchange: string;
+          isin?: string;
+          sector?: string;
+          industry?: string;
+        }
+      >();
       for (const item of symbols) {
-        const symbol = String(item.symbol ?? "").trim().toUpperCase();
+        const symbol = String(item.symbol ?? "")
+          .trim()
+          .toUpperCase();
         if (!symbol) continue;
         if (item.exchange && item.exchange.toUpperCase() !== "NSE") continue;
         unique.set(symbol, {
@@ -405,7 +483,8 @@ async function syncInstrumentUniverseWithFallback(input: {
 
       warnings.push(`Provider '${providerKey}' yielded zero valid NSE symbols`);
     } catch (error) {
-      const message = error instanceof Error ? error.message : "unknown provider error";
+      const message =
+        error instanceof Error ? error.message : "unknown provider error";
       warnings.push(`Provider '${providerKey}' failed symbol sync: ${message}`);
       await completeProviderJob({
         jobId,
@@ -433,7 +512,10 @@ async function persistQuotes(input: {
   if (input.quotes.length === 0) return 0;
 
   const bySymbol = new Map(
-    input.instruments.map((instrument) => [instrument.symbol.toUpperCase(), instrument.id]),
+    input.instruments.map((instrument) => [
+      instrument.symbol.toUpperCase(),
+      instrument.id,
+    ]),
   );
 
   const rows = input.quotes
@@ -466,7 +548,8 @@ async function persistFiiDii(input: {
   marketDate: string;
   flow: FiiDiiFlow;
 }): Promise<number> {
-  const marketDate = new Date(`${input.marketDate}T00:00:00.000Z`);
+  const effectiveDate = input.flow.date || input.marketDate;
+  const marketDate = new Date(`${effectiveDate}T00:00:00.000Z`);
   await prisma.fiiDiiSnapshot.upsert({
     where: { date: marketDate },
     update: {
@@ -531,7 +614,9 @@ async function ingestCandlesWithFallback(input: {
   const providersUsed: string[] = [];
   const marketDateObj = new Date(`${input.marketDate}T00:00:00.000Z`);
   const instrumentIds = input.instruments.map((instrument) => instrument.id);
-  const remaining = new Map(input.instruments.map((instrument) => [instrument.id, instrument]));
+  const remaining = new Map(
+    input.instruments.map((instrument) => [instrument.id, instrument]),
+  );
 
   const candleStats = await prisma.candle.groupBy({
     by: ["instrumentId"],
@@ -589,7 +674,9 @@ async function ingestCandlesWithFallback(input: {
         const stat = statByInstrument.get(instrument.id);
         const fromDate =
           stat?.latestTs && stat.count >= MIN_HISTORY_FOR_INCREMENTAL
-            ? new Date(stat.latestTs.getTime() - INCREMENTAL_OVERLAP_DAYS * DAY_MS)
+            ? new Date(
+                stat.latestTs.getTime() - INCREMENTAL_OVERLAP_DAYS * DAY_MS,
+              )
             : new Date(marketDateObj.getTime() - input.bootstrapDays * DAY_MS);
 
         const series = await adapter.getHistoricalCandles({
@@ -603,7 +690,8 @@ async function ingestCandlesWithFallback(input: {
 
         let symbolRows = 0;
         for (const candle of series.candles) {
-          if (!Number.isFinite(candle.open) || !Number.isFinite(candle.close)) continue;
+          if (!Number.isFinite(candle.open) || !Number.isFinite(candle.close))
+            continue;
           const ts = new Date(candle.ts);
           if (Number.isNaN(ts.getTime())) continue;
 
@@ -663,8 +751,11 @@ async function ingestCandlesWithFallback(input: {
         },
       });
     } catch (error) {
-      const message = error instanceof Error ? error.message : "unknown provider error";
-      warnings.push(`Provider '${providerKey}' failed daily candle ingest: ${message}`);
+      const message =
+        error instanceof Error ? error.message : "unknown provider error";
+      warnings.push(
+        `Provider '${providerKey}' failed daily candle ingest: ${message}`,
+      );
       await completeProviderJob({
         jobId,
         status: "failed",
@@ -687,7 +778,27 @@ async function ingestCandlesWithFallback(input: {
   };
 }
 
-async function runFreeDataSync(phase: SyncPhase, marketDateInput?: string): Promise<FreeDataSyncResult> {
+async function pruneOldDailyCandles(input: {
+  marketDate: string;
+  retentionDays: number;
+}): Promise<number> {
+  const marketDateObj = new Date(`${input.marketDate}T00:00:00.000Z`);
+  const cutoff = new Date(
+    marketDateObj.getTime() - input.retentionDays * DAY_MS,
+  );
+  const result = await prisma.candle.deleteMany({
+    where: {
+      timeframe: "D1",
+      ts: { lt: cutoff },
+    },
+  });
+  return result.count;
+}
+
+async function runFreeDataSync(
+  phase: SyncPhase,
+  marketDateInput?: string,
+): Promise<FreeDataSyncResult> {
   const marketDate = marketDateInput ?? toDateKey(new Date());
   const config = getSyncConfig();
   const providersByKey = await getProviderMap();
@@ -697,7 +808,9 @@ async function runFreeDataSync(phase: SyncPhase, marketDateInput?: string): Prom
       : config.postCloseSymbolLimit;
   const warnings: string[] = [];
   let symbolsSynced = 0;
-  const activeInstrumentCount = await prisma.instrument.count({ where: { isActive: true } });
+  const activeInstrumentCount = await prisma.instrument.count({
+    where: { isActive: true },
+  });
   const shouldSyncSymbols =
     activeInstrumentCount === 0 ||
     (config.symbolUniverseLimit != null
@@ -724,7 +837,8 @@ async function runFreeDataSync(phase: SyncPhase, marketDateInput?: string): Prom
     providersByKey,
     capability: "quotes",
     jobKey: `${phase}_quotes`,
-    execute: async ({ adapter }) => adapter.getQuotes(instruments.map((instrument) => instrument.symbol)),
+    execute: async ({ adapter }) =>
+      adapter.getQuotes(instruments.map((instrument) => instrument.symbol)),
     isUsable: (quotes) => quotes.length > 0,
   });
   warnings.push(...quotesResult.warnings);
@@ -801,6 +915,16 @@ async function runFreeDataSync(phase: SyncPhase, marketDateInput?: string): Prom
     candleSymbolsCovered = candleResult.coveredSymbols;
     candleSymbolsMissing = candleResult.missingSymbols;
     candleProviders = candleResult.providersUsed;
+
+    const prunedCandles = await pruneOldDailyCandles({
+      marketDate,
+      retentionDays: config.candleRetentionDays,
+    });
+    if (prunedCandles > 0) {
+      warnings.push(
+        `Pruned ${prunedCandles} D1 candles older than ${config.candleRetentionDays} days`,
+      );
+    }
   }
 
   return {
@@ -826,10 +950,14 @@ async function runFreeDataSync(phase: SyncPhase, marketDateInput?: string): Prom
   };
 }
 
-export async function runFreePreMarketSync(marketDate?: string): Promise<FreeDataSyncResult> {
+export async function runFreePreMarketSync(
+  marketDate?: string,
+): Promise<FreeDataSyncResult> {
   return runFreeDataSync("pre_market", marketDate);
 }
 
-export async function runFreePostCloseSync(marketDate?: string): Promise<FreeDataSyncResult> {
+export async function runFreePostCloseSync(
+  marketDate?: string,
+): Promise<FreeDataSyncResult> {
   return runFreeDataSync("post_close", marketDate);
 }

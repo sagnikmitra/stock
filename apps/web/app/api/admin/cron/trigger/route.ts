@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@ibo/db";
 
-const VALID_PIPELINES = ["pre-market", "post-close", "month-end"] as const;
+const VALID_PIPELINES = [
+  "ingest-eod-fast",
+  "ingest-eod-enrich",
+  "pre-market",
+  "post-close",
+  "provider-health",
+  "weekly",
+  "month-end",
+] as const;
 type Pipeline = (typeof VALID_PIPELINES)[number];
 
 function isValidPipeline(value: unknown): value is Pipeline {

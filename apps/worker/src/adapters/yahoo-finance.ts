@@ -82,12 +82,13 @@ export class YahooFinanceAdapter extends BaseAdapter {
           out.push({
             symbol: bareSym,
             ltp: px,
-            dayOpen: numeric(anyQ.regularMarketOpen),
-            dayHigh: numeric(anyQ.regularMarketDayHigh),
-            dayLow: numeric(anyQ.regularMarketDayLow),
-            prevClose: numeric(anyQ.regularMarketPreviousClose),
+            open: numeric(anyQ.regularMarketOpen),
+            high: numeric(anyQ.regularMarketDayHigh),
+            low: numeric(anyQ.regularMarketDayLow),
+            close: numeric(anyQ.regularMarketPreviousClose),
+            changePct: numeric(anyQ.regularMarketChangePercent),
             volume: numeric(anyQ.regularMarketVolume),
-            asOf: new Date().toISOString(),
+            ts: new Date(),
           });
         }
       } catch {
@@ -132,7 +133,7 @@ export class YahooFinanceAdapter extends BaseAdapter {
   async getIndexSeries(input: IndexRequest): Promise<CandleSeries> {
     return this.getHistoricalCandles({
       symbol: input.symbol,
-      timeframe: input.timeframe ?? Timeframe.D1,
+      timeframe: Timeframe.D1,
       from: input.from,
       to: input.to,
     });

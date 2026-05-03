@@ -16,6 +16,7 @@ Optional tuning:
 - `FREE_DATA_PREMARKET_SYMBOL_LIMIT=80`
 - `FREE_DATA_POSTCLOSE_SYMBOL_LIMIT=140`
 - `FREE_DATA_BOOTSTRAP_DAYS=420`
+- `FREE_DATA_CANDLE_RETENTION_DAYS=450`
 - `FREE_DATA_SYMBOL_UNIVERSE_LIMIT=0` (`0`/unset = uncapped NSE symbol sync)
 
 Notes:
@@ -59,6 +60,8 @@ This performs:
 - `FiiDiiSnapshot` (if source supports)
 - `MarketBreadthSnapshot` (if source supports)
 - `Candle` (`D1`, with bootstrap + incremental overlap)
+
+`Candle` keeps a 450-day hot window in Supabase by default. Older daily candles are rebuildable from providers and are pruned after post-close sync to keep the database small.
 
 ## 5. Validation
 

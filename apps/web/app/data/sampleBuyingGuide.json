@@ -1,0 +1,626 @@
+{
+  "as_of": "2026-04-24 post-market, India",
+  "cadence": "weekly",
+  "week_label": "Week ending 2026-04-24",
+  "intent": "swing_trading_research_watchlist",
+  "disclaimer": "This is not financial advice or a guaranteed buy/sell call. Treat this as a structured watchlist and risk plan. Use your broker chart before placing orders because gap openings can invalidate these levels.",
+  "market_regime": {
+    "bias": "cautious_selective_longs_only",
+    "regime_score_out_of_100": 42,
+    "summary": "The market is weak-to-fragile, not clean bullish. Nifty closed below 24,000 at 23,897.95, Sensex fell 1.27%, crude stayed elevated, IT was under heavy selling pressure, and the rupee weakened sharply. Swing trades should be selective, smaller in size, and only near defined support/retest zones.",
+    "macro_risks": [
+      {
+        "risk": "Crude oil shock",
+        "impact": "Negative for India macro, inflation, current account, rupee, autos, aviation, paints, OMCs, and broad risk appetite.",
+        "evidence": "Brent crude was reported near $107.25/barrel while the rupee logged its steepest weekly drop since 2022."
+      },
+      {
+        "risk": "Foreign selling and valuation compression",
+        "impact": "High-valuation names can derate quickly; avoid blind breakout chasing.",
+        "evidence": "J.P. Morgan downgraded Indian equities to neutral due to oil-led earnings risks, higher valuations, and trimmed earnings estimates across several sectors."
+      },
+      {
+        "risk": "IT sector breakdown",
+        "impact": "Avoid fresh swing longs in large-cap IT until reversal confirmation.",
+        "evidence": "Nifty IT lost about 10.3% for the week after weak guidance from major IT firms."
+      }
+    ],
+    "index_levels": {
+      "nifty_50": {
+        "close": 23897.95,
+        "immediate_support_zone": [23800, 23900],
+        "danger_zone_below": 23600,
+        "first_reclaim_zone": [24150, 24200],
+        "safer_bullish_reclaim": 24600,
+        "trade_rule": "Take longs only if Nifty holds 23,800-23,900 or reclaims 24,150+. If Nifty breaks 23,600, stop forcing long swing trades.",
+        "evidence": "Trading plan flagged caution until Nifty reclaims and sustains above 24,600, with near-term downside levels around 24,000-23,900 after a 24,100 break."
+      },
+      "bank_nifty": {
+        "support_zone": [55700, 55800],
+        "secondary_support": 55500,
+        "major_support": 54400,
+        "resistance_zone": [56850, 57000],
+        "trade_rule": "Bank trades are allowed only if Bank Nifty holds 55,700-55,800. Fresh aggressive bank longs become better only above 57,000.",
+        "evidence": "Technical commentary placed Bank Nifty support near 55,700-55,800 and resistance near 56,850-57,000."
+      }
+    },
+    "position_sizing_rules": {
+      "risk_per_trade_percent": {
+        "conservative": 0.5,
+        "standard": 0.75,
+        "maximum": 1.0
+      },
+      "max_open_positions": 4,
+      "max_total_portfolio_risk_percent": 3.0,
+      "entry_split": {
+        "first_entry": "60% of planned quantity inside limit-buy zone",
+        "second_entry": "40% only after price confirms with reclaim/retest or market breadth improves"
+      },
+      "quantity_formula": "quantity = max_rupee_risk_per_trade / abs(entry_price - stop_loss)",
+      "hard_rule": "Do not average down below stop-loss. That is not swing trading; that is loss denial."
+    }
+  },
+  "strategy_framework_considered": {
+    "enabled_strategies": [
+      {
+        "name": "relative_strength_pullback",
+        "definition": "Stock holds green or falls less than index during market weakness, then is bought near support.",
+        "best_for": ["SBI", "Coal India", "Bharti Airtel", "HDFC Bank"]
+      },
+      {
+        "name": "breakout_retest",
+        "definition": "Stock near 52-week or recent swing high; buy only after breakout or controlled retest, not at random intraday spike.",
+        "best_for": ["Coal India", "BEL", "Titan", "Nestle India"]
+      },
+      {
+        "name": "trend_continuation_pullback",
+        "definition": "Strong structural stock pulls back to previous support / demand zone while broader trend remains intact.",
+        "best_for": ["L&T", "Titan", "BEL"]
+      },
+      {
+        "name": "defensive_sector_rotation",
+        "definition": "Money rotates into lower-beta or relatively resilient sectors during weak index sessions.",
+        "best_for": ["Bharti Airtel", "Nestle India", "HDFC Bank"]
+      },
+      {
+        "name": "earnings_or_event_momentum",
+        "definition": "Stock moves because of results/news; entry allowed only after the first reaction stabilizes.",
+        "best_for": ["Nestle India", "Cipla"],
+        "warning": "Never buy a huge result candle blindly. Wait for pullback or breakout continuation."
+      },
+      {
+        "name": "mean_reversion_from_support",
+        "definition": "Large-cap stock near short-term support after controlled fall; buy only if support holds.",
+        "best_for": ["HDFC Bank", "Cipla", "Bharti Airtel"]
+      },
+      {
+        "name": "opening_range_breakout",
+        "definition": "Wait first 30-45 minutes; buy only if stock breaks opening range high while Nifty is stable.",
+        "best_for": ["SBI", "BEL", "Coal India"],
+        "condition": "Use only if the stock opens inside or near the planned buy zone. Do not use after a large gap-up."
+      },
+      {
+        "name": "vwap_bounce_addition",
+        "definition": "Use VWAP intraday only for add-on entry, not for the first swing entry.",
+        "best_for": ["BEL", "SBI", "L&T"]
+      }
+    ],
+    "disabled_strategies": [
+      {
+        "name": "falling_knife_IT_buying",
+        "reason": "IT sector has a sector-wide breakdown and weak outlook. Avoid until reversal structure appears."
+      },
+      {
+        "name": "buying_gap_up_without_retest",
+        "reason": "High VIX / fragile market regime makes failed gap-ups common."
+      },
+      {
+        "name": "averaging_down",
+        "reason": "Invalid for swing trading. If the stop hits, the thesis is wrong."
+      },
+      {
+        "name": "pre_result_gambling",
+        "reason": "Avoid taking fresh overnight exposure just before results unless the trade is explicitly event-risk sized."
+      }
+    ]
+  },
+  "final_watchlist": [
+    {
+      "rank": 1,
+      "symbol": "SBIN",
+      "stock": "State Bank of India",
+      "sector": "Public sector bank",
+      "latest_price": 1101.1,
+      "day_range": [1090.05, 1106],
+      "fifty_two_week_range": [755.5, 1234.7],
+      "source": "Moneycontrol quote as of 24 Apr 2026 03:59.",
+      "setup_score_out_of_100": 82,
+      "risk_grade": "medium",
+      "primary_strategy": "relative_strength_pullback",
+      "secondary_strategies": ["bank_nifty_rotation", "opening_range_breakout", "vwap_bounce_addition"],
+      "why_selected": "SBI closed positive while the broader market was weak. It is currently cleaner than most private bank alternatives because it showed relative strength instead of just falling less.",
+      "limit_buy_zone": [1090, 1104],
+      "ideal_entry_zone": [1094, 1100],
+      "breakout_entry_above": 1114,
+      "avoid_chasing_above": 1124,
+      "stop_loss": {
+        "hard_sl": 1075,
+        "closing_basis_sl": 1080,
+        "reason": "Below recent intraday support and below the planned demand zone."
+      },
+      "targets": {
+        "target_1": 1124,
+        "target_2": 1145,
+        "target_3": 1170
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 1097,
+        "risk_per_share": 22,
+        "r_to_t1": 1.23,
+        "r_to_t2": 2.18,
+        "r_to_t3": 3.32
+      },
+      "trade_management": {
+        "book_at_t1": "Book 30-40%. Move SL to cost for remaining quantity.",
+        "trail_after_t2": "Trail below previous day low or 20 EMA on hourly chart.",
+        "invalid_if": "Bank Nifty breaks below 55,700-55,800 or SBI closes below 1,075."
+      },
+      "verdict": "top_pick"
+    },
+    {
+      "rank": 2,
+      "symbol": "COALINDIA",
+      "stock": "Coal India",
+      "sector": "Mining / commodity defensive",
+      "latest_price": 456.9,
+      "day_range": [451.3, 462.15],
+      "fifty_two_week_range": [368.55, 475.95],
+      "source": "Moneycontrol quote as of 24 Apr 2026 04:01.",
+      "setup_score_out_of_100": 80,
+      "risk_grade": "medium",
+      "primary_strategy": "breakout_retest",
+      "secondary_strategies": ["relative_strength", "defensive_rotation"],
+      "why_selected": "Strong close in a weak market and trading close to its 52-week high. This is a better relative-strength candidate than trying to bottom-fish broken sectors.",
+      "limit_buy_zone": [452, 458],
+      "ideal_entry_zone": [453, 456],
+      "breakout_entry_above": 462,
+      "avoid_chasing_above": 466,
+      "stop_loss": {
+        "hard_sl": 443,
+        "closing_basis_sl": 446,
+        "reason": "Below the pullback/retest area; if this breaks, the breakout-retest thesis weakens."
+      },
+      "targets": {
+        "target_1": 466,
+        "target_2": 476,
+        "target_3": 492
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 455,
+        "risk_per_share": 12,
+        "r_to_t1": 0.92,
+        "r_to_t2": 1.75,
+        "r_to_t3": 3.08
+      },
+      "trade_management": {
+        "book_at_t1": "Book only small partial because T1 is close; main trade is T2/T3.",
+        "trail_after_t2": "Trail below 455 if 476 is reached.",
+        "invalid_if": "Close below 443 or failed breakout above 462 followed by heavy selling."
+      },
+      "verdict": "top_pick"
+    },
+    {
+      "rank": 3,
+      "symbol": "LT",
+      "stock": "Larsen & Toubro",
+      "sector": "Infrastructure / engineering",
+      "latest_price": 4014.3,
+      "day_range": [3983.2, 4088.1],
+      "fifty_two_week_range": [3230.1, 4440],
+      "source": "Moneycontrol quote as of 24 Apr 2026 03:59.",
+      "setup_score_out_of_100": 77,
+      "risk_grade": "medium",
+      "primary_strategy": "trend_continuation_pullback",
+      "secondary_strategies": ["infra_rotation", "support_reclaim"],
+      "why_selected": "High-quality liquid infra name with manageable pullback structure. Better than chasing smaller infra counters in a volatile market.",
+      "limit_buy_zone": [3970, 4020],
+      "ideal_entry_zone": [3980, 4005],
+      "breakout_entry_above": 4095,
+      "avoid_chasing_above": 4120,
+      "stop_loss": {
+        "hard_sl": 3915,
+        "closing_basis_sl": 3940,
+        "reason": "Below the support band and below recent intraday weakness."
+      },
+      "targets": {
+        "target_1": 4088,
+        "target_2": 4150,
+        "target_3": 4220
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 3995,
+        "risk_per_share": 80,
+        "r_to_t1": 1.16,
+        "r_to_t2": 1.94,
+        "r_to_t3": 2.81
+      },
+      "trade_management": {
+        "book_at_t1": "Book 30%. Hold remaining only if Nifty is above 24,150.",
+        "trail_after_t2": "Trail below 4,050 after 4,150 is reached.",
+        "invalid_if": "Nifty breaks 23,600 or L&T closes below 3,915."
+      },
+      "verdict": "top_pick"
+    },
+    {
+      "rank": 4,
+      "symbol": "BEL",
+      "stock": "Bharat Electronics",
+      "sector": "Defence / aerospace",
+      "latest_price": 444.45,
+      "day_range": [438.75, 451.2],
+      "fifty_two_week_range": [293.7, 473.45],
+      "source": "Moneycontrol quote as of 24 Apr 2026 03:59.",
+      "setup_score_out_of_100": 75,
+      "risk_grade": "medium_high",
+      "primary_strategy": "defence_momentum_pullback",
+      "secondary_strategies": ["breakout_retest", "vwap_bounce_addition"],
+      "why_selected": "Still structurally strong and near highs, but volatility is higher. Good trade only if bought near support, not chased.",
+      "limit_buy_zone": [438, 445],
+      "ideal_entry_zone": [440, 443],
+      "breakout_entry_above": 456,
+      "avoid_chasing_above": 460,
+      "stop_loss": {
+        "hard_sl": 428,
+        "closing_basis_sl": 432,
+        "reason": "Below the lower support zone. Below this, momentum structure weakens."
+      },
+      "targets": {
+        "target_1": 456,
+        "target_2": 466,
+        "target_3": 475
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 441.5,
+        "risk_per_share": 13.5,
+        "r_to_t1": 1.07,
+        "r_to_t2": 1.81,
+        "r_to_t3": 2.48
+      },
+      "trade_management": {
+        "book_at_t1": "Book 40% because defence names can reverse sharply.",
+        "trail_after_t2": "Trail below 452 after 466 is reached.",
+        "invalid_if": "Close below 428 or failed breakout above 456 with high-volume rejection."
+      },
+      "verdict": "top_pick_but_volatile"
+    },
+    {
+      "rank": 5,
+      "symbol": "BHARTIARTL",
+      "stock": "Bharti Airtel",
+      "sector": "Telecom",
+      "latest_price": 1819.95,
+      "day_range": [1807.3, 1850.9],
+      "fifty_two_week_range": [1747.15, 2174.7],
+      "source": "Moneycontrol quote as of 24 Apr 2026 04:01.",
+      "setup_score_out_of_100": 72,
+      "risk_grade": "medium",
+      "primary_strategy": "defensive_sector_rotation",
+      "secondary_strategies": ["support_pullback", "mean_reversion"],
+      "why_selected": "Defensive large-cap setup. Not explosive, but suitable when market is fragile and IT/cyclicals are weak.",
+      "limit_buy_zone": [1805, 1825],
+      "ideal_entry_zone": [1810, 1818],
+      "breakout_entry_above": 1851,
+      "avoid_chasing_above": 1865,
+      "stop_loss": {
+        "hard_sl": 1768,
+        "closing_basis_sl": 1780,
+        "reason": "Below nearby swing support and close enough to prevent oversized loss."
+      },
+      "targets": {
+        "target_1": 1851,
+        "target_2": 1890,
+        "target_3": 1930
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 1815,
+        "risk_per_share": 47,
+        "r_to_t1": 0.77,
+        "r_to_t2": 1.6,
+        "r_to_t3": 2.45
+      },
+      "trade_management": {
+        "book_at_t1": "Book 25-30%; this is not a high-beta stock.",
+        "trail_after_t2": "Trail below 1,850 after 1,890 is reached.",
+        "invalid_if": "Close below 1,768 or Nifty breaks 23,600."
+      },
+      "verdict": "good_defensive_pick"
+    },
+    {
+      "rank": 6,
+      "symbol": "NESTLEIND",
+      "stock": "Nestle India",
+      "sector": "FMCG / food processing",
+      "latest_price": 1419,
+      "day_range": [1409.7, 1431.15],
+      "fifty_two_week_range": [1085, 1431.15],
+      "source": "Moneycontrol quote as of 24 Apr 2026 04:01.",
+      "setup_score_out_of_100": 71,
+      "risk_grade": "medium_high_due_to_extension",
+      "primary_strategy": "earnings_momentum_pullback",
+      "secondary_strategies": ["breakout_retest", "defensive_sector_rotation"],
+      "why_selected": "Strong earnings-backed momentum. Nestle reported 26% YoY profit growth and strong revenue growth, but the stock is already near a 52-week high, so entry discipline is mandatory.",
+      "limit_buy_zone": [1390, 1415],
+      "ideal_entry_zone": [1395, 1408],
+      "breakout_entry_above": 1432,
+      "avoid_chasing_above": 1440,
+      "stop_loss": {
+        "hard_sl": 1362,
+        "closing_basis_sl": 1375,
+        "reason": "Below post-result support; below this, the result-momentum trade cools off."
+      },
+      "targets": {
+        "target_1": 1431,
+        "target_2": 1470,
+        "target_3": 1500
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 1402.5,
+        "risk_per_share": 40.5,
+        "r_to_t1": 0.7,
+        "r_to_t2": 1.67,
+        "r_to_t3": 2.41
+      },
+      "trade_management": {
+        "book_at_t1": "Book only partial because breakout above 1,431 can extend.",
+        "trail_after_t2": "Trail below 1,420 once 1,470 is reached.",
+        "invalid_if": "Close below 1,362 or failed breakout above 1,432 followed by close below 1,400."
+      },
+      "verdict": "good_but_do_not_chase"
+    },
+    {
+      "rank": 7,
+      "symbol": "HDFCBANK",
+      "stock": "HDFC Bank",
+      "sector": "Private sector bank",
+      "latest_price": 785.5,
+      "day_range": [777, 787.85],
+      "fifty_two_week_range": [726.75, 1020.35],
+      "source": "Moneycontrol quote as of 24 Apr 2026 04:01.",
+      "setup_score_out_of_100": 69,
+      "risk_grade": "low_medium",
+      "primary_strategy": "conservative_mean_reversion",
+      "secondary_strategies": ["bank_nifty_support_hold", "defensive_largecap"],
+      "why_selected": "HDFC Bank is not the strongest momentum name, but it is liquid, relatively defensive, and held positive in a weak market.",
+      "limit_buy_zone": [778, 786],
+      "ideal_entry_zone": [780, 784],
+      "breakout_entry_above": 792,
+      "avoid_chasing_above": 800,
+      "stop_loss": {
+        "hard_sl": 766,
+        "closing_basis_sl": 772,
+        "reason": "Below current base support; if this breaks, the mean-reversion trade fails."
+      },
+      "targets": {
+        "target_1": 800,
+        "target_2": 815,
+        "target_3": 835
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 782,
+        "risk_per_share": 16,
+        "r_to_t1": 1.13,
+        "r_to_t2": 2.06,
+        "r_to_t3": 3.31
+      },
+      "trade_management": {
+        "book_at_t1": "Book 30% and move SL to cost.",
+        "trail_after_t2": "Trail below 800 after 815 is hit.",
+        "invalid_if": "Bank Nifty breaks 55,700 or HDFC Bank closes below 766."
+      },
+      "verdict": "conservative_pick"
+    },
+    {
+      "rank": 8,
+      "symbol": "AXISBANK",
+      "stock": "Axis Bank",
+      "sector": "Private sector bank",
+      "latest_price": 1362.85,
+      "day_range": [1350, 1375],
+      "fifty_two_week_range": [1042.5, 1418.3],
+      "source": "Moneycontrol quote as of 24 Apr 2026 04:01; page also flagged earnings expected on 25 Apr 2026.",
+      "setup_score_out_of_100": 67,
+      "risk_grade": "high_due_to_event_risk",
+      "primary_strategy": "near_high_retest_with_event_filter",
+      "secondary_strategies": ["bank_nifty_rotation", "breakout_retest"],
+      "why_selected": "Technically stronger than ICICI because it is closer to its 52-week high, but upcoming earnings make it risky for overnight swing exposure.",
+      "limit_buy_zone": [1352, 1365],
+      "ideal_entry_zone": [1355, 1362],
+      "breakout_entry_above": 1376,
+      "avoid_chasing_above": 1385,
+      "stop_loss": {
+        "hard_sl": 1338,
+        "closing_basis_sl": 1345,
+        "reason": "Below the recent low band and below the event-risk protection area."
+      },
+      "targets": {
+        "target_1": 1376,
+        "target_2": 1418,
+        "target_3": 1450
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 1358.5,
+        "risk_per_share": 20.5,
+        "r_to_t1": 0.85,
+        "r_to_t2": 2.9,
+        "r_to_t3": 4.46
+      },
+      "trade_management": {
+        "book_at_t1": "Book 50% before results if already in profit.",
+        "trail_after_t2": "Trail below 1,376 if 1,418 is reached.",
+        "invalid_if": "Poor result reaction, gap-down below 1,338, or Bank Nifty below 55,700.",
+        "special_rule": "Avoid fresh overnight position before result unless position size is cut by 50%."
+      },
+      "verdict": "technically_good_but_event_risky"
+    },
+    {
+      "rank": 9,
+      "symbol": "TITAN",
+      "stock": "Titan Company",
+      "sector": "Consumer discretionary / jewellery",
+      "latest_price": 4411.9,
+      "day_range": [4360.15, 4485.35],
+      "fifty_two_week_range": [3246.15, 4548.95],
+      "source": "Moneycontrol quote as of 24 Apr 2026 04:01.",
+      "setup_score_out_of_100": 65,
+      "risk_grade": "medium_high_due_to_expensive_zone",
+      "primary_strategy": "quality_momentum_pullback",
+      "secondary_strategies": ["breakout_retest", "relative_strength"],
+      "why_selected": "High-quality momentum stock trading close to its 52-week high, but the stock is expensive and the day range is wide, so bad entries can hurt.",
+      "limit_buy_zone": [4365, 4420],
+      "ideal_entry_zone": [4380, 4405],
+      "breakout_entry_above": 4550,
+      "avoid_chasing_above": 4565,
+      "stop_loss": {
+        "hard_sl": 4290,
+        "closing_basis_sl": 4325,
+        "reason": "Below the short-term support band and below recent volatility range."
+      },
+      "targets": {
+        "target_1": 4485,
+        "target_2": 4550,
+        "target_3": 4650
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 4392.5,
+        "risk_per_share": 102.5,
+        "r_to_t1": 0.9,
+        "r_to_t2": 1.54,
+        "r_to_t3": 2.51
+      },
+      "trade_management": {
+        "book_at_t1": "Book 30-40%; do not hold full size into rejection near 4,550.",
+        "trail_after_t2": "Trail below 4,485 if 4,550 is hit.",
+        "invalid_if": "Close below 4,290 or broad consumer discretionary weakness."
+      },
+      "verdict": "watchlist_only_unless_good_pullback"
+    },
+    {
+      "rank": 10,
+      "symbol": "CIPLA",
+      "stock": "Cipla",
+      "sector": "Pharma",
+      "latest_price": 1295,
+      "day_range": [1254.1, 1303.9],
+      "fifty_two_week_range": [1165.7, 1672.2],
+      "source": "Moneycontrol quote as of 24 Apr 2026 03:58/04:01.",
+      "setup_score_out_of_100": 63,
+      "risk_grade": "medium_high",
+      "primary_strategy": "conditional_reversal_pullback",
+      "secondary_strategies": ["event_momentum", "mean_reversion"],
+      "why_selected": "Cipla had a wide intraday range and some supportive news/research flow, but pharma is mixed and this is not as clean as SBI/Coal/L&T. It is a conditional trade, not a first-priority trade.",
+      "limit_buy_zone": [1270, 1295],
+      "ideal_entry_zone": [1275, 1285],
+      "breakout_entry_above": 1305,
+      "avoid_chasing_above": 1320,
+      "stop_loss": {
+        "hard_sl": 1245,
+        "closing_basis_sl": 1254,
+        "reason": "Below the intraday support zone. If 1,245 breaks, reversal structure fails."
+      },
+      "targets": {
+        "target_1": 1305,
+        "target_2": 1340,
+        "target_3": 1375
+      },
+      "risk_reward_from_mid_entry": {
+        "mid_entry": 1282.5,
+        "risk_per_share": 37.5,
+        "r_to_t1": 0.6,
+        "r_to_t2": 1.53,
+        "r_to_t3": 2.47
+      },
+      "trade_management": {
+        "book_at_t1": "Book only if weak rejection appears near 1,305; otherwise hold partial for 1,340.",
+        "trail_after_t2": "Trail below 1,305 after 1,340 is hit.",
+        "invalid_if": "Close below 1,245 or weak pharma breadth."
+      },
+      "verdict": "conditional_only"
+    }
+  ],
+  "highest_conviction_basket": {
+    "max_positions": 5,
+    "stocks": ["SBIN", "COALINDIA", "LT", "BEL", "BHARTIARTL"],
+    "reason": "These offer the best current combination of relative strength, sector preference, liquidity, and defined invalidation."
+  },
+  "defensive_basket": {
+    "max_positions": 3,
+    "stocks": ["HDFCBANK", "BHARTIARTL", "NESTLEIND"],
+    "reason": "Better for a fragile index environment where capital preservation matters more than aggressive upside."
+  },
+  "conditional_basket": {
+    "stocks": ["AXISBANK", "TITAN", "CIPLA"],
+    "reason": "Good only if trigger conditions are met. Do not force entry."
+  },
+  "excluded_or_low_priority": [
+    {
+      "stock_or_sector": "Infosys / HCLTech / TCS / broad IT",
+      "reason": "Sector-wide breakdown, weak FY27 guidance, and heavy weekly fall in Nifty IT. Avoid fresh swing longs until reversal confirmation."
+    },
+    {
+      "stock_or_sector": "Reliance Industries",
+      "reason": "Not a clean swing long right now because quarterly profit missed estimates and Middle East conflict/crude supply issues affected costs and refining earnings."
+    },
+    {
+      "stock_or_sector": "ICICI Bank",
+      "reason": "Liquid and fundamentally strong, but short-term relative strength is weaker than SBI and Axis. ICICI fell 1.62% while SBI closed positive."
+    },
+    {
+      "stock_or_sector": "Random smallcaps / illiquid momentum names",
+      "reason": "High volatility and weak index structure increase slippage risk. Not worth it unless you are actively monitoring intraday."
+    }
+  ],
+  "execution_protocol": {
+    "before_market_open": [
+      "Check SGX/GIFT Nifty direction.",
+      "Check crude oil and USD/INR direction.",
+      "Mark Nifty 23,800, 23,600, 24,150 and Bank Nifty 55,700-55,800, 57,000."
+    ],
+    "first_30_minutes": [
+      "Do not place full orders in first 5 minutes.",
+      "Let opening range form.",
+      "Reject any stock that gaps above avoid_chasing_above level.",
+      "If Nifty breaks below 23,800 in first hour, reduce all planned quantity by 50%."
+    ],
+    "entry_rules": [
+      "Prefer limit orders inside the buy zone.",
+      "Use 60% quantity on first entry.",
+      "Add 40% only after reclaim/breakout confirmation.",
+      "Never buy below the stop-loss just because it looks cheaper."
+    ],
+    "exit_rules": [
+      "If target_1 hits, book partial profit.",
+      "If stop-loss hits, exit fully.",
+      "If Nifty closes below 23,600, close weak trades and stop new long swing entries.",
+      "If stock hits target_2, trail aggressively instead of hoping for unlimited upside."
+    ],
+    "capital_example": {
+      "example_capital": 200000,
+      "risk_per_trade_percent": 0.75,
+      "max_loss_per_trade": 1500,
+      "example": {
+        "stock": "SBIN",
+        "entry": 1097,
+        "stop_loss": 1075,
+        "risk_per_share": 22,
+        "quantity": 68,
+        "logic": "1500 / 22 = 68 shares approximately"
+      }
+    }
+  },
+  "final_verdict": {
+    "best_8_to_10_watchlist": ["SBIN", "COALINDIA", "LT", "BEL", "BHARTIARTL", "NESTLEIND", "HDFCBANK", "AXISBANK", "TITAN", "CIPLA"],
+    "best_5_for_actual_execution": ["SBIN", "COALINDIA", "LT", "BEL", "BHARTIARTL"],
+    "market_condition": "selective_long_only",
+    "brutal_rule": "The worst move now is buying 10 stocks together. Pick 3-5 max, use hard stops, and skip trades if they gap beyond the planned zone."
+  }
+}

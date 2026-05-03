@@ -1,6 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
+import sampleBuyingGuide from "@/data/sampleBuyingGuide.json";
+import {
+  formatCurrencyINR,
+  formatRange,
+  getRewardToRisk,
+  getStatusColor,
+  getTradeStatus,
+} from "@/lib/buying-guide-utils";
+import type { BuyingGuide, BuyingGuideStock } from "@/types/buying-guide";
 
 type Mode = "intersection" | "union" | "difference";
 
@@ -29,6 +39,10 @@ export function ScreenerLabClient({ screeners }: Props) {
     () => screeners.filter((screener) => !screener.isExternalReference),
     [screeners],
   );
+  const buyingGuideLookup = useMemo(() => {
+    const guide = sampleBuyingGuide as unknown as BuyingGuide;
+    return new Map((guide.final_watchlist ?? []).map((stock) => [normalizeSymbol(stock.symbol), stock]));
+  }, []);
 
   const [selected, setSelected] = useState<string[]>([]);
   const [mode, setMode] = useState<Mode>("intersection");
@@ -201,6 +215,7 @@ export function ScreenerLabClient({ screeners }: Props) {
             </button>
             {results.map((row) => {
               const open = expanded[row.symbol] ?? false;
+              const guideStock = buyingGuideLookup.get(normalizeSymbol(row.symbol));
               return (
                 <div key={row.symbol} className="rounded-xl border border-slate-200/80 bg-white/90 p-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
@@ -216,6 +231,7 @@ export function ScreenerLabClient({ screeners }: Props) {
                       </p>
                     </div>
                   </div>
+                  {guideStock ? <BuyingGuideRowBadge stock={guideStock} /> : null}
                   <button
                     type="button"
                     onClick={() => setExpanded((current) => ({ ...current, [row.symbol]: !open }))}
@@ -239,4 +255,29 @@ export function ScreenerLabClient({ screeners }: Props) {
       </div>
     </div>
   );
+}
+
+function BuyingGuideRowBadge({ stock }: { stock: BuyingGuideStock }) {
+  const status = getTradeStatus(stock);
+  const rrToT2 = stock.risk_reward_from_mid_entry?.r_to_t2 ?? getRewardToRisk(stock, stock.targets?.target_2);
+
+  return (
+    <div className="mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-cyan-100 bg-cyan-50/70 p-2 text-xs">
+      <span className={`rounded-lg border px-2 py-1 font-bold ${getStatusColor(status)}`}>{status}</span>
+      <span className="rounded-lg bg-white px-2 py-1 font-bold text-slate-700">Score {stock.setup_score_out_of_100}</span>
+      <span className="rounded-lg bg-white px-2 py-1 font-semibold text-cyan-800">Buy {formatRange(stock.limit_buy_zone)}</span>
+      <span className="rounded-lg bg-white px-2 py-1 font-semibold text-rose-800">SL {formatCurrencyINR(stock.stop_loss?.hard_sl)}</span>
+      <span className="rounded-lg bg-white px-2 py-1 font-semibold text-slate-700">T2 {rrToT2.toFixed(2)}R</span>
+      <Link
+        href={`/buying-guide?symbol=${encodeURIComponent(stock.symbol)}&tab=watchlist`}
+        className="rounded-lg bg-slate-950 px-2.5 py-1 font-bold text-white hover:bg-slate-800"
+      >
+        View Buying Guide
+      </Link>
+    </div>
+  );
+}
+
+function normalizeSymbol(symbol: string): string {
+  return symbol.replace(/\.NS$/i, "").trim().toUpperCase();
 }

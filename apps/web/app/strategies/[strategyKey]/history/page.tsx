@@ -1,6 +1,7 @@
 import { prisma } from "@ibo/db";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../../components/ui/card";
+import { PageHeader } from "../../../components/ui/page-header";
 
 interface Props {
   params: Promise<{ strategyKey: string }>;
@@ -32,6 +33,11 @@ export default async function StrategyHistoryPage({ params, searchParams }: Prop
 
   return (
     <div className="space-y-4">
+      <PageHeader
+        title={`${strategy.name} History`}
+        description="Historical strategy matches and rule context for review."
+      />
+
       <Card>
         <CardHeader>
           <CardTitle>{strategy.name} History</CardTitle>

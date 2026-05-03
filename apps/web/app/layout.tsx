@@ -6,8 +6,12 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Investment Bible OS",
-  description: "Personal market digest, screener engine & strategy intelligence for Indian equity markets",
+  description:
+    "Personal market digest, screener engine & strategy intelligence for Indian equity markets",
 };
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const hostGrotesk = Host_Grotesk({
   subsets: ["latin"],
@@ -15,17 +19,25 @@ const hostGrotesk = Host_Grotesk({
   display: "swap",
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={`${hostGrotesk.variable}`}>
         <Providers>
-          <div style={{ display: "flex", minHeight: "100vh", background: "#F4F7FB" }}>
+          <div
+            style={{
+              display: "flex",
+              minHeight: "100vh",
+              background: "#F4F7FB",
+            }}
+          >
             <Sidebar />
             <main style={{ flex: 1, overflowY: "auto", padding: 20 }}>
-              <div style={{ margin: "0 auto", maxWidth: 1440 }}>
-                {children}
-              </div>
+              <div style={{ margin: "0 auto", maxWidth: 1440 }}>{children}</div>
             </main>
           </div>
         </Providers>
